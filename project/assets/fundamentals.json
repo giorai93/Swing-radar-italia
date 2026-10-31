@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-31T20:54:36.460140+00:00",
+  "updatedAt": "2026-10-31T21:00:26.962988+00:00",
   "values": {
     "GVS": {
       "dataStatus": "needs_review",
@@ -17,7 +17,7 @@
       "basis": "Annual consolidated IFRS; not TTM",
       "lei": "81560013EACB40B52D17",
       "sha256": "a12256a2c4bcd09ead90ae70f5cd974887b143abb7eff15bb9e6894ba15a3ed5",
-      "retrievedAt": "2026-10-31T20:54:24.721253+00:00",
+      "retrievedAt": "2026-10-31T21:00:24.758243+00:00",
       "facts": {
         "revenue_2025": {
           "concept": "ifrs-full:Revenue",
@@ -173,7 +173,7 @@
       "basis": "Annual consolidated IFRS; not TTM",
       "lei": "81560096A9AEBBBD4B25",
       "sha256": "a289b099e4ba03def2b8abaee74e8f58782ae56e3615d34298ccffd71f994736",
-      "retrievedAt": "2026-10-31T20:54:30.701814+00:00",
+      "retrievedAt": "2026-10-31T21:00:26.772549+00:00",
       "facts": {
         "revenue_2025": {
           "concept": "ifrs-full:Revenue",
