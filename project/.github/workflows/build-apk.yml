@@ -1,0 +1,24 @@
+name: Build Swing Radar Italia 3.0
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Install Android platform and build tools
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Build signed APK
+        run: bash build_apk.sh
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Swing-Radar-Italia-3.0
+          path: Swing_Radar_Italia_3.0.apk

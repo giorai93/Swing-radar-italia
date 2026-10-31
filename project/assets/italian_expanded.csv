@@ -1,0 +1,118 @@
+ticker,name,segment
+A2A,A2A S.p.A.,MID
+ACE,Acea S.p.A.,MID
+AMP,Amplifon SpA,MID
+ANIM,ANIMA Holding S.p.A.,MID
+ARIS,Ariston Holding NV,SMALL
+ASC,Ascopiave S.p.A.,SMALL
+AVIO,Avio SpA,SMALL
+AZM,Azimut Holding Spa,MID
+BAMI,Banco BPM SpA,LARGE
+BC,Brunello Cucinelli S.p.A.,MID
+BDB,Banco di Desio e della Brianza S.p.A.,MID
+BFF,BFF Bank SpA,SMALL
+BGN,Banca Generali S.p.A.,MID
+BMED,Banca Mediolanum SpA,LARGE
+BMPS,Banca Monte dei Paschi di Siena S.p.A.,LARGE
+BPE,BPER Banca S.p.A.,LARGE
+BRE,Brembo N.V.,MID
+BSS,Biesse S.p.A.,SMALL
+BZU,Buzzi Spa,MID
+CAI,Cairo Communication S.p.A.,SMALL
+CE,Credito Emiliano S.p.A.,MID
+CEM,Cementir Holding N.V.,MID
+CMB,Cembre S.p.A.,SMALL
+CPR,Davide Campari-Milano N.V.,MID
+CRL,Carel Industries SpA,MID
+CY4,CY4Gate SpA,SMALL
+DAN,Danieli & C. Officine Meccaniche S.p.A.,MID
+DANR,Danieli & C.Officine Meccaniche SPA Az. di risp. Non Conv.,MID
+DIA,DiaSorin S.p.A.,MID
+DIS,d'Amico International Shipping S.A.,SMALL
+DLG,De'Longhi S.p.A.,MID
+DNR,Industrie De Nora SpA,SMALL
+DOV,doValue S.p.A.,SMALL
+ELN,El.En. S.p.A.,SMALL
+ENAV,ENAV S.p.A.,MID
+ENEL,Enel SpA,LARGE
+ENI,Eni S.p.A.,LARGE
+ERG,ERG S.p.A.,MID
+FBK,FinecoBank SpA,LARGE
+FCT,Fincantieri S.p.A.,MID
+FILA,F.I.L.A. - Fabbrica Italiana Lapis ed Affini S.p.A.,SMALL
+FM,Fiera Milano SpA,SMALL
+G,Assicurazioni Generali S.p.A.,LARGE
+GF,Generalfinance S.p.A.,SMALL
+GPI,GPI SpA,SMALL
+GSP,Gas Plus S.p.A.,SMALL
+GVS,GVS S.p.A,SMALL
+HER,Hera S.p.A.,MID
+ICOP,ICOP S.p.A. Societa Benefit,SMALL
+ICOS,Intercos S.p.A.,SMALL
+IF,Banca IFIS S.p.A.,SMALL
+IG,Italgas SpA,MID
+IGD,Immobiliare Grande Distribuzione SIIQ S.p.A.,SMALL
+INW,Infrastrutture Wireless Italiane S.p.A.,MID
+IOT,SECO S.p.A.,SMALL
+IP,Interpump Group S.p.A.,MID
+IRE,Iren S.p.A.,MID
+ISP,Intesa Sanpaolo S.p.A.,LARGE
+ITM,Italmobiliare S.p.A.,SMALL
+IVG,Iveco Group NV,MID
+JUVE,Juventus Football Club S.p.A.,SMALL
+LDO,Leonardo SpA,LARGE
+LTMC,Lottomatica Group S.P.A.,MID
+LUVE,LU-VE S.p.A.,SMALL
+MAIRE,MAIRE S.p.A.,MID
+MARR,MARR SpA,SMALL
+MB,Mediobanca - Banca di Credito Finanziario S.p.A.,LARGE
+MFEA,MFE-MediaForEurope NV Class A,SMALL
+MFEB,MFE-MediaForEurope NV Class B,SMALL
+MN,Arnoldo Mondadori Editore S.p.A.,SMALL
+MOL,Moltiply Group S.p.A.,SMALL
+MONC,Moncler SpA,LARGE
+NEXI,Nexi S.p.A.,MID
+NWL,NewPrinces S.p.A.,SMALL
+NXT,Next Geosolutions Europe SpA,SMALL
+OROX,Gens Aurea S.p.A.,SMALL
+ORS,Orsero SpA,SMALL
+OS,Officina Stellare S.p.A.,SMALL
+OVS,OVS S.p.A.,SMALL
+PHN,PharmaNutra S.p.A.,SMALL
+PIA,Piaggio & C. S.p.a.,SMALL
+PIRC,Pirelli & C. S.p.A.,MID
+PRT,Esprinet S.p.A.,SMALL
+PRY,Prysmian S.p.A.,LARGE
+PST,Poste Italiane SpA,LARGE
+RACE,Ferrari NV,LARGE
+REC,Recordati S.p.A.,LARGE
+REVO,REVO Insurance S.p.A.,SMALL
+REY,Reply S.p.A.,MID
+RWAY,Rai Way SpA,SMALL
+SERI,Seri Industrial S.p.A.,SMALL
+SES,SeSa S.p.A.,SMALL
+SFER,Salvatore Ferragamo S.p.A.,SMALL
+SFL,Safilo Group S.p.A.,SMALL
+SGF,Sogefi S.p.A.,SMALL
+SL,Sanlorenzo S.p.A.,SMALL
+SOL,SOL S.p.A.,MID
+SOM,Somec S.p.A.,SMALL
+SPM,Saipem S.p.A.,MID
+SRG,Snam S.p.A.,LARGE
+STLAM,Stellantis N.V.,LARGE
+STMMI,STMicroelectronics NV,LARGE
+SYS,Sys-dat S.P.A.,SMALL
+TEN,Tenaris S.A.,LARGE
+TFIN,Trevi Finanziaria Industriale S.p.A.,SMALL
+TGYM,Technogym S.p.A,MID
+TIP,Tamburi Investment Partners S.p.A.,SMALL
+TIT,Telecom Italia S.p.A.,LARGE
+TPRO,Technoprobe SpA,LARGE
+TRN,Terna S.p.A.,LARGE
+TXT,TXT e-solutions S.p.A.,SMALL
+UCG,UniCredit S.p.A.,LARGE
+UNI,UNIPOL ASSICURAZIONI SPA,LARGE
+WBD,Webuild SpA,MID
+WIIT,WIIT SpA,SMALL
+YACHT,Ferretti S.p.A.,SMALL
+ZV,Zignago Vetro SpA,SMALL

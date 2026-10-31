@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>Swing Radar Italia 3.0</title>
+  <style>
+    :root{--ink:#10263d;--muted:#708398;--blue:#0d6efd;--navy:#071e34;--green:#0d996e;--amber:#d08412;--red:#c83c52;--bg:#f2f5fa;--line:#e7edf4;--white:#fff;--shadow:0 10px 35px #0f36500b}
+    *{box-sizing:border-box}html,body{margin:0;color:var(--ink);background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{min-height:100vh;padding-bottom:100px}
+    .hero{background:linear-gradient(145deg,#071e34 0%,#123b5b 100%);padding:25px 19px 28px;color:#fff;border-radius:0 0 28px 28px}.brand{display:flex;align-items:center;justify-content:space-between;gap:8px}.brand-name{font-size:12px;font-weight:800;letter-spacing:2px;color:#b5dbfa}.livepill{font-size:10px;font-weight:800;background:#ffffff1b;border:1px solid #ffffff35;padding:7px 10px;border-radius:30px;color:#cbe8ff}.hero h1{margin:19px 0 8px;font-size:27px;line-height:1.13;letter-spacing:-1px}.hero p{margin:0;font-size:12px;color:#b8cfe3;line-height:1.6}.hero-bottom{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:20px}.white-btn{background:#fff;border:0;border-radius:13px;padding:13px 19px;font-size:13px;font-weight:800;color:#0e3857;box-shadow:0 5px 18px #00132640}.white-btn:disabled{opacity:.5}.secondary-btn{border:1px solid #a8bfdb70;color:#d6eafe;padding:12px 13px;background:#ffffff12;border-radius:13px;font-size:12px;font-weight:700}
+    .content{padding:17px 16px 0;max-width:780px;margin:auto}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:-30px;position:relative}.stat{padding:16px 12px;border-radius:17px;background:#fff;box-shadow:var(--shadow)}.stat .num{font-size:23px;font-weight:850;letter-spacing:-.7px}.stat .label{color:var(--muted);font-size:10px;margin-top:4px}.stat .num.green{color:var(--green)}.stat .num.blue{color:#2783cb}
+    .alert{margin-top:15px;background:#fff2e6;color:#8a4b04;border:1px solid #f7d7b6;border-radius:14px;padding:12px 13px;font-size:12px;line-height:1.5}.alert.err{background:#fff0f1;border-color:#ffd5da;color:#982e42}.alert.ok{background:#eafaf5;border-color:#bfeadd;color:#09694b}.alert strong{display:block;font-size:12px;margin-bottom:2px}.topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:23px 0 13px}.topline h2{font-size:19px;margin:0;letter-spacing:-.4px}.topline small{font-size:11px;color:var(--muted)}.text-link{border:none;background:none;color:var(--blue);font-size:12px;font-weight:800}
+    .chips{display:flex;gap:8px;overflow-x:auto;padding:1px 0 14px;scrollbar-width:none}.chip{white-space:nowrap;padding:10px 13px;border-radius:12px;background:#fff;border:1px solid var(--line);color:#586e83;font-size:11px;font-weight:750}.chip.sel{background:#103651;color:white;border-color:#103651}.chip .dot{display:inline-block;height:6px;width:6px;border-radius:50%;background:#8fa4ba;margin-right:6px}.chip.sel .dot{background:#6dbbff}
+    .signal{background:#fff;border:1px solid var(--line);border-radius:17px;padding:15px;margin-bottom:11px;box-shadow:var(--shadow)}.signalhead{display:flex;align-items:center;gap:11px}.ticker{background:#edf4ff;color:#0e5daf;font-weight:900;font-size:13px;min-width:58px;text-align:center;padding:9px 8px;border-radius:10px}.company{flex:1;min-width:0}.company strong{display:block;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.company span{display:block;font-size:10px;color:var(--muted);margin-top:3px}.score{font-weight:900;font-size:18px;color:var(--green);line-height:1;text-align:right}.score small{display:block;font-size:9px;font-weight:600;color:var(--muted);margin-top:5px}.badges{display:flex;gap:7px;flex-wrap:wrap;margin:13px 0}.badge{font-size:10px;font-weight:800;border-radius:100px;padding:6px 9px;background:#eef4fa;color:#526c81}.badge.force{background:#e6f7f1;color:#088866}.badge.weak{background:#fff3e4;color:#bc7212}.badge.old{background:#fff0f1;color:#ba3853}.signalgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:#f7f9fc;border-radius:12px;padding:12px}.signalgrid small{color:#8393a4;font-size:10px;display:block}.signalgrid strong{display:block;font-size:13px;margin-top:4px}.reason{font-size:11px;line-height:1.55;color:#6a7d8d;margin:13px 1px 0}.signalactions{display:flex;justify-content:space-between;align-items:center;margin-top:13px;gap:8px}.risk{font-size:10px;color:#8190a2}.action{background:#ebf3ff;color:#0c66bf;border:0;border-radius:10px;font-weight:800;padding:9px 12px;font-size:11px}
+    .empty{background:#fff;border:1px dashed #cbd8e4;padding:30px 19px;text-align:center;border-radius:17px;color:var(--muted);font-size:12px;line-height:1.7}.empty .bigicon{font-size:34px;display:block;margin-bottom:10px}.section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:12px}.section h3{font-size:14px;margin:0 0 10px}.section p{font-size:12px;line-height:1.6;color:#63778b;margin:0}.small-list{padding-left:18px;font-size:12px;line-height:1.8;color:#5c7187}.detail-line{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:12px}.detail-line:last-child{border-bottom:0}.detail-line span{color:var(--muted)}.detail-line strong{text-align:right}
+    .nav{position:fixed;z-index:20;bottom:0;left:0;right:0;background:#fff;box-shadow:0 -10px 30px #0f365013;border-top:1px solid #e9eef4;display:flex;padding:8px max(4px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom))}.nav button{flex:1;min-width:0;border:0;background:transparent;color:#8fa0b2;font-size:9px;font-weight:650;padding:4px 0 2px}.nav button span{display:block;font-size:20px;line-height:23px;margin-bottom:3px}.nav button.on{color:#0b68b7}
+    .fund-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:12px 0 0}.fund-tag{font-size:10px;font-weight:750;padding:6px 8px;border-radius:9px;background:#f0f6f9;color:#285373}.fund-tag.missing{background:#fff0f1;color:#ba3853}.watch-label{color:#9a6618;background:#fff8ea;border-radius:9px;font-size:10px;padding:5px 8px;display:inline-block;margin-top:7px}.funds-list{max-height:65vh;overflow-y:auto}
+    .trade{padding:14px;background:#fff;border:1px solid var(--line);border-radius:14px;margin:10px 0}.trade .tradehead{display:flex;justify-content:space-between}.trade small{font-size:10px;color:var(--muted)}.trade .profit{font-weight:850;color:var(--green)}.trade .loss{color:var(--red)}.formrow{margin:12px 0}.formrow label{display:block;color:#667c8f;font-size:11px;font-weight:650;margin-bottom:6px}.formrow input,.formrow select,.formrow textarea{width:100%;border:1px solid #d7e2ec;background:#f9fbfd;border-radius:10px;padding:12px;font-size:14px;color:#123148}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.primary{background:#0f6bc3;color:white;border:0;border-radius:12px;padding:12px 16px;font-size:12px;font-weight:800;width:100%}.modal-backdrop{position:fixed;inset:0;z-index:50;background:#00192fa3;display:flex;align-items:flex-end;justify-content:center;padding:0}.modal{background:#fff;width:100%;max-width:780px;max-height:91vh;overflow:auto;padding:20px 20px 35px;border-radius:24px 24px 0 0}.modal h2{margin:0;font-size:18px}.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.xbtn{font-size:23px;background:#edf2f7;border:none;color:#5b6c7d;width:36px;height:36px;border-radius:50%}.mono{font-variant-numeric:tabular-nums}.spinner{width:9px;height:9px;display:inline-block;border-radius:50%;background:#26beab;box-shadow:0 0 0 4px #26beab24;animation:pulse 1.1s infinite}@keyframes pulse{50%{opacity:.35}}
+    .fv-card{background:linear-gradient(135deg,#eff7ff,#f8fbff);border:1px solid #d8e8f5;border-radius:15px;padding:15px;margin:12px 0}.fv-number{font-size:24px;font-weight:850;color:#124a78}.fv-note{font-size:11px;color:#60798e;line-height:1.6;margin-top:8px}.fv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}.fv-grid small{display:block;color:#758da1;font-size:10px}.fv-grid strong{font-size:15px}.chart-modal{padding:19px 15px 30px}.chart-modal .modal-header{margin-bottom:8px}.chart-note{font-size:10px;color:#657c90;line-height:1.55;margin:8px 2px 12px}.chart-period{padding-bottom:9px}.chart-period .chip{padding:8px 11px}.chart-layerrow{display:flex;gap:12px;flex-wrap:wrap;padding:2px 0 12px}.chart-toggle{font-size:10px;color:#516b81;display:flex;align-items:center;gap:5px}.chart-toggle input{accent-color:#187dc2}.chart-shell{background:#fff;border:1px solid #dfebf5;border-radius:14px;padding:5px 0;overflow:hidden}.chart-shell canvas{width:100%;height:420px;display:block;touch-action:pan-y}.chart-info{font-size:11px;color:#426179;min-height:40px;line-height:1.5;background:#eef5fb;border-radius:10px;padding:10px;margin:9px 0}.chart-key{display:flex;gap:9px;flex-wrap:wrap;font-size:10px;font-weight:750;margin:9px 0 14px}.chart-modal .chips{scrollbar-width:none}
+    .strategy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:15px 0 20px}.strategy-tile{min-height:72px;text-align:left;background:#fff;border:1px solid #dfe8f1;border-radius:15px;padding:13px;color:#38536a;font-size:12px;font-weight:800;box-shadow:var(--shadow)}.strategy-tile.selected{background:#103651;color:#fff;border-color:#103651}.nav button{font-size:10px}.nav button span{font-size:21px}.fv-card{border-left:4px solid #1583c8}.signalactions{flex-wrap:wrap}.hero h1{font-size:25px}
+    .three-scores{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:13px 0}.score-pillar{background:#f3f7fb;border:1px solid #e2eaf2;border-radius:12px;padding:10px 7px;min-width:0}.score-pillar small{display:block;color:#688096;font-size:10px;font-weight:800}.score-pillar strong{display:block;color:#123e5c;font-size:16px;margin:5px 0}.score-pillar span{font-size:9px;color:#8493a1;display:block;line-height:1.35}
+    .chart-scroll{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.chart-scroll .action{font-size:10px;padding:7px 9px;white-space:nowrap}.chart-scroll span{font-size:9px;color:#7b8ca0;text-align:center}
+    .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.stats-metric{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;min-height:94px}.stats-metric span{display:block;font-size:10px;color:#718398}.stats-metric strong{display:block;font-size:20px;font-weight:850;color:#133550;margin:7px 0}.stats-metric small{display:block;font-size:10px;color:#8d9baa;line-height:1.4}.stats-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.stats-form label{font-size:11px;color:#61768b;font-weight:700}.stats-form input,.stats-form select{margin-top:5px;width:100%;border:1px solid #d3e1ed;border-radius:10px;padding:10px;color:#18354f;background:#f9fcff;font-size:13px}.stats-summary{display:grid;grid-template-columns:1.25fr .85fr 1fr 1fr;align-items:center;gap:6px;padding:14px 0;border-bottom:1px solid var(--line)}.stats-summary>div{min-width:0}.stats-summary span,.stats-summary small{display:block;font-size:9px;color:#8092a4;margin-top:4px}.stats-summary strong{display:block;font-size:11px;word-break:break-word}.stats-result{display:flex;align-items:center;gap:8px;justify-content:space-between;border-bottom:1px solid #e8edf3;padding:11px 0}.stats-result>div{min-width:0;flex:1}.stats-result strong{display:block;font-size:10px}.stats-result small{display:block;font-size:9px;color:#8091a2;margin-top:5px;line-height:1.3}.stats-result .action{padding:8px;min-width:36px}.stats-foot{font-size:10px!important;color:#667d91!important;margin-top:12px!important;line-height:1.6!important}
+    .badge.recovery-watch{background:#e9f1fc;color:#2f6798}.badge.recovery-rebound{background:#fff2dd;color:#98621c}.badge.recovery-confirm{background:#e2f8ed;color:#0a8354}.badge.recovery-invalid{background:#fff0f1;color:#ad354d}.phase-note{border-left:3px solid #dba95b;background:#fff9ef;color:#855c25;border-radius:7px;padding:9px 11px;font-size:11px;line-height:1.5;margin:12px 0 0}.phase-note.recovery-confirm{background:#eafaf2;color:#166648;border-color:#36b887}.phase-note.recovery-invalid{background:#fff2f2;color:#8b3746;border-color:#ce5469}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="hero">
+    <div class="brand"><div class="brand-name">◆ SWING RADAR <span style="color:#62b8ff">ITALIA</span></div><div class="livepill" id="connection">◌ Solo Borsa Italiana</div></div>
+    <h1>Scopri i setup.<br><span style="color:#61c4ff">Decidi tu quando entrare.</span></h1>
+    <p>Analisi quotidiana direttamente sul telefono. Nessun server, nessun conto broker collegato.</p>
+    <div class="hero-bottom"><button class="white-btn" id="scanBtn" onclick="startScan()">↻ &nbsp; Scansiona Milano</button><button class="secondary-btn" onclick="nav('stats')">📊 Statistiche</button><button class="secondary-btn" onclick="nav('data')">Fonte e qualità dati</button></div>
+  </header>
+  <main class="content">
+    <div class="stats">
+      <div class="stat"><div class="num blue" id="analysed">–</div><div class="label">Titoli analizzati</div></div>
+      <div class="stat"><div class="num green" id="countForce">–</div><div class="label" id="labelForce">Setup forza · 45gg</div></div>
+      <div class="stat"><div class="num" id="countWeak">–</div><div class="label" id="labelWeak">Setup debolezza · 45gg</div></div>
+    </div>
+    <div id="status"></div>
+    <section id="view"></section>
+    <section id="events"></section>
+    <section id="watchlist"></section>
+  </main>
+  <nav class="nav">
+    <button data-tab="radar" class="on" onclick="nav('radar')"><span>◈</span>Radar</button>
+    <button data-tab="strategies" onclick="nav('strategies')"><span>◫</span>Strategie</button>
+    <button data-tab="titles" onclick="nav('titles')"><span>◇</span>Titoli</button>
+    <button data-tab="history" onclick="nav('history')"><span>◷</span>Storico</button>
+    <button data-tab="journal" onclick="nav('journal')"><span>▤</span>Diario</button>
+    
+  </nav>
+  <div id="overlay"></div>
+</div>
+<script>
+  'use strict';
+  let tab='radar',snapshot={signals:[],trades:[],status:{}},filter='all',period='45d',zoneMode='recent',zonePhase='all',modalSignal=null,fundMode='all',lastSnapshotText='';
+  let lifecycleMode='active',journalMode='open',diagTicker='MAIRE',strategyMode='force';
+  const esc=v=>String(v===null||v===undefined?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const euro=(n,d=2)=>Number(n||0).toLocaleString('it-IT',{minimumFractionDigits:d,maximumFractionDigits:d})+' €';
+  const fnum=(n,d=1)=>Number(n||0).toLocaleString('it-IT',{maximumFractionDigits:d});
+  const segmentLabel=s=>({LARGE:'Large Cap',MID:'Mid Cap',SMALL:'Small Cap',BASE:'Lista base'})[s]||'Segmento N/D';
+  const known=n=>typeof n==='number'&&Number.isFinite(n);
+  const metric=(n,d=1,suffix='')=>known(n)?fnum(n,d)+suffix:'N/D';
+  const lastUpdateIt=value=>{const d=Date.parse(value||'');return Number.isFinite(d)?new Date(d).toLocaleString('it-IT',{timeZone:'Europe/Rome',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'mai';};
+  const fundamentals=()=>snapshot.status?.fundamentals||{values:{}};
+  const earnings=()=>snapshot.status?.earnings||{values:{},upcoming:[],recent:[]};
+  const metricsFor=ticker=>(fundamentals().values||{})[ticker]||null;
+  function medianOf(items){const n=items.length;if(!n)return null;items.sort((a,b)=>a-b);return n%2?items[(n-1)/2]:(items[n/2-1]+items[n/2])/2;}
+  function peersFor(ticker,col){const m=metricsFor(ticker);if(!m||!m.sector)return null;const peers=Object.entries(fundamentals().values||{}).filter(([t,x])=>t!==ticker&&x.sector===m.sector&&known(x[col])&&x[col]>0).map(([t,x])=>x[col]);return peers.length>=3?medianOf(peers):null;}
+
+  // Tre punteggi indipendenti: non mescoliamo il segnale tecnico con una stima di prezzo.
+  function qualityAssessment(ticker){
+    const m=metricsFor(ticker);
+    if(!m)return {score:null,coverage:0,detail:'Dati fondamentali assenti'};
+    const checks=[
+      [m.roe_pct, v=>v>=15?100:v>=8?70:v>0?35:0, 'ROE'],
+      [m.net_margin_pct,v=>v>=15?100:v>=7?70:v>0?35:0,'Margine netto'],
+      [m.cash_conversion,v=>v>=1?100:v>=0.7?70:v>0?35:0,'Cassa operativa / utile'],
+      [m.equity_ratio_pct,v=>v>=50?100:v>=30?75:v>=15?40:0,'Patrimonio / attivo']
+    ];
+    const valid=checks.filter(([v])=>known(v));
+    if(valid.length<2)return {score:null,coverage:valid.length,detail:'Copertura insufficiente'};
+    const score=Math.round(valid.reduce((sum,[v,fn])=>sum+fn(v),0)/valid.length);
+    return {score,coverage:valid.length,detail:'Euristica su '+valid.map(x=>x[2]).join(', ')};
+  }
+  function relativeValuation(ticker){
+    const m=metricsFor(ticker);
+    if(!m)return {ratio:null,confidence:'N/D',range:null,count:0,method:'Dati assenti'};
+    const candidates=[['P/E','price_earnings_ttm'],['P/B','price_book_fq']];
+    const estimates=[];
+    for(const [label,col] of candidates){
+      const own=m[col],peer=peersFor(ticker,col);
+      if(known(own)&&own>0&&known(peer)&&peer>0){
+        const r=peer/own;
+        if(r>=0.25&&r<=4)estimates.push({name:label,ratio:r});
+      }
+    }
+    if(!estimates.length)return {ratio:null,confidence:'N/D',range:null,count:0,method:'Comparabili insufficienti'};
+    const vals=estimates.map(x=>x.ratio).sort((a,b)=>a-b);
+    const ratio=vals.reduce((a,b)=>a+b,0)/vals.length;
+    const dispersion=vals.length===2?Math.abs(vals[1]-vals[0])/ratio:1;
+    const confidence=vals.length>=2&&dispersion<=0.35?'Media':'Bassa';
+    const band=confidence==='Media'?0.15:0.30;
+    return {ratio,range:[Math.max(0,ratio*(1-band)),ratio*(1+band)],confidence,count:vals.length,method:estimates.map(x=>x.name).join(' + ')};
+  }
+  function valueAssessment(ticker){
+    const m=metricsFor(ticker);
+    if(!m||!known(m.eps)||!known(m.price)||m.price<=0||!m.priceDate)return {score:null,coverage:0,detail:'EPS o prezzo assenti'};
+    const age=(Date.now()-Date.parse(m.priceDate))/86400000;
+    if(!Number.isFinite(age)||age<0||age>7)return {score:null,coverage:0,detail:'Prezzo scaduto'};
+    const yieldPct=m.eps/m.price*100;
+    return {score:Math.round(Math.max(0,Math.min(100,yieldPct*10))),coverage:1,detail:'Earnings yield annuale '+yieldPct.toFixed(2)+'%; euristica 0–10%'};
+  }
+  function scoreStrip(ticker,technical){
+    const q=qualityAssessment(ticker),v=valueAssessment(ticker);
+    const tech=known(technical)?Math.max(0,Math.min(100,Math.round(Number(technical)))):null;
+    const cell=(label,val,sub)=>'<div class="score-pillar"><small>'+label+'</small><strong>'+(val===null?'N/D':val+'/100')+'</strong><span>'+esc(sub)+'</span></div>';
+    return '<div class="three-scores">'+cell('Qualità',q.score,q.score===null?'Copertura insufficiente':q.coverage+'/4 metriche')+cell('Valutazione',v.score,v.detail)+cell('Timing',tech,tech===null?'Segnale non confermato':'Tecnico')+'</div>';
+  }
+  function fundamentalsPriority(ticker){
+    const q=qualityAssessment(ticker),v=valueAssessment(ticker);
+    if(q.score===null||v.score===null)return {score:null,label:'Fondamentali da verificare'};
+    return {score:Math.round(q.score*.65+v.score*.35),label:'65% qualità · 35% valutazione'};
+  }
+
+  let sortMode='opportunity', minGrowthFilter=0, minQualityFilter=0, undervaluedOnly=false;
+  function setSortMode(v){sortMode=v;render();}
+  function setMinGrowth(v){minGrowthFilter=Number(v)||0;render();}
+  function setMinQuality(v){minQualityFilter=Number(v)||0;render();}
+  function setUndervalued(v){undervaluedOnly=!!v;render();}
+  function tradeAssessment(s){
+    if(!s)return {score:null,coverage:0,label:'N/D',reason:'Nessun segnale'};
+    const n=x=>known(x)?x:null;
+    const entry=n(s.entry),stop=n(s.stop),target=n(s.target1),rvol=n(s.rvol),raw=n(s.score);
+    const direction=entry!==null&&stop!==null&&target!==null&&entry>0&&stop<entry&&target>entry;
+    const rr=direction?(target-entry)/(entry-stop):null;
+    const risk=direction?(entry-stop)/entry*100:null;
+    const trend=raw===null?null:Math.max(0,Math.min(100,raw));
+    const setup=trend;
+    const volume=rvol===null?null:Math.round(Math.max(0,Math.min(100,45+(rvol-1)*35)));
+    const riskReward=rr===null?null:Math.round(Math.max(0,Math.min(100,(rr-0.7)*43)));
+    const timing=(!s.asof||s.dataAge===undefined)?null:(Number(s.dataAge)<=2?85:Number(s.dataAge)<=4?55:15);
+    const parts=[[trend,.20],[setup,.25],[volume,.20],[riskReward,.20],[timing,.15]];
+    const valid=parts.filter(x=>x[0]!==null);
+    const coverage=valid.reduce((a,x)=>a+x[1],0);
+    if(coverage<.75||!direction||!Number.isFinite(risk)||risk>12)return {score:null,coverage,label:'Da verificare',reason:'Livelli, copertura o rischio non idonei',rr};
+    let score=Math.round(valid.reduce((a,x)=>a+x[0]*x[1],0)/coverage);
+    const lifecycle=lifecycleGroup(s);
+    if(lifecycle!=='active')score=Math.min(score,35);
+    if(rr<1.5)score=Math.min(score,49);
+    if(Number(s.dataAge)>4)score=Math.min(score,50);
+    return {score,coverage,label:score>=80?'Setup forte':score>=65?'Interessante':score>=50?'In osservazione':'Debole',reason:'Score euristico, non probabilità di successo',rr};
+  }
+  function growthAssessment(ticker){
+    const m=metricsFor(ticker);if(!m)return {score:null,rate:null};
+    const rate=m.revenue_growth_pct;
+    if(!Number.isFinite(rate))return {score:null,rate:null};
+    const pct=rate; // ESEF normalization always supplies percentage points.
+    return {score:Math.round(Math.max(0,Math.min(100,50+pct*2))),rate:pct};
+  }
+  function opportunityAssessment(s){
+    const m=metricsFor(s.ticker);
+    if(!m||!m.retrievedAt||!s.asof||s.asof<m.retrievedAt.slice(0,10))return {score:null,reason:'Nessun bilancio verificato disponibile alla data del setup'};
+    const q=qualityAssessment(s.ticker),g=growthAssessment(s.ticker),v=valueAssessment(s.ticker),t=tradeAssessment(s);
+    if([q.score,g.score,v.score,t.score].some(x=>x===null))return {score:null,reason:'Dati incompleti'};
+    let score=Math.round(.25*q.score+.20*g.score+.20*v.score+.35*t.score);
+    if(t.score<50)score=Math.min(score,49);
+    if(lifecycleGroup(s)!=='active')score=Math.min(score,35);
+    return {score,reason:'25% qualità · 20% crescita · 20% valore · 35% trade'};
+  }
+  function sortValue(s){
+    if(sortMode==='trade')return tradeAssessment(s).score;
+    if(sortMode==='quality')return qualityAssessment(s.ticker).score;
+    if(sortMode==='growth')return growthAssessment(s.ticker).score;
+    if(sortMode==='value')return valueAssessment(s.ticker).score;
+    if(sortMode==='technical')return Number(s.score);
+    return opportunityAssessment(s).score;
+  }
+  function researchSort(a,b){
+    const x=sortValue(a),y=sortValue(b);
+    if(x===null&&y===null)return 0;
+    if(x===null)return 1;
+    if(y===null)return -1;
+    return y-x;
+  }
+  function passesResearchFilters(s){
+    const g=growthAssessment(s.ticker),q=qualityAssessment(s.ticker),v=relativeValuation(s.ticker);
+    if(minGrowthFilter>0&&(g.rate===null||g.rate<minGrowthFilter))return false;
+    if(minQualityFilter>0&&(q.score===null||q.score<minQualityFilter))return false;
+    if(undervaluedOnly&&(v.ratio===null||v.ratio<=1))return false;
+    return true;
+  }
+  function sortControls(){
+    return '<div class="section"><h3>Ordina e filtra · Borsa Italiana</h3><div class="formrow"><label>Ordina per</label><select onchange="setSortMode(this.value)">'+[['opportunity','Opportunità complessiva'],['trade','Qualità del trade'],['value','Sottovalutazione'],['quality','Qualità aziendale'],['growth','Crescita ricavi'],['technical','Ranking tecnico']].map(([k,v])=>'<option value="'+k+'"'+(sortMode===k?' selected':'')+'>'+v+'</option>').join('')+'</select></div><div class="formgrid"><div class="formrow"><label>Crescita ricavi minima (%)</label><input type="number" min="0" max="100" step="1" value="'+minGrowthFilter+'" onchange="setMinGrowth(this.value)"></div><div class="formrow"><label>Qualità minima (0–100)</label><input type="number" min="0" max="100" step="5" value="'+minQualityFilter+'" onchange="setMinQuality(this.value)"></div></div><label class="chart-toggle"><input type="checkbox" '+(undervaluedOnly?'checked':'')+' onchange="setUndervalued(this.checked)"> Solo potenzialmente sottovalutate</label><p style="margin-top:9px">N/D esclusi soltanto quando il filtro richiede il dato. Punteggi euristici da validare, non previsioni.</p></div>';
+  }
+  function titlesView(){
+    const all=Object.keys(fundamentals().values||{});
+    const active=new Set(consolidateSignals(snapshot.signals||[]).filter(s=>lifecycleGroup(s)==='active').map(s=>s.ticker));
+    const watch=new Set((snapshot.status?.candidates||[]).map(s=>s.ticker));
+    const ranked=all.map(ticker=>({ticker,quality:qualityAssessment(ticker),valuation:relativeValuation(ticker),priority:fundamentalsPriority(ticker)})).filter(r=>(minGrowthFilter<=0||(growthAssessment(r.ticker).rate!==null&&growthAssessment(r.ticker).rate>=minGrowthFilter))&&(minQualityFilter<=0||(r.quality.score!==null&&r.quality.score>=minQualityFilter))&&(!undervaluedOnly||(r.valuation.ratio!==null&&r.valuation.ratio>1))).sort((a,b)=>{const score=r=>sortMode==='growth'?growthAssessment(r.ticker).score:sortMode==='quality'?r.quality.score:sortMode==='value'?valueAssessment(r.ticker).score:r.priority.score;return (score(b)??-1)-(score(a)??-1);});
+    let out='<div class="topline"><h2>Titoli · analisi fondamentale</h2><small>'+ranked.length+' con dati</small></div>';
+    out+=sortControls();out+='<div class="section"><h3>Prima l’azienda, poi il timing</h3><p>Ordinamento di ricerca: 65% qualità e 35% valutazione quando entrambi sono calcolabili. Il timing tecnico rimane separato. Dati mancanti = N/D, non zero.</p></div>';
+    for(const r of ranked){
+      const m=metricsFor(r.ticker);
+      const tag=active.has(r.ticker)?'Setup attivo':watch.has(r.ticker)?'In osservazione':'Solo fondamentali';
+      out+='<article class="signal"><div class="signalhead"><div class="ticker">'+esc(r.ticker)+'</div><div class="company"><strong>'+esc(m.sector||'Settore N/D')+'</strong><span>'+tag+'</span></div><div class="score">'+(r.priority.score===null?'N/D':r.priority.score+'/100')+'<small>Priorità fondamentale</small></div></div>'+scoreStrip(r.ticker,null)+fundBadges(r.ticker)+'<div class="signalactions"><span class="risk">Non è un segnale di acquisto</span><button class="action" onclick="openFund(\''+esc(r.ticker)+'\')">Fair Value e bilanci →</button></div></article>';
+    }
+    if(!ranked.length)out+='<div class="empty">Dati fondamentali non disponibili. Controlla la fonte nel menu Dati.</div>';
+    return out;
+  }
+  function fundBadges(ticker){const q=qualityAssessment(ticker),g=growthAssessment(ticker),v=valueAssessment(ticker);return '<div class="fund-row">'+[['Quality',q.score],['Growth',g.score],['Valuation',v.score]].map(([k,n])=>'<span class="fund-tag">'+k+' '+(n===null?'N/D':n+'/100')+'</span>').join('')+'</div>';}
+  function fairValuePanel(){return '<p class="reason">Fair value N/D: il Valuation Score misura solo earnings yield, non un prezzo obiettivo né una probabilità.</p>';}
+  function fundPanel(ticker){
+    const m=metricsFor(ticker);if(!m)return '<p>Bilancio ESEF non disponibile per questo titolo.</p>';
+    const rows=[['Società',m.name],['Chiusura esercizio',m.periodEnd],['Base','Consolidato annuale IFRS, non TTM'],['Pubblicazione',m.publishedAt||'Non verificata'],['Recuperato il',m.retrievedAt],['Crescita ricavi a/a',metric(m.revenue_growth_pct,2,'%')],['ROE su patrimonio medio del gruppo',metric(m.roe_pct,2,'%')],['Margine netto consolidato',metric(m.net_margin_pct,2,'%')],['Patrimonio / attivo',metric(m.equity_ratio_pct,2,'%')],['Cassa operativa / utile',metric(m.cash_conversion,2,'×')],['EPS base annuale',metric(m.eps,3,' €')],['Prezzo',metric(m.price,3,' €')],['Data prezzo',m.priceDate||'N/D']];
+    const link=(u,label)=>typeof u==='string'&&u.startsWith('https://')?'<p><a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(label)+'</a></p>':'';
+    return '<p class="reason">'+esc(m.dataStatus==='needs_review'?'DATI DA VERIFICARE: '+(m.warnings||[]).join(' · '):'Controlli di estrazione superati')+'</p>'+fundBadges(ticker)+fairValuePanel()+rows.map(([k,v])=>'<div class="detail-line"><span>'+esc(k)+'</span><strong>'+esc(v||'N/D')+'</strong></div>').join('')+link(m.sourceUrl,'Bilancio ESEF originale')+link(m.sourcePage,'Pagina Investor Relations')+link(m.priceSource,'Fonte prezzo Yahoo (non ufficiale)')+'<p class="reason">SHA-256: '+esc(m.sha256)+'</p><details><summary>Dati XBRL verificabili e contesti</summary>'+Object.entries(m.facts||{}).map(([k,f])=>'<p><b>'+esc(k)+'</b>: '+esc(f.value)+' '+esc(f.unit)+'<br>'+esc(f.concept)+' · '+esc(f.context)+' · '+esc(f.start||'istantaneo')+' → '+esc(f.end)+' · ID '+esc(f.id)+'</p>').join('')+'</details><p class="reason">Quality: media delle metriche disponibili (minimo 2/4). Growth: clamp(50 + 2 × crescita %, 0, 100). Valuation: clamp(10 × earnings yield %, 0, 100). Euristiche non validate. Copertura: solo emittenti nel registro ESEF.</p>';
+  }
+  function nav(to){tab=to;filter='all';document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===to));render();}
+  function chooseStrategy(v){strategyMode=v;render();}
+  function strategySelector(){
+    const opts=[['force','↗ Forza / Breakout'],['weak','↘ Debolezza / Pullback'],['zones','⌁ Zone / Recupero'],['events','⚡ Momentum / Eventi']];
+    return '<div class="strategy-grid">'+opts.map(([id,name])=>'<button class="strategy-tile '+(strategyMode===id?'selected':'')+'" onclick="chooseStrategy(\''+id+'\')">'+name+'</button>').join('')+'</div>';
+  }
+  function renderStrategies(){
+    let out='<div class="topline"><h2>Quattro movimenti · strategie distinte</h2></div>'+strategySelector();
+    if(strategyMode==='zones')return out+renderZones();
+    if(strategyMode==='events')return out+renderEventMomentum()+renderEarnings();
+    const kind=strategyMode==='force'?'FORZA':'DEBOLEZZA';
+    const signals=consolidateSignals(snapshot.signals||[]).filter(s=>s.kind===kind&&isRecent(s));
+    const active=signals.filter(s=>lifecycleGroup(s)==='active');
+    const watch=(snapshot.status?.candidates||[]).filter(s=>s.kind===kind);
+    out+='<div class="section"><h3>Setup attivi</h3><p>'+active.length+' setup ancora attivi. I livelli sono teorici e derivano da prezzi EOD.</p></div>';
+    out+=sortControls();out+=active.length?active.filter(passesResearchFilters).sort(researchSort).map(signalCard).join(''):'<div class="empty">Nessun setup attivo per questa strategia.</div>';
+    out+='<div class="topline"><h2>In osservazione</h2><small>'+watch.length+' titoli</small></div>';
+    out+=watch.length?watch.map(w=>'<article class="signal"><div class="signalhead"><div class="ticker">'+esc(w.ticker)+'</div><div class="company"><strong>'+esc(w.name)+'</strong><span>'+esc(w.asof)+'</span></div></div><div class="badges"><span class="badge weak">DA CONFERMARE</span><span class="badge">'+esc(w.matched)+'/'+esc(w.required)+' condizioni</span></div><p class="reason">'+esc(w.missing||'Conferma tecnica mancante')+'</p>'+fundBadges(w.ticker)+'<div class="signalactions"><span class="risk">Non è un segnale di ingresso</span><button class="action" onclick="openFund(\''+esc(w.ticker)+'\')">Fair Value →</button></div></article>').join(''):'<div class="empty">Nessun candidato in formazione.</div>';
+    return out;
+  }
+  function renderHistory(){
+    const signals=consolidateSignals(snapshot.signals||[]).filter(s=>lifecycleGroup(s)!=='active').sort((a,b)=>b.asof.localeCompare(a.asof));
+    let out='<div class="topline"><h2>Storico segnali</h2><small>'+signals.length+' conclusi o archiviati</small></div>';
+    out+='<div class="section"><p>Separato dal Radar operativo. Include setup scaduti, invalidati e target raggiunti, senza confonderli con opportunità attuali.</p></div>';
+    out+=signals.length?signals.slice(0,150).map(signalCard).join(''):'<div class="empty">Nessun segnale storico disponibile.</div>';
+    return out;
+  }
+  function update(){
+    if(window.Android){try{const fresh=Android.getSnapshot();if(fresh===lastSnapshotText)return;lastSnapshotText=fresh;snapshot=JSON.parse(fresh);}catch(e){snapshot.error='Problema lettura archivio';}}
+    else{snapshot.error='Interfaccia nativa non disponibile';}
+    render();
+  }
+  function startScan(){if(!window.Android){alert('Questa interfaccia richiede l’APK Android');return;}let message=Android.startScan();setTimeout(update,300);if(message.includes('già'))toast(message);}
+  function toast(message){const host=document.getElementById('status');host.innerHTML='<div class="alert">'+esc(message)+'</div>';}
+  function isRecent(s){if(period==='session')return s.asof===(snapshot.status?.report?.lastSession||'');const t=Date.parse(s.asof+'T12:00:00Z');return Number.isFinite(t)&&Date.now()-t<45*86400000;}
+  function setPeriod(value){period=value;render();}
+  function lifecycleGroup(s){
+    if(['STOP_TOUCHED','SCADUTO'].includes(s.lifecycle))return 'invalid';
+    if(['TARGET1_TOUCHED','TARGET2_TOUCHED'].includes(s.lifecycle))return 'target';
+    return 'active';
+  }
+  function lifecycleLabel(s){return ({ATTIVO:'Attivo · teorico',TARGET1_TOUCHED:'Target 1 toccato',TARGET2_TOUCHED:'Target 2 toccato',STOP_TOUCHED:'Stop toccato',SCADUTO:'Scaduto (20 sedute)'})[s.lifecycle]||'Stato in aggiornamento';}
+  function setLifecycleMode(v){lifecycleMode=v;render();}
+  // A signal can satisfy the same conditions on several consecutive closes.
+  // Treat those observations as one research idea while preserving every raw
+  // dated observation in SQLite (and the first entry for statistics).
+  function consolidateSignals(raw){
+    const ordered=[...(raw||[])].filter(s=>s&&s.ticker&&s.asof&&['FORZA','DEBOLEZZA'].includes(s.kind))
+      .sort((a,b)=>a.asof.localeCompare(b.asof)||a.ticker.localeCompare(b.ticker));
+    const recent=new Map(),episodes=[];
+    for(const s of ordered){
+      const key=s.ticker+'|'+s.kind,previous=recent.get(key);
+      const gap=previous?(Date.parse(s.asof+'T12:00:00Z')-Date.parse(previous.last.asof+'T12:00:00Z'))/86400000:Infinity;
+      // A previously completed trade can legitimately be followed by a new idea.
+      const closedBeforeNext=previous&&lifecycleGroup(previous.last)!=='active'&&
+        previous.last.stateAt&&previous.last.stateAt<=s.asof;
+      if(previous&&gap>=0&&gap<=7&&!closedBeforeNext){
+        previous.last=s;previous.days.push(s.asof);
+      }else{
+        const episode={first:s,last:s,days:[s.asof]};episodes.push(episode);recent.set(key,episode);
+      }
+    }
+    return episodes.map(e=>({...e.last,episodeCount:e.days.length,episodeStart:e.first.asof,
+      episodeDates:e.days}));
+  }
+  function activeSignals(){return consolidateSignals(snapshot.signals||[]).filter(s=>isRecent(s)&&
+    (filter==='all'||s.kind===filter)&&(lifecycleMode==='all'||lifecycleGroup(s)===lifecycleMode));}
+  function decorateSegments(){
+    const segments=new Map([...(snapshot.signals||[]),...(snapshot.status?.candidates||[]),...(snapshot.status?.recoveryZones||[])].map(s=>[s.ticker,s.segment]));
+    document.querySelectorAll('article.signal').forEach(card=>{
+      const ticker=card.querySelector('.ticker')?.textContent;
+      const badges=card.querySelector('.badges');
+      if(ticker&&badges&&segments.has(ticker)&&!badges.querySelector('.market-segment'))
+        badges.insertAdjacentHTML('afterbegin','<span class="badge market-segment">'+esc(segmentLabel(segments.get(ticker)))+'</span>');
+      const actions=card.querySelector('.signalactions');
+      if(ticker&&/^[A-Z0-9]{1,12}$/.test(ticker)&&actions&&!actions.querySelector('.chart-action')){
+        const date=(card.querySelector('.company span')?.textContent||'').match(/\d{4}-\d{2}-\d{2}/)?.[0]||'';
+        const kind=(snapshot.signals||[]).find(s=>s.ticker===ticker&&s.asof===date)?.kind||'';
+        actions.insertAdjacentHTML('afterbegin','<button class="action chart-action" onclick="openChart(\''+ticker+'\',\''+date+'\',\''+kind+'\')">📈 Grafico</button>');
+      }
+    });
+  }
+  function renderEarnings(){
+    const e=earnings(),upcoming=[...(e.upcoming||[])].sort((a,b)=>a.daysAway-b.daysAway).slice(0,20);
+    const recent=[...(e.recent||[])].sort((a,b)=>a.daysAgo-b.daysAgo).slice(0,10);
+    let out='<div class="topline"><h2>◷ Calendario trimestrali</h2><small>Prossimi 14 giorni</small></div>';
+    out+='<div class="section"><p>Le date vengono raccolte automaticamente dai dati disponibili. <strong>Possono essere previsioni del provider, non date confermate dalla società.</strong> Una trimestrale imminente è un evento di rischio, non una previsione di rialzo.'+(e.lastError?' Ultimo errore: '+esc(e.lastError)+'.':'')+'</p></div>';
+    if(!upcoming.length&&!recent.length)out+='<div class="empty">Nessun evento nel periodo oppure dati non disponibili. Fonte aggiornata: '+esc(e.updatedAt?new Date(e.updatedAt).toLocaleString('it-IT'):'mai')+'.</div>';
+    for(const x of upcoming){const z=(snapshot.status?.recoveryZones||[]).find(q=>q.ticker===x.ticker&&
+      !['INVALIDATO','SCADUTO'].includes(q.phase)&&Date.now()-Date.parse((q.relevantAt||q.asof)+'T12:00:00Z')<8*86400000);
+      out+='<div class="signal" style="padding:12px 14px"><div class="signalhead"><div class="ticker">'+esc(x.ticker)+'</div><div class="company"><strong>Risultati attesi: '+esc(x.nextDate)+'</strong><span>'+(x.daysAway===0?'Oggi':x.daysAway===1?'Domani':'Fra '+esc(x.daysAway)+' giorni')+' · Data da verificare alla fonte</span></div>'+(z?'<span class="badge weak">Zona debolezza</span>':'')+'</div></div>';}
+    if(recent.length){out+='<div class="topline"><h2>Ultimi risultati</h2><small>Ultimi 5 giorni</small></div>';for(const x of recent){out+='<div class="section" style="padding:10px 13px"><div class="detail-line"><strong>'+esc(x.ticker)+'</strong><span>Pubblicazione indicata: '+esc(x.lastDate)+'</span></div></div>';}}
+    return out;
+  }
+  function setZoneMode(mode){zoneMode=mode;render();}
+  function setZonePhase(mode){zonePhase=mode;render();}
+  function zonePhaseData(phase){
+    return ({
+      OSSERVAZIONE:{text:'◌ Zona osservata',css:'recovery-watch',group:'watch'},
+      RIMBALZO:{text:'↗ Rimbalzo in formazione',css:'recovery-rebound',group:'rebound'},
+      CONFERMATO:{text:'✓ Conferma tecnica · sperimentale',css:'recovery-confirm',group:'confirmed'},
+      INVALIDATO:{text:'✕ Setup invalidato',css:'recovery-invalid',group:'invalid'},
+      SCADUTO:{text:'⌛ Zona scaduta',css:'recovery-invalid',group:'invalid'}
+    })[phase]||{text:'◌ Zona osservata',css:'recovery-watch',group:'watch'};
+  }
+  function renderZones(){
+    const now=Date.now(),refDate=z=>z.relevantAt||z.asof;
+    const daysAgo=z=>(now-Date.parse(refDate(z)+'T12:00:00Z'))/86400000;
+    const all=(snapshot.status?.recoveryZones||[]).filter(z=>Number.isFinite(daysAgo(z))&&daysAgo(z)>=-1&&daysAgo(z)<45);
+    const zones=all.filter(z=>(zoneMode!=='recent'||daysAgo(z)<=8)&&
+      (zonePhase==='all'||zonePhaseData(z.phase).group===zonePhase));
+    let out='<div class="topline"><h2>Zone di recupero</h2><small>'+zones.length+' società</small></div>';
+    out+='<div class="section"><h3>Recupero del supporto · controtrend</h3><p>Individuiamo titoli deboli vicini ai minimi di 120 sedute, anche sotto SMA200. Ogni idea segue quattro fasi: <strong>zona osservata → rimbalzo in formazione → conferma tecnica → invalidazione</strong> (oppure scadenza). Le conferme sono <strong>solo tecniche e non validate da backtest</strong>, mai ordini o acquisti automatici.</p></div>';
+    out+='<div class="chips"><button class="chip '+(zoneMode==='recent'?'sel':'')+'" onclick="setZoneMode(\'recent\')">Ultima settimana</button><button class="chip '+(zoneMode==='45d'?'sel':'')+'" onclick="setZoneMode(\'45d\')">Storico 45 giorni</button></div>';
+    out+='<div class="chips"><button class="chip '+(zonePhase==='all'?'sel':'')+'" onclick="setZonePhase(\'all\')">Tutti</button><button class="chip '+(zonePhase==='watch'?'sel':'')+'" onclick="setZonePhase(\'watch\')">Osservazione</button><button class="chip '+(zonePhase==='rebound'?'sel':'')+'" onclick="setZonePhase(\'rebound\')">Rimbalzo</button><button class="chip '+(zonePhase==='confirmed'?'sel':'')+'" onclick="setZonePhase(\'confirmed\')">Conferma</button><button class="chip '+(zonePhase==='invalid'?'sel':'')+'" onclick="setZonePhase(\'invalid\')">Invalidati</button></div>';
+    if(!zones.length)return out+'<div class="empty">Nessuna zona controtrend compatibile con i criteri nel periodo selezionato. È normale che in alcuni giorni non vi siano candidati.</div>';
+    for(const z of zones){
+      const e=(earnings().values||{})[z.ticker]||{},next=e.nextDate||'',last=e.lastDate||'';
+      const dateDiff=value=>value?(Date.parse(value+'T12:00:00Z')-Date.parse(z.asof+'T12:00:00Z'))/86400000:NaN;
+      const event=(dateDiff(last)>=0&&dateDiff(last)<=3?'<span class="badge weak">Risultati successivi '+esc(last)+'*</span>':dateDiff(next)>=0&&dateDiff(next)<=7?'<span class="badge weak">Trimestrale prevista '+esc(next)+'</span>':'');
+      const phase=zonePhaseData(z.phase),currentPrice=known(z.lastPrice)?z.lastPrice:z.price;
+      const latest=('<span>Prima osservazione '+esc(z.firstObservedAt||z.asof)+' · '+esc(segmentLabel(z.segment))+'</span>');
+      out+='<article class="signal"><div class="signalhead"><div class="ticker">'+esc(z.ticker)+'</div><div class="company"><strong>'+esc(z.name)+'</strong>'+latest+'</div><div class="score" style="color:#d08412">'+esc(z.matched)+'/'+esc(z.required)+'<small>filtri iniziali</small></div></div>';
+      out+='<div class="badges"><span class="badge '+phase.css+'">'+phase.text+'</span><span class="badge">60gg '+esc(z.return60Pct)+'%</span><span class="badge">RSI2 '+esc(z.rsi2)+'</span>'+event+'</div>';
+      out+='<div class="signalgrid"><div><small>Prezzo osservato</small><strong>'+euro(z.price,3)+'</strong></div><div><small>Ultima chiusura '+esc(z.lastChecked||z.asof)+'</small><strong>'+euro(currentPrice,3)+'</strong></div><div><small>Supporto iniziale</small><strong>'+euro(z.support,3)+'</strong></div></div>';
+      out+='<div class="signalgrid" style="margin-top:7px"><div><small>Stop teorico iniziale</small><strong>'+euro(z.stop,3)+'</strong></div><div><small>Target 1 teorico</small><strong>'+euro(z.target1,3)+'</strong></div><div><small>Target 2 teorico</small><strong>'+euro(z.target2,3)+'</strong></div></div>';
+      out+='<p class="phase-note '+phase.css+'"><strong>'+phase.text+'</strong> · '+esc(z.phaseReason||z.missing||'Zona ancora da confermare')+' <span>Stato dal '+esc(z.phaseAt||z.asof)+'.</span></p>';
+      if(known(z.confirmationPrice))out+='<p class="reason">Prezzo alla conferma tecnica: '+euro(z.confirmationPrice,3)+' (non è un’esecuzione).</p>';
+      out+='<p class="reason">Fascia di osservazione: '+euro(z.zoneLow,3)+'–'+euro(z.zoneHigh,3)+' (non un intervallo di acquisto). Distanza iniziale dal supporto '+esc(z.distSupportPct)+'% · rischio iniziale '+esc(z.riskPct)+'%. I livelli originari restano fissi.</p>';
+      out+=fundBadges(z.ticker)+'<div class="signalactions" style="flex-wrap:wrap"><button class="action" onclick="openChart(\''+esc(z.ticker)+'\',\''+esc(z.asof)+'\')">📈 Grafico</button><span class="risk">Solo ricerca · nessun ordine</span><button class="action" onclick="openFund(\''+esc(z.ticker)+'\')">Analisi bilancio →</button></div></article>';
+    }
+    return out+'<div class="section"><p>Regole di ricerca: rimbalzo = minimo sotto supporto e chiusura sopra; conferma tecnica = chiusura successiva sopra il massimo della seduta precedente, candela forte e volumi almeno nella media. Se il prezzo viola lo stop iniziale o chiude sotto il supporto, lo stato è invalidato; dopo 12 sedute senza conferma la zona scade. * Le trimestrali associate a date storiche potrebbero essere note solo oggi. Nessun backtest fuori campione di questa logica è stato ancora eseguito.</p></div>';
+  }
+  function renderEventMomentum(){
+    const recent=(snapshot.status?.eventMomentum||[]).filter(x=>Date.now()-Date.parse(x.asof+'T12:00:00Z')<=9*86400000).slice(0,35);
+    let out='<div class="topline"><h2>⚡ Momentum + eventi</h2><small>'+recent.length+' titoli in osservazione</small></div>';
+    out+='<div class="section"><p>Accelerazioni dei prezzi con volumi anomali, anche se la media a 50 sedute non è sopra quella a 200. <strong>Non sono segnali di acquisto.</strong> Le trimestrali vengono associate usando i dati disponibili oggi: per le osservazioni storiche l’associazione può essere retrospettiva.</p></div>';
+    if(!recent.length)return out+'<div class="empty">Nessuna accelerazione qualificata nell’ultima settimana, oppure prezzi non disponibili.</div>';
+    for(const x of recent){
+      const e=(earnings().values||{})[x.ticker]||{};
+      const diff=date=>date?(Date.parse(date+'T12:00:00Z')-Date.parse(x.asof+'T12:00:00Z'))/86400000:NaN;
+      const tag=Math.abs(diff(e.lastDate))<=3?'Risultati vicini '+e.lastDate+'*':diff(e.nextDate)>=0&&diff(e.nextDate)<=5?'Risultati previsti '+e.nextDate+'*':'Catalizzatore non verificato';
+      out+='<article class="signal"><div class="signalhead"><div class="ticker">'+esc(x.ticker)+'</div><div class="company"><strong>'+esc(x.name)+'</strong><span>'+esc(x.asof)+' · '+esc(segmentLabel(x.segment))+'</span></div><div class="score" style="color:#d08412">+'+esc(x.dayPct)+'%<small>seduta</small></div></div><div class="badges"><span class="badge weak">SOLO WATCH</span><span class="badge">Vol. '+esc(x.rvol)+'×</span><span class="badge">2 sedute '+(x.twoDayPct>0?'+':'')+esc(x.twoDayPct)+'%</span><span class="badge">'+esc(tag)+'</span></div><div class="signalgrid"><div><small>Chiusura storica</small><strong>'+euro(x.price,3)+'</strong></div><div><small>Posizione candela</small><strong>'+esc(Math.round(x.position*100))+'%</strong></div><div><small>SMA50 sopra 200</small><strong>'+(x.sma50Above200?'Sì':'No')+'</strong></div></div>'+fundBadges(x.ticker)+'<div class="signalactions"><span class="risk">In attesa di conferma, nessun ordine</span><button class="action" onclick="openFund(\''+esc(x.ticker)+'\')">Fondamentali →</button></div></article>';
+    }
+    return out+'<div class="section"><p>* Data/evento associato oggi: non è prova che il calendario fosse noto all’app alla data storica. Nessun rendimento è stato dimostrato.</p></div>';
+  }
+  function render(){
+    const s=snapshot.status||{},all=consolidateSignals(snapshot.signals||[]).filter(isRecent),show=all.filter(x=>x.kind==='FORZA'),weak=all.filter(x=>x.kind==='DEBOLEZZA');
+    document.getElementById('analysed').textContent=s.good||s.report?.usable||snapshot.cachedStocks||0;
+    document.getElementById('countForce').textContent=show.length;
+    document.getElementById('countWeak').textContent=weak.length;
+    document.getElementById('labelForce').textContent='Forza · '+(period==='session'?(s.sessionStale?'seduta arretrata':'ultima seduta'):'45 giorni');
+    document.getElementById('labelWeak').textContent='Debolezza · '+(period==='session'?(s.sessionStale?'seduta arretrata':'ultima seduta'):'45 giorni');
+    document.getElementById('scanBtn').disabled=!!s.running;
+    document.getElementById('scanBtn').textContent=s.running?'◉  Scansione in corso…':'↻   Scansiona Milano';
+    document.getElementById('connection').textContent=s.running?'● Analisi in corso':'◌ Milano · EOD';
+    let html='';
+    if(s.running){html='<div class="alert ok"><strong><span class="spinner"></span> Analisi automatica in corso</strong>'+esc(s.current)+' · '+(s.done||0)+' / '+(s.total||'?')+' · '+(s.good||0)+' storici validi</div>';}
+    else if(s.report?.incomplete){html='<div class="alert err"><strong>Scansione interrotta</strong>'+esc(s.lastError||s.lastInfo)+' · Vedi i dettagli nel menu Dati.</div>';}
+    else if(!s.lastRun||s.lastRun==='mai'){html='<div class="alert"><strong>Primo avvio</strong>L’app sta tentando la prima scansione di Milano. Serve una connessione Internet.</div>';}
+    else if(s.sessionStale){html='<div class="alert err"><strong>⚠ Dati giornalieri arretrati</strong>Ultima chiusura disponibile: '+esc(s.report?.lastSession||'N/D')+'. Giorno feriale atteso: '+esc(s.expectedSession||'N/D')+'. Ultima scansione: '+esc(lastUpdateIt(s.lastRun))+'. L’app prova ad aggiornare quando viene aperta; puoi anche premere “Scansiona Milano”. Se il feed è in ritardo, non considerare attuali gli 0 setup.</div>';}
+    else{html='<div class="alert ok"><strong>Scansione completata · prezzi EOD</strong>'+esc(s.lastInfo||s.lastRun)+' · Aggiornata '+esc(lastUpdateIt(s.lastRun))+(Number(s.report?.withoutHistory)>0?' · '+esc(s.report.withoutHistory)+' titoli senza storico affidabile (dettagli in Dati).':'')+(Number(s.report?.staleQuoteCount)>0?' · '+esc(s.report.staleQuoteCount)+' quotazioni più vecchie del giorno atteso.':'')+'</div>';}
+    document.getElementById('status').innerHTML=html;
+    filter=tab==='force'?'FORZA':tab==='weak'?'DEBOLEZZA':filter;
+    renderExtra();
+    document.getElementById('events').innerHTML=(tab==='radar'||tab==='zones')?renderEarnings():'';
+    const view=document.getElementById('view');
+    if(tab==='strategies'){view.innerHTML=renderStrategies();decorateSegments();return;}
+    if(tab==='history'){view.innerHTML=renderHistory();decorateSegments();return;}
+    if(tab==='journal'){view.innerHTML=renderJournal();return;}
+    if(tab==='stats'){view.innerHTML=statsRender();return;}
+    if(tab==='data'){view.innerHTML=renderData();return;}
+    if(tab==='titles'){view.innerHTML=titlesView();return;}
+    if(tab==='fund'){view.innerHTML=renderFunds();return;}
+    if(tab==='zones'){view.innerHTML=renderZones()+renderEventMomentum();decorateSegments();return;}
+    const selected=activeSignals().filter(s=>lifecycleGroup(s)==='active');
+    let out='<div class="topline"><h2>'+(tab==='force'?'Acquisti sulla forza':tab==='weak'?'Acquisti sulla debolezza':'Setup confermati')+'</h2><small>'+selected.length+' setup</small></div>';
+    out+='<div class="chips"><button class="chip '+(period==='45d'?'sel':'')+'" onclick="setPeriod(\'45d\')">Ultimi 45 giorni</button><button class="chip '+(period==='session'?'sel':'')+'" onclick="setPeriod(\'session\')">'+(s.sessionStale?'Seduta archiviata ':'Ultima seduta ')+esc(s.report?.lastSession||'')+'</button></div>';
+
+
+    if(!selected.length){out+='<div class="empty"><span class="bigicon">◎</span><strong>'+(s.sessionStale&&period==='session'?'I segnali del giorno atteso non sono ancora disponibili':'Nessun setup confermato '+(period==='session'?'nell’ultima seduta':'nei 45 giorni visualizzati'))+'</strong><br>'+(s.sessionStale&&period==='session'?'Il feed visualizzato è in ritardo; il valore zero NON descrive l’ultima seduta attesa.':'Nessun titolo soddisfa <em>tutte</em> le regole nel periodo scelto.')+' Scorri in basso per i titoli in formazione; non sono segnali di ingresso.</div>';}
+    else{out+=sortControls();selected.filter(passesResearchFilters).sort(researchSort).slice(0,120).forEach(s=>out+=signalCard(s));}
+    if(tab==='radar')out+='<div class="section"><h3>Strategie e opportunità in osservazione</h3><p>Apri Strategie per consultare Forza, Debolezza, Zone e Momentum/Eventi separatamente. Lo storico è in una schermata dedicata.</p><button class="primary" style="margin-top:12px" onclick="nav(\'strategies\')">Esplora le 4 strategie</button></div>';
+    out+='<div class="section" style="margin-top:19px"><h3>⚑ Segnali di ricerca, non ordini</h3><p>Più rilevamenti ravvicinati dello stesso titolo e strategia sono raggruppati in una sola idea; il dettaglio conserva le date e mostra i livelli dell’ultimo rilevamento. Entrate, stop e target sono livelli teorici calcolati sulla chiusura. Ranking euristico e strategie non validate su un backtest italiano fuori campione. Gli stati derivano dalle candele EOD e <strong>non rappresentano esecuzioni reali</strong>. Se stop e target sono toccati nello stesso giorno, viene assunto prima lo stop. Nessun acquisto automatico.</p></div>';
+    view.innerHTML=out;decorateSegments();
+  }
+  function renderExtra(){
+    const s=snapshot.status||{},report=s.report||{},box=document.getElementById('watchlist');
+    if(tab==='journal'){box.innerHTML='';return;}
+    if(tab==='data'){
+      const errors=report.errors||[];
+      let out='<div class="topline"><h2>Esito della scansione</h2><small>'+errors.length+' anomalie registrate</small></div>';
+      const univ=s.universeInfo||{};
+      out+='<div class="section"><div class="detail-line"><span>Universo italiano</span><strong>'+esc(report.universe||univ.total||84)+' ticker</strong></div><div class="detail-line"><span>Nuovi rispetto alla lista base</span><strong>'+esc(univ.added||0)+'</strong></div><div class="detail-line"><span>Large / Mid / Small (ind.)</span><strong>'+esc(univ.large||0)+' / '+esc(univ.mid||0)+' / '+esc(univ.small||0)+'</strong></div><div class="detail-line"><span>Fonte elenco</span><strong>'+esc(univ.source||'Lista locale')+'</strong></div><div class="detail-line"><span>Ultimo aggiornamento universo</span><strong>'+esc(univ.lastSuccess?new Date(univ.lastSuccess).toLocaleString('it-IT'):'non disponibile')+'</strong></div><div class="detail-line"><span>Richieste effettuate</span><strong>'+esc(report.attempted||0)+'</strong></div><div class="detail-line"><span>Storici validi (≥210 sedute)</span><strong>'+esc(report.usable||0)+'</strong></div><div class="detail-line"><span>Problemi di dati</span><strong>'+esc(report.withoutHistory||0)+'</strong></div>'+(univ.lastError?'<p style="color:#b65e1f">Feed elenco: '+esc(univ.lastError)+'. Usato elenco locale o cache.</p>':'')+(report.incomplete?'<p style="color:#b65e1f">Scansione interrotta: non tutti i ticker sono stati controllati.</p>':'')+'<p style="margin-top:10px">Large/Mid/Small sono fasce di capitalizzazione indicative, non appartenenza agli indici FTSE. Le società sotto 100 mln € o poco liquide non sono aggiunte automaticamente.</p></div>';
+      out+='<div class="section"><h3>Perché non vedo un titolo?</h3><p>Digita un ticker per verificare se è stato analizzato, quale condizione manca o se i prezzi non sono arrivati.</p><div class="formrow"><input id="diagInput" maxlength="12" placeholder="Es. MAIRE, STLAM" value="'+esc(diagTicker)+'" oninput="updateTickerDiagnostic(this.value)"></div><div id="tickerDiagnostics">'+renderTickerDiagnostic()+'</div></div>';
+      if(errors.length)out+='<div class="section"><h3>Titoli esclusi: dettaglio</h3>'+errors.slice(0,100).map(e=>'<div class="detail-line"><strong>'+esc(e.ticker)+'</strong><span style="max-width:75%;text-align:right">'+esc(e.reason)+'</span></div>').join('')+'</div>';
+      box.innerHTML=out;return;
+    }
+    if(!['radar','force','weak'].includes(tab)){box.innerHTML='';return;}
+    if(tab==='radar'){box.innerHTML='';return;}
+    const watch=(s.candidates||[]).filter(w=>filter==='all'||w.kind===filter);
+    let out='<div class="topline"><h2>◌ In formazione · ultima seduta</h2><small>'+watch.length+' candidati '+(filter==='all'?'':filter.toLowerCase())+'</small></div>';
+    if(!watch.length)out+='<div class="empty">Nessun titolo vicino ai criteri nella scansione disponibile. L’elenco si aggiorna dopo una scansione completata.</div>';
+    else watch.forEach(w=>{out+='<article class="signal"><div class="signalhead"><div class="ticker">'+esc(w.ticker)+'</div><div class="company"><strong>'+esc(w.name)+'</strong><span>Milano · '+esc(w.asof)+'</span></div><div class="score" style="color:#d08412">'+esc(w.matched)+'/'+esc(w.required)+'<small>Regole OK</small></div></div><span class="watch-label">DA CONFERMARE · non è un ordine</span><div class="badges"><span class="badge '+(w.kind==='FORZA'?'force':'weak')+'">'+(w.kind==='FORZA'?'↗ FORZA':'↘ DEBOLEZZA')+'</span><span class="badge">RSI2 '+esc(w.rsi2)+'</span><span class="badge">Vol. '+esc(w.rvol)+'×</span></div><div class="signalgrid"><div><small>Chiusura</small><strong>'+euro(w.price,3)+'</strong></div><div><small>Massimo 20g</small><strong>'+euro(w.resistance,3)+'</strong></div><div><small>Pullback</small><strong>'+esc(w.pullbackPct)+'%</strong></div></div><p class="reason"><strong>Condizioni mancanti:</strong> '+esc(w.missing)+'</p>'+fundBadges(w.ticker)+'<div class="signalactions"><span class="risk">Valutazione su dati di bilancio</span><button class="action" onclick="openFund(\''+esc(w.ticker)+'\')">Analisi →</button></div></article>';});
+    out+='<div class="section"><p>“Regole OK” indica quante condizioni tecniche sono rispettate, non la probabilità di guadagno. Questi titoli <strong>NON</strong> hanno superato tutti i filtri e non generano notifiche d’ingresso.</p></div>';
+    box.innerHTML=out;
+  }
+  function updateTickerDiagnostic(value){diagTicker=String(value).toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,12);const host=document.getElementById('tickerDiagnostics');if(host)host.innerHTML=renderTickerDiagnostic();}
+  function renderTickerDiagnostic(){
+    const q=diagTicker.trim(),report=snapshot.status?.report||{},items=report.diagnostics||[];
+    if(!q)return '<p class="reason">Inserisci un ticker del listino Milano.</p>';
+    const result=items.find(x=>x.ticker===q);
+    if(!result)return '<p class="reason">'+esc(q)+' non presente nel report. Avvia una scansione completa: se il ticker è nel listino ma manca dall’universo, verrà segnalato qui.</p>';
+    let rows=[['Ticker',result.ticker],['Esito',String(result.status||'N/D').replace(/_/g,' ')],['Ultima seduta',result.asof||'N/D'],['Motivo',result.reason||'N/D']];
+    if(known(result.price))rows.push(['Ultima chiusura',euro(result.price,3)]);
+    if(known(result.sma50))rows.push(['SMA50 / SMA200',euro(result.sma50,3)+' / '+euro(result.sma200,3)]);
+    if(known(result.turnover))rows.push(['Controvalore giornaliero mediano',euro(result.turnover,0)+' · minimo '+euro(result.turnoverRequired,0)]);
+    if(result.hasEventMomentum)rows.push(['Accelerazione osservata',esc(result.lastEventDay||'Ultime 35 sedute')+' (controlla Momentum + eventi)']);
+    if(result.hasRecoveryZone)rows.push(['Recupero osservato','Sì (controlla Zone)']);
+    return rows.map(([k,v])=>'<div class="detail-line"><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>').join('');
+  }
+  function setFilter(value){filter=value;render();}
+  function signalCard(s){const ts=tradeAssessment(s),os=opportunityAssessment(s);const old=Number(s.dataAge)>4;const sym=s.kind==='FORZA'?'↗ FORZA':'↘ DEBOLEZZA';return '<article class="signal"><div class="signalhead"><div class="ticker">'+esc(s.ticker)+'</div><div class="company"><strong>'+esc(s.name)+'</strong><span>Milano · '+esc(s.asof)+'</span></div><div class="score">'+esc(s.score)+'/100<small>Ranking tecnico</small></div></div><div class="badges"><span class="badge '+(s.kind==='FORZA'?'force':'weak')+'">'+sym+'</span><span class="badge '+(lifecycleGroup(s)==='invalid'?'old':lifecycleGroup(s)==='target'?'force':'weak')+'">'+esc(lifecycleLabel(s))+'</span><span class="badge">Vol. '+esc(s.rvol)+'×</span>'+(s.episodeCount>1?'<span class="badge">↻ '+esc(s.episodeCount)+' rilevamenti · dal '+esc(s.episodeStart)+'</span>':'')+(old?'<span class="badge old">Storico · '+esc(s.dataAge)+' gg</span>':'')+'</div><div class="three-scores"><div class="score-pillar"><small>Trade Score</small><strong>'+(ts.score===null?'N/D':ts.score+'/100')+'</strong><span>'+esc(ts.label)+'</span></div><div class="score-pillar"><small>Opportunity</small><strong>'+(os.score===null?'N/D':os.score+'/100')+'</strong><span>Fondamentali + trade</span></div><div class="score-pillar"><small>Rischio/Rendimento</small><strong>'+(ts.rr===null||ts.rr===undefined?'N/D':ts.rr.toFixed(2)+'R')+'</strong><span>Target 1 / stop</span></div></div><div class="signalgrid"><div><small>Entrata teorica</small><strong class="mono">'+euro(s.entry,3)+'</strong></div><div><small>Stop indicativo</small><strong class="mono">'+euro(s.stop,3)+'</strong></div><div><small>Target 1</small><strong class="mono">'+euro(s.target1,3)+'</strong></div></div><div class="reason">'+esc(s.reason)+(s.stateAt?' Stato osservato al '+esc(s.stateAt)+'.':'')+'</div>'+scoreStrip(s.ticker,s.score)+'<div class="signalactions"><span class="risk">Rischio prezzo: '+esc(s.riskPct)+'% · RSI2 '+esc(s.rsi2)+'</span><button class="action" onclick="showSignal(\''+esc(s.ticker)+'\',\''+esc(s.asof)+'\',\''+esc(s.kind)+'\')">Dettagli e diario →</button></div></article>';}
+  function showSignal(ticker,asof,kind){modalSignal=(snapshot.signals||[]).find(s=>s.ticker===ticker&&s.asof===asof&&s.kind===kind);if(!modalSignal)return;const s=modalSignal,episode=consolidateSignals(snapshot.signals||[]).find(x=>x.ticker===ticker&&x.kind===kind&&x.asof===asof);const rows=[['Stato simulato',lifecycleLabel(s)],['Stato aggiornato',s.stateAt||'N/D'],['Ultima chiusura osservata',known(s.lastPrice)?euro(s.lastPrice,3):'N/D'],['Prezzo di riferimento',euro(s.price,3)],['Stop indicativo',euro(s.stop,3)],['Target 1',euro(s.target1,3)],['Target 2',euro(s.target2,3)],['Massimo 20 sedute',euro(s.resistance,3)],['SMA20',euro(s.sma20,3)],['SMA50',euro(s.sma50,3)],['SMA200',euro(s.sma200,3)],['RSI(2)',fnum(s.rsi2)],['Volume relativo',fnum(s.rvol,2)+'×'],['Fonte',s.source],['Trade Score',tradeAssessment(s).score===null?'N/D':tradeAssessment(s).score+'/100'],['Opportunity Score',opportunityAssessment(s).score===null?'N/D':opportunityAssessment(s).score+'/100'],['R/R target 1',tradeAssessment(s).rr===null?'N/D':fnum(tradeAssessment(s).rr,2)+'R'],['Backtest validato?','No, ricerca sperimentale']];if(episode&&episode.episodeCount>1)rows.unshift(['Rilevamenti dello stesso setup',episode.episodeDates.join(', ')+' · livelli più recenti']);document.getElementById('overlay').innerHTML='<div class="modal-backdrop" onclick="closeModal(event)"><div class="modal"><div class="modal-header"><h2>'+esc(s.ticker)+' · '+esc(s.kind)+'</h2><button class="xbtn" onclick="closeModal()">×</button></div><p style="color:#718396;font-size:12px">'+esc(s.reason)+'</p>'+rows.map(([k,v])=>'<div class="detail-line"><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>').join('')+'<div class="section" style="margin-top:14px"><h3>Analisi fondamentale</h3>'+fundPanel(s.ticker)+'</div><button class="primary" style="margin-top:16px" onclick="tradeFromSignal()">+ Registra un acquisto reale</button></div></div>';}
+  function openFund(ticker){modalSignal=null;document.getElementById('overlay').innerHTML='<div class="modal-backdrop" onclick="closeModal(event)"><div class="modal"><div class="modal-header"><h2>'+esc(ticker)+' · Fondamentali</h2><button class="xbtn" onclick="closeModal()">×</button></div>'+fundPanel(ticker)+'<div class="section" style="margin-top:14px"><p>Questi dati non costituiscono un segnale operativo. Le metriche possono essere ritardate o mancanti; verificare sempre il bilancio pubblicato dall’emittente.</p></div></div></div>';}
+  function setFundMode(v){fundMode=v;render();}
+  function renderFunds(){const f=fundamentals(),values=f.values||{},all=Object.keys(values).sort();
+    const watching=new Set((snapshot.status?.candidates||[]).map(x=>x.ticker));const signalled=new Set((snapshot.signals||[]).filter(isRecent).map(x=>x.ticker));
+    const tickers=all.filter(t=>fundMode==='all'||(fundMode==='watch'&&watching.has(t))||(fundMode==='signal'&&signalled.has(t)));
+    let out='<div class="topline"><h2>Fair Value e fondamentali</h2><small>'+all.length+' con dati</small></div>';
+    out+='<div class="section"><h3>Fonte: bilanci pubblici ESEF/XBRL</h3><p>Ultimo aggiornamento: '+(f.updatedAt?esc(new Date(f.updatedAt).toLocaleString('it-IT',{timeZone:'Europe/Rome'})):'mai')+'. Registro iniziale: GVS e SOL; sono mostrati solo i depositi recuperati e validati. Bilanci annuali 2025; non includono le semestrali 2026. Altri titoli restano N/D finché il relativo deposito non viene integrato.'+(f.lastError?'<br>Ultimo errore: '+esc(f.lastError):'')+Object.entries(f.errors||{}).map(([t,e])=>'<br>'+esc(t)+': '+esc(e)).join('')+'</p></div>';
+    out+='<div class="chips"><button class="chip '+(fundMode==='all'?'sel':'')+'" onclick="setFundMode(\'all\')">Tutti con dati</button><button class="chip '+(fundMode==='watch'?'sel':'')+'" onclick="setFundMode(\'watch\')">In formazione</button><button class="chip '+(fundMode==='signal'?'sel':'')+'" onclick="setFundMode(\'signal\')">Setup confermati</button></div>';
+    if(!tickers.length)out+='<div class="empty">Nessuna metrica disponibile per questa selezione. Le quote tecniche non sono valutazioni fondamentali.</div>';
+    for(const ticker of tickers){const m=values[ticker];out+='<article class="signal"><div class="signalhead"><div class="ticker">'+esc(ticker)+'</div><div class="company"><strong>'+esc(m.sector||'Settore non disponibile')+'</strong><span>'+(watching.has(ticker)?'In formazione · ':'')+(signalled.has(ticker)?'Setup tecnico · ':'')+'Borsa Milano</span></div></div>'+fundBadges(ticker)+'<p>Bilancio '+esc(m.periodEnd||'N/D')+'</p><div class="signalactions"><span class="risk">Valutazione · qualità · crescita</span><button class="action" onclick="openFund(\''+esc(ticker)+'\')">Fair Value e qualità →</button></div></article>';}
+    return out+'<div class="section"><p>Multipli e margini sono descrittivi; non usiamo una valutazione sintetica senza confronto e copertura settoriale sufficienti. Il filtro tecnico rimane indipendente.</p></div>';
+  }
+  function closeModal(event){if(!event||event.target.classList.contains('modal-backdrop'))document.getElementById('overlay').innerHTML='';}
+  function setJournalMode(value){journalMode=value;render();}
+  function renderJournal(){const trades=snapshot.trades||[];let closed=trades.filter(t=>t.exit!==null&&t.exit!==undefined),opened=trades.filter(t=>t.exit===null||t.exit===undefined),pnl=closed.reduce((a,t)=>a+Number(t.pnl||0),0);
+    let out='<div class="topline"><h2>Posizioni reali · diario</h2><small>'+trades.length+' operazioni manuali</small></div><div class="section"><div class="detail-line"><span>Posizioni aperte</span><strong>'+opened.length+'</strong></div><div class="detail-line"><span>Posizioni chiuse</span><strong>'+closed.length+'</strong></div><div class="detail-line"><span>Risultato realizzato*</span><strong style="color:'+(pnl>=0?'#0d996e':'#c83c52')+'">'+euro(pnl)+'</strong></div><p style="margin-top:11px">* P&L lordo delle imposte, al netto delle commissioni inserite. L’app non controlla il broker: apertura e chiusura vanno registrate da te.</p></div>';
+    out+='<button class="action" style="width:100%;margin-bottom:12px;padding:13px" onclick="nav(\'stats\')">📊 Esplora statistiche e risultati teorici dei setup →</button>';
+    out+='<div class="chips"><button class="chip '+(journalMode==='open'?'sel':'')+'" onclick="setJournalMode(\'open\')">Aperte ('+opened.length+')</button><button class="chip '+(journalMode==='closed'?'sel':'')+'" onclick="setJournalMode(\'closed\')">Chiuse ('+closed.length+')</button><button class="chip '+(journalMode==='all'?'sel':'')+'" onclick="setJournalMode(\'all\')">Tutte</button></div><button class="primary" onclick="tradeFromSignal(null)">+ Registra acquisto reale</button>';
+    const chosen=journalMode==='open'?opened:journalMode==='closed'?closed:trades;
+    if(!chosen.length)return out+'<div class="empty" style="margin-top:15px"><span class="bigicon">▤</span>Nessuna posizione in questa categoria. I segnali del radar non sono ordini eseguiti.</div>';
+    chosen.forEach(t=>{const open=t.exit===null||t.exit===undefined;out+='<div class="trade"><div class="tradehead"><strong>'+esc(t.ticker)+' · '+esc(t.kind)+'</strong>'+(open?'<small>APERTA · registrata manualmente</small>':'<span class="'+(t.pnl>=0?'profit':'profit loss')+'">'+euro(t.pnl)+'</span>')+'</div><div style="margin:11px 0;font-size:12px">'+esc(t.quantity)+' pz · Entrata '+euro(t.entry,3)+(open?'':' · Uscita '+euro(t.exit,3))+'</div><small>Commissioni totali: '+euro(t.fees)+' · '+esc(t.note||'')+'</small>'+(open?'<div style="margin-top:10px"><button class="action" onclick="closeTradeDialog('+Number(t.id)+')">Registra vendita / chiudi</button></div>':'')+'</div>';});return out;
+  }
+  function tradeFromSignal(s=modalSignal){if(s&&s.ticker===undefined)s=null;document.getElementById('overlay').innerHTML='<div class="modal-backdrop" onclick="closeModal(event)"><div class="modal"><div class="modal-header"><h2>Registra acquisto</h2><button class="xbtn" onclick="closeModal()">×</button></div><form onsubmit="submitTrade(event)"><div class="formgrid"><div class="formrow"><label>Ticker (Milano)</label><input id="tTicker" maxlength="12" required value="'+esc(s?s.ticker:'')+'" placeholder="ENI"></div><div class="formrow"><label>Setup</label><select id="tKind"><option '+(s&&s.kind==='FORZA'?'selected':'')+'>FORZA</option><option '+(s&&s.kind==='DEBOLEZZA'?'selected':'')+'>DEBOLEZZA</option><option '+(!s?'selected':'')+'>MANUALE</option></select></div><div class="formrow"><label>Prezzo ingresso (€)</label><input id="tEntry" type="number" inputmode="decimal" step="0.0001" min="0.0001" required value="'+(s?s.entry:'')+'"></div><div class="formrow"><label>Quantità</label><input id="tQty" type="number" inputmode="decimal" step="0.001" min="0.001" required></div></div><div class="formrow"><label>Commissione acquisto (€)</label><input id="tFees" type="number" step="0.01" min="0" value="0"></div><div class="formrow"><label>Note</label><textarea id="tNote" rows="3" placeholder="Motivo d’ingresso / decisione"></textarea></div><button class="primary" type="submit">Salva nel diario locale</button></form></div></div>';}
+  function submitTrade(e){e.preventDefault();const t={ticker:document.getElementById('tTicker').value,kind:document.getElementById('tKind').value,entry:Number(document.getElementById('tEntry').value),quantity:Number(document.getElementById('tQty').value),fees:Number(document.getElementById('tFees').value),note:document.getElementById('tNote').value};const result=Android.addTrade(JSON.stringify(t));if(result.startsWith('ERRORE')){alert(result);return;}closeModal();nav('journal');update();}
+  function closeTradeDialog(id){document.getElementById('overlay').innerHTML='<div class="modal-backdrop" onclick="closeModal(event)"><div class="modal"><div class="modal-header"><h2>Chiudi operazione #'+id+'</h2><button class="xbtn" onclick="closeModal()">×</button></div><form onsubmit="submitCloseTrade(event,'+id+')"><div class="formrow"><label>Prezzo di vendita (€)</label><input id="exitPrice" type="number" required step="0.0001" min="0.0001"></div><div class="formrow"><label>Commissioni vendita (€)</label><input id="exitFees" type="number" step="0.01" min="0" value="0"></div><button class="primary" type="submit">Conferma chiusura</button></form></div></div>';}
+  function submitCloseTrade(e,id){e.preventDefault();const result=Android.closeTrade(id,Number(document.getElementById('exitPrice').value),Number(document.getElementById('exitFees').value));if(result.startsWith('ERRORE')){alert(result);return;}closeModal();update();}
+  function renderData(){const s=snapshot.status||{},f=fundamentals();
+    let out='<div class="topline"><h2>Motore e dati</h2><small>Solo Borsa Italiana</small></div>';
+    out+='<div class="section"><h3>Stato feed</h3><div class="detail-line"><span>Prezzi giornalieri</span><strong>Yahoo Chart · .MI · non live</strong></div><div class="detail-line"><span>Storici in cache</span><strong>'+esc(snapshot.cachedStocks||0)+'</strong></div><div class="detail-line"><span>Ultimo controllo</span><strong>'+esc(lastUpdateIt(s.lastRun))+'</strong></div><div class="detail-line"><span>Ultima seduta disponibile</span><strong>'+esc(s.report?.lastSession||'N/D')+'</strong></div><div class="detail-line"><span>Seduta attesa (lun–ven)</span><strong>'+esc(s.expectedSession||'N/D')+'</strong></div><div class="detail-line"><span>Prezzi arretrati</span><strong>'+esc(s.report?.staleQuoteCount||0)+' ticker</strong></div><div class="detail-line"><span>Scansione</span><strong>'+esc(s.done||0)+' / '+esc(s.total||'?')+'</strong></div><div class="detail-line"><span>Fondamentali disponibili</span><strong>'+esc(f.count||0)+' titoli</strong></div><div class="detail-line"><span>Trimestrali in calendario</span><strong>'+esc((earnings().upcoming||[]).length)+' entro 14 giorni</strong></div><div class="detail-line"><span>Fonte eventi aggiornata</span><strong>'+esc(earnings().updatedAt?new Date(earnings().updatedAt).toLocaleString('it-IT'):'mai')+'</strong></div>'+(earnings().lastError?'<p>Errore calendario: '+esc(earnings().lastError)+'</p>':'')+'<p style="margin-top:14px">Questa app analizza <strong>candele giornaliere completate</strong>, non le quotazioni intraday di TradingView. La seduta attesa si basa sui giorni feriali: festività ed eventuali ritardi del provider possono incidere.</p></div>';
+    if((s.report?.staleQuotes||[]).length)out+='<div class="section"><h3>Titoli con ultima candela arretrata</h3>'+(s.report.staleQuotes||[]).slice(0,30).map(x=>'<div class="detail-line"><strong>'+esc(x.ticker)+'</strong><span>'+esc(x.asof)+' · atteso '+esc(s.expectedSession||'')+'</span></div>').join('')+'</div>';
+    out+='<div class="section"><h3>↗ Acquisto sulla forza</h3><ul class="small-list"><li>Prezzo sopra SMA200 e SMA50 sopra SMA200</li><li>Chiusura sopra il massimo delle precedenti 20 sedute (+0,5%)</li><li>Consolidamento profondo al massimo 22%</li><li>Volume ≥1,3× mediana 20 sedute</li><li>Chiusura nella parte alta della candela (≥65%)</li></ul></div>';
+    out+='<div class="section"><h3>↘ Acquisto sulla debolezza</h3><ul class="small-list"><li>Prezzo sopra SMA200 e SMA50 sopra SMA200</li><li>Performance 60 sedute oltre +4%</li><li>Pullback 3,5–14% dal massimo 20 sedute</li><li>RSI(2) ≤25</li><li>Distanza dal supporto SMA20 o SMA50 ≤3,5%</li></ul></div>';
+    out+='<div class="section"><h3>⌁ Recupero da debolezza · in osservazione</h3><ul class="small-list"><li>Prezzo sotto SMA200 e calo a 60 sedute almeno 8%</li><li>Distanza massima del 20% dal minimo delle precedenti 120 sedute</li><li>Almeno 3 condizioni aggiuntive su 4: zona entro +12% dal minimo, calo 60gg almeno 12%, RSI(2) ≤70, chiusura nella metà superiore della candela</li><li>Stop teorico sotto il supporto e rischio prezzo massimo del 18%</li><li>Storico di 35 sedute: viene conservata la zona più recente per titolo, anche se ora il prezzo è cambiato</li></ul><p>Questa è solo una lista di osservazione: non produce notifiche d’ingresso, non anticipa risultati societari e non è validata fuori campione.</p></div>';
+    out+='<div class="section"><h3>◷ Eventi trimestrali</h3><p>Calendario informativo dei risultati attesi entro 14 giorni, più gli ultimi 5 giorni. Le date dello screener possono essere stimate e devono essere confermate sulla pagina Investor Relations dell’emittente. Nessun acquisto viene segnalato per il solo avvicinarsi di un evento.</p></div>';
+    out+='<div class="section"><h3>Universo dinamico Italia</h3><p>La versione 1.4 aggiunge automaticamente le azioni Milano liquide dallo screener. Fasce indicative: Large Cap ≥10 mld €, Mid Cap 2–10 mld €, Small Cap 100 mln–2 mld €. Turnover giornaliero medio richiesto in selezione: 500.000 € Large/Mid e 250.000 € Small. L’elenco locale storico è sempre mantenuto. La scoperta è aggiornata circa ogni 24 ore; in caso di errore si usa la cache o la lista base. Screener non ufficiale e soggetto a disponibilità.</p></div>';
+    out+='<div class="section"><h3>Parametri comuni</h3><p>Prezzo ≥1 €; turnover mediano a 20 sedute ≥500.000 € per Large/Mid/lista base oppure ≥250.000 € per Small; almeno 210 sedute di storico. Prima delle 18:15 italiane la candela odierna è esclusa: si analizza l’ultima seduta completata. Stop/target ATR(14). I setup sono confermati solo se rispettano tutte le regole; quelli in formazione mostrano il conteggio delle condizioni superate.</p></div>';
+    out+='<div class="section"><h3>Analisi fondamentale</h3><p>I dati reali (P/E, P/B, ROE, ricavi, margini, leverage e settore) sono visibili nel menu Bilanci. Sono informativi e non bloccano i setup tecnici. Il confronto settoriale viene mostrato solo quando ci sono almeno tre società comparabili nel nostro paniere.</p></div>';
+    out+='<div class="section"><h3>Autonomia Android</h3><p>Le analisi avvengono sul telefono, con Internet e senza server privato. JobScheduler può posticipare la scansione giornaliera per batteria o inattività. Non c’è esecuzione di ordini, né feed intraday.</p></div>';
+    return out+'<div class="section"><h3>Limiti</h3><p>Questa replica non è una strategia proprietaria certificata e non è stata validata fuori campione sull’universo italiano. I dati dei bilanci possono essere ritardati o assenti. Prima di usare capitale reale occorre un backtest con commissioni, spread e slippage.</p></div>';
+  }
+  setInterval(update,2200);
+  // Re-check the 18:15 EOD cutoff even when the app stays open all afternoon.
+  setInterval(()=>{try{if(window.Android&&typeof Android.refreshIfDue==='function')Android.refreshIfDue();}catch(e){}},60000);
+  update();
+</script>
+<script src="chart.js"></script>
+<script src="stats.js"></script>
+</body>
+</html>

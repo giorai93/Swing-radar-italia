@@ -1,0 +1,19 @@
+{
+  "GVS": {
+    "name": "GVS S.p.A.",
+    "lei": "81560013EACB40B52D17",
+    "year": 2025,
+    "listing": "https://www.gvs.com/en/investor-relations/financial-statements/",
+    "url": "https://filings.xbrl.org/81560013EACB40B52D17/2025-12-31/ESEF/IT/0/81560013EACB40B52D17-2025-12-31-1-en/reports/81560013EACB40B52D17-2025-12-31-1-en.xhtml",
+    "publishedAt": null,
+    "issuerArchive": "https://static.gvs.com/investor-relations/documents/202604240751-a201553f7d5751cc/81560013EACB40B52D17-2025-12-31-1-en-1.zip"
+  },
+  "SOL": {
+    "name": "SOL S.p.A.",
+    "lei": "81560096A9AEBBBD4B25",
+    "year": 2025,
+    "listing": "https://www.solgroup.com/it/investitori/per-gli-azionisti",
+    "url": "https://www.solgroup.com/it/investitori/per-gli-azionisti/rapporti-annuali/gruppo-sol-bilancio-consolidato-2025-formato-esef",
+    "publishedAt": "2026-04-20"
+  }
+}
