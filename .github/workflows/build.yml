@@ -29,6 +29,9 @@ jobs:
           python -m unittest discover -s project/tests -p 'test_esef.py' -v
           cd project
           node tests/fundamentals_smoke.js
+          node tests/stats_smoke.js
+          node tests/chart_smoke.js
+          node tests/universe_smoke.js
       - name: Fetch and verify real GVS and SOL ESEF reports
         run: python project/tools/esef.py --strict
       - name: Verify live facts

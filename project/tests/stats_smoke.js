@@ -71,3 +71,26 @@ assert(nodes.get('view').innerHTML.includes('value="2.95"'),'stored fee displaye
 vm.runInContext("statsSetParam('fee',0)",ui);
 assert(nodes.get('view').innerHTML.includes('Win rate netto'),'stats view recalculates after parameter change');
 console.log('OK: next-open fill, costs, stop-first, target1 vs T2 alternative, expiry, pending, no-fill, dedupe, segment/kind split, UI link');
+
+{
+// Four independent strategies share the same execution engine and costs.
+const four=['FORZA','DEBOLEZZA','RECUPERO','EVENT_MOMENTUM'].map(kind=>sig(bars[0][0],kind));
+const compute=vm.runInContext('statsCompute',context);
+const report=compute(four,()=>tgtBars,opts);
+assert.equal(report.all.closed,4);
+for(const key of ['force','weak','recovery','momentum']){
+  assert.equal(report[key].closed,1);
+  assert.equal(report[key].avgPnl,report.force.avgPnl,'identical levels must have identical fills/costs');
+}
+const repeatedFour=compute([...four,...four.map(s=>({...s,asof:bars[0][0]}))],()=>tgtBars,opts);
+assert.equal(repeatedFour.all.signals,4,'duplicates must not inflate any strategy');
+const unfinished=compute(four,()=>bars.slice(0,1),opts);
+assert.equal(unfinished.all.closed,0);
+assert.equal(unfinished.all.pending,4);
+const noLevels=compute([{ticker:'RWAY',kind:'RECUPERO',asof:bars[0][0]}],()=>bars,opts);
+assert.equal(noLevels.recovery.excluded,1,'watch without frozen trade levels is not a backtest trade');
+const prefix=compute(four,()=>bars.slice(0,8),opts);
+assert.equal(prefix.all.closed,0,'later bars cannot resolve a truncated experiment');
+console.log('PASS: all four strategies, equal execution costs, duplicate exclusion, pending and missing-level cases');
+
+}

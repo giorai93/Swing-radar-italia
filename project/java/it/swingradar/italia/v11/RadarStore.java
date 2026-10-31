@@ -10,13 +10,35 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 final class RadarStore extends SQLiteOpenHelper {
-    RadarStore(Context c){super(c.getApplicationContext(),"swing_radar_italia_v11.db",null,1);}
+    RadarStore(Context c){super(c.getApplicationContext(),"swing_radar_italia_v11.db",null,2);}
     @Override public void onCreate(SQLiteDatabase db){
+        createResearch(db);
         db.execSQL("CREATE TABLE quotes(ticker TEXT PRIMARY KEY,asof TEXT,fetched_at INTEGER,payload TEXT NOT NULL)");
         db.execSQL("CREATE TABLE signals(id INTEGER PRIMARY KEY AUTOINCREMENT,ticker TEXT,kind TEXT,asof TEXT,payload TEXT,UNIQUE(ticker,kind,asof))");
         db.execSQL("CREATE TABLE trades(id INTEGER PRIMARY KEY AUTOINCREMENT,created_at INTEGER,ticker TEXT,kind TEXT,entry REAL,quantity REAL,exit REAL,fees REAL,note TEXT)");
     }
-    @Override public void onUpgrade(SQLiteDatabase db,int from,int to){}
+    @Override public void onUpgrade(SQLiteDatabase db,int from,int to){
+        if(from<2)createResearch(db);
+    }
+    private static void createResearch(SQLiteDatabase db){
+        db.execSQL("CREATE TABLE IF NOT EXISTS research_signals(ticker TEXT,kind TEXT,asof TEXT,payload TEXT NOT NULL,PRIMARY KEY(ticker,kind,asof))");
+    }
+    synchronized void researchSignal(JSONObject x)throws Exception{
+        getWritableDatabase().execSQL("INSERT OR IGNORE INTO research_signals VALUES(?,?,?,?)",
+            new Object[]{x.getString("ticker"),x.getString("kind"),x.getString("asof"),x.toString()});
+    }
+    synchronized JSONArray researchSignals(){
+        JSONArray out=new JSONArray();
+        try(Cursor c=getReadableDatabase().rawQuery("SELECT payload FROM research_signals ORDER BY asof,ticker",null)){
+            while(c.moveToNext())try{out.put(new JSONObject(c.getString(0)));}catch(Exception ignored){}
+        }return out;
+    }
+    synchronized JSONArray backtestSignals(){
+        JSONArray out=new JSONArray();
+        try(Cursor c=getReadableDatabase().rawQuery("SELECT payload FROM signals ORDER BY asof,ticker",null)){
+            while(c.moveToNext())try{out.put(new JSONObject(c.getString(0)));}catch(Exception ignored){}
+        }return out;
+    }
     synchronized JSONObject quote(String ticker){
         try(Cursor c=getReadableDatabase().rawQuery("SELECT asof,fetched_at,payload FROM quotes WHERE ticker=?",new String[]{ticker})){
             if(c.moveToFirst())return new JSONObject().put("asof",c.getString(0)).put("fetchedAt",c.getLong(1)).put("payload",c.getString(2));

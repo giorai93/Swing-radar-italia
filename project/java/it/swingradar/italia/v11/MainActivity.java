@@ -75,7 +75,7 @@ public final class MainActivity extends Activity{
         @JavascriptInterface public String getSnapshot(){
             RadarStore db=new RadarStore(getApplicationContext());
             try{return new JSONObject().put("status",RadarScanner.status(getApplicationContext()))
-                .put("signals",db.signals()).put("trades",db.trades()).put("cachedStocks",db.cached()).toString();}
+                .put("researchSignals",db.researchSignals()).put("backtestSignals",db.backtestSignals()).put("signals",db.signals()).put("trades",db.trades()).put("cachedStocks",db.cached()).toString();}
             catch(Exception e){return "{\"error\":\"Lettura dati non riuscita\"}";}finally{db.close();}
         }
         @JavascriptInterface public String startScan(){return RadarScanner.start(getApplicationContext(),null,true)?"Scansione aggiornata dal provider":"Scansione già in corso";}

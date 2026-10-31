@@ -125,6 +125,14 @@ final class RadarScanner {
                         for(int end=Math.max(210,bars.size()-35);end<=bars.size();end++){
                             List<Bar> prefix=bars.subList(0,end);
                             JSONObject recovery=recoveryZone(prefix,ticker,name,segment);
+                            // Independent, immutable research observations. Never use the later
+                            // mutated recovery lifecycle to backdate an entry or its levels.
+                            if(recovery!=null && recovery.optInt("matched")==4){
+                                JSONObject trial=new JSONObject(recovery.toString());
+                                trial.put("researchVersion",1).put("execution","NEXT_OPEN")
+                                    .put("rule","Supporto controtrend: tutte le 4 condizioni, ingresso apertura successiva");
+                                store.researchSignal(trial);
+                            }
                             if(lastRecovery==null){
                                 if(recovery!=null){
                                     lastRecovery=startRecoveryState(recovery,prefix);
@@ -154,7 +162,21 @@ final class RadarScanner {
                                 }
                             }
                             JSONObject mover=eventMomentum(prefix,ticker,name,segment);
-                            if(mover!=null)lastEventMover=mover;
+                            if(mover!=null){
+                                lastEventMover=mover;
+                                Bar eventBar=prefix.get(prefix.size()-1);
+                                double eventStop=eventBar.l-.25*atr14(prefix);
+                                double eventRisk=eventBar.c-eventStop;
+                                if(eventStop>0 && eventRisk>0 && eventRisk/eventBar.c<=.12){
+                                    JSONObject trial=new JSONObject(mover.toString());
+                                    trial.put("stop",round(eventStop,3))
+                                        .put("target1",round(eventBar.c+2*eventRisk,3))
+                                        .put("target2",round(eventBar.c+3*eventRisk,3))
+                                        .put("researchVersion",1).put("execution","NEXT_OPEN")
+                                        .put("rule","Momentum prezzo-volume; nessun catalizzatore storico verificato");
+                                    store.researchSignal(trial);
+                                }
+                            }
                             JSONObject s=evaluate(prefix,ticker,name,segment);
                             if(s==null)continue;
                             boolean inserted=store.signal(s);
