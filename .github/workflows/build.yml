@@ -23,7 +23,7 @@ jobs:
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Extract project
-        run: unzip -q SwingRadar3_Android_NUOVO.zip -d project
+        run: unzip -q SwingRadar3_Specifiche_Concordate.zip -d project
 
       - name: Build APK
         run: bash project/build_apk.sh
