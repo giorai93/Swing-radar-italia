@@ -15,3 +15,7 @@ Nella revisione documentale non sono stati eseguiti nuovi backtest o build APK. 
 ## Componente fondamentale
 
 [Valutatore](fundamental_screen.py) dei tre scanner Bucket 1/2, trascritti dalle immagini originali del settembre 2025. Richiede campi con definizione verificata e provenienza temporale: restituisce pass/fail/unknown, mai ordini. Nove test sintetici passati; nessuna validazione su aziende reali o nuova misura di redditività.
+
+## Verifica su fonti societarie reali
+
+[Audit NVIDIA Q1/Q2 FY2026](company_checks/README.md), comunicati pubblicati nel 2025: sei coppie di valori verificate, GAAP e non-GAAP separate. [Parser riproducibile](verify_nvidia_sources.py). Il caso rimane incompleto per lo scanner; nessun segnale o rendimento calcolato.
