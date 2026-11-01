@@ -1,0 +1,38 @@
+name: Italian ML research verification
+on:
+  push:
+    branches: ['research/italy-ml-v1']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r project/research/requirements.txt
+      - run: python -m unittest discover -s project/research -p 'test_*.py'
+      - name: Replay actual saved market samples
+        run: python project/research/italy_ml.py --replay project/research/snapshots/samples.csv.gz --out /tmp/ml-replay
+      - name: Match locally executed results
+        run: |
+          python - <<'PY'
+          import json, math
+          a=json.load(open('project/research/snapshots/report.json'))
+          b=json.load(open('/tmp/ml-replay/replay_report.json'))
+          for method,metrics in a['overall'].items():
+              for key in ['trades','periods','mean_net_pct','mean_gross_pct','win_rate_pct','profit_factor']:
+                  assert math.isclose(metrics[key],b['overall'][method][key],rel_tol=1e-7,abs_tol=1e-9),(method,key)
+          print('Saved-sample results reproduced')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: italian-ml-replay
+          path: /tmp/ml-replay/

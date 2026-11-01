@@ -1,0 +1,728 @@
+{
+  "overall": {
+    "boosting": {
+      "trades": 590,
+      "periods": 59,
+      "mean_net_pct": 0.35864081929105684,
+      "mean_gross_pct": 1.0486408192910568,
+      "win_rate_pct": 47.28813559322034,
+      "profit_factor": 1.095031324866641,
+      "period_mean_95ci_pct": [
+        -1.0240250015048638,
+        1.7259609278157968
+      ]
+    },
+    "equal_universe": {
+      "trades": 5072,
+      "periods": 59,
+      "mean_net_pct": 0.6236287364796488,
+      "mean_gross_pct": 1.3136287364796486,
+      "win_rate_pct": 50.63091482649842,
+      "profit_factor": 1.1997515046607783,
+      "period_mean_95ci_pct": [
+        -0.5155435787878504,
+        1.749555600868618
+      ]
+    },
+    "momentum60": {
+      "trades": 590,
+      "periods": 59,
+      "mean_net_pct": 0.5756165754148672,
+      "mean_gross_pct": 1.2656165754148665,
+      "win_rate_pct": 48.13559322033898,
+      "profit_factor": 1.1588910883596288,
+      "period_mean_95ci_pct": [
+        -0.8947603678498641,
+        2.0573883257363907
+      ]
+    },
+    "reversal5": {
+      "trades": 590,
+      "periods": 59,
+      "mean_net_pct": 1.1835378383207604,
+      "mean_gross_pct": 1.8735378383207606,
+      "win_rate_pct": 51.52542372881356,
+      "profit_factor": 1.349614570260201,
+      "period_mean_95ci_pct": [
+        -0.31108409436992035,
+        2.7088191469877514
+      ]
+    },
+    "ridge": {
+      "trades": 590,
+      "periods": 59,
+      "mean_net_pct": -0.45817543964381796,
+      "mean_gross_pct": 0.23182456035618182,
+      "win_rate_pct": 46.271186440677965,
+      "profit_factor": 0.8867438200989868,
+      "period_mean_95ci_pct": [
+        -2.1096403877918593,
+        1.1413141495186883
+      ]
+    }
+  },
+  "by_year": {
+    "boosting/2021": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": 2.6172312750480162,
+      "mean_gross_pct": 3.307231275048015,
+      "win_rate_pct": 55.00000000000001,
+      "profit_factor": 2.3444449786274517,
+      "period_mean_95ci_pct": [
+        -0.16510611871739533,
+        5.503226172587645
+      ]
+    },
+    "boosting/2022": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": -1.9173126409713157,
+      "mean_gross_pct": -1.227312640971316,
+      "win_rate_pct": 37.5,
+      "profit_factor": 0.6448178555756727,
+      "period_mean_95ci_pct": [
+        -5.470634418105838,
+        1.7810483602130345
+      ]
+    },
+    "boosting/2023": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": -0.2252540540558973,
+      "mean_gross_pct": 0.46474594594410285,
+      "win_rate_pct": 45.83333333333333,
+      "profit_factor": 0.9410186504774967,
+      "period_mean_95ci_pct": [
+        -3.1079820234668056,
+        2.8404032725762742
+      ]
+    },
+    "boosting/2024": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": -0.038987870615676684,
+      "mean_gross_pct": 0.6510121293843227,
+      "win_rate_pct": 46.666666666666664,
+      "profit_factor": 0.9889450234031618,
+      "period_mean_95ci_pct": [
+        -2.7267369899415956,
+        2.619926247712462
+      ]
+    },
+    "boosting/2025": {
+      "trades": 110,
+      "periods": 11,
+      "mean_net_pct": 1.448335256846441,
+      "mean_gross_pct": 2.1383352568464407,
+      "win_rate_pct": 51.81818181818182,
+      "profit_factor": 1.3435471696792425,
+      "period_mean_95ci_pct": [
+        -2.044349125816416,
+        4.664919274754842
+      ]
+    },
+    "equal_universe/2021": {
+      "trades": 1014,
+      "periods": 12,
+      "mean_net_pct": 1.578494781505755,
+      "mean_gross_pct": 2.2684947815057552,
+      "win_rate_pct": 54.33925049309665,
+      "profit_factor": 1.7240864976546255,
+      "period_mean_95ci_pct": [
+        -0.1273692431162682,
+        3.656753797984104
+      ]
+    },
+    "equal_universe/2022": {
+      "trades": 943,
+      "periods": 12,
+      "mean_net_pct": -1.1881753398956654,
+      "mean_gross_pct": -0.49817533989566576,
+      "win_rate_pct": 42.417815482502654,
+      "profit_factor": 0.7360657341331232,
+      "period_mean_95ci_pct": [
+        -4.029002497911188,
+        2.2493631150428697
+      ]
+    },
+    "equal_universe/2023": {
+      "trades": 992,
+      "periods": 12,
+      "mean_net_pct": 0.29616348797162856,
+      "mean_gross_pct": 0.9861634879716282,
+      "win_rate_pct": 50.90725806451613,
+      "profit_factor": 1.1038667444108354,
+      "period_mean_95ci_pct": [
+        -1.6596923477684573,
+        2.1899927516141156
+      ]
+    },
+    "equal_universe/2024": {
+      "trades": 1073,
+      "periods": 12,
+      "mean_net_pct": 0.31292297996802054,
+      "mean_gross_pct": 1.0029229799680202,
+      "win_rate_pct": 49.86020503261883,
+      "profit_factor": 1.1033834089621448,
+      "period_mean_95ci_pct": [
+        -1.6117099016476153,
+        1.9833212386823968
+      ]
+    },
+    "equal_universe/2025": {
+      "trades": 1050,
+      "periods": 11,
+      "mean_net_pct": 1.9555619532628694,
+      "mean_gross_pct": 2.6455619532628694,
+      "win_rate_pct": 54.95238095238095,
+      "profit_factor": 1.6216837764455883,
+      "period_mean_95ci_pct": [
+        -1.2457550600834457,
+        5.693508042233657
+      ]
+    },
+    "momentum60/2021": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": 2.310973791726998,
+      "mean_gross_pct": 3.000973791726998,
+      "win_rate_pct": 54.166666666666664,
+      "profit_factor": 1.851827848550281,
+      "period_mean_95ci_pct": [
+        -0.9006882289483993,
+        5.619219766421212
+      ]
+    },
+    "momentum60/2022": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": -2.1663287183271893,
+      "mean_gross_pct": -1.4763287183271905,
+      "win_rate_pct": 38.333333333333336,
+      "profit_factor": 0.5767901040059088,
+      "period_mean_95ci_pct": [
+        -5.074862023211583,
+        0.8656742311362129
+      ]
+    },
+    "momentum60/2023": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": -0.6837379445043329,
+      "mean_gross_pct": 0.006262055495666284,
+      "win_rate_pct": 40.833333333333336,
+      "profit_factor": 0.7994028713212354,
+      "period_mean_95ci_pct": [
+        -2.9306345879267703,
+        1.6231280216997108
+      ]
+    },
+    "momentum60/2024": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": 0.8663090659507751,
+      "mean_gross_pct": 1.5563090659507748,
+      "win_rate_pct": 50.0,
+      "profit_factor": 1.3193714626303081,
+      "period_mean_95ci_pct": [
+        -1.3470679260409502,
+        2.5487500885803507
+      ]
+    },
+    "momentum60/2025": {
+      "trades": 110,
+      "periods": 11,
+      "mean_net_pct": 2.7304348737565607,
+      "mean_gross_pct": 3.4204348737565593,
+      "win_rate_pct": 58.18181818181818,
+      "profit_factor": 1.6486134389712923,
+      "period_mean_95ci_pct": [
+        -1.7909158435253796,
+        7.179399780791348
+      ]
+    },
+    "reversal5/2021": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": 2.3754875912914133,
+      "mean_gross_pct": 3.0654875912914137,
+      "win_rate_pct": 55.00000000000001,
+      "profit_factor": 2.2267537011587573,
+      "period_mean_95ci_pct": [
+        -0.286892258009975,
+        5.475488920232861
+      ]
+    },
+    "reversal5/2022": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": -2.1680844994903556,
+      "mean_gross_pct": -1.478084499490356,
+      "win_rate_pct": 48.333333333333336,
+      "profit_factor": 0.6134166715983955,
+      "period_mean_95ci_pct": [
+        -5.0698556171389955,
+        0.9225719893680087
+      ]
+    },
+    "reversal5/2023": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": 0.8851526349230554,
+      "mean_gross_pct": 1.575152634923055,
+      "win_rate_pct": 47.5,
+      "profit_factor": 1.2961944060332307,
+      "period_mean_95ci_pct": [
+        -1.4956695936063293,
+        3.1136494687350673
+      ]
+    },
+    "reversal5/2024": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": 0.04472331087985448,
+      "mean_gross_pct": 0.7347233108798537,
+      "win_rate_pct": 48.333333333333336,
+      "profit_factor": 1.0141610513316996,
+      "period_mean_95ci_pct": [
+        -1.9872973845415636,
+        2.0907972844141653
+      ]
+    },
+    "reversal5/2025": {
+      "trades": 110,
+      "periods": 11,
+      "mean_net_pct": 5.107398546334296,
+      "mean_gross_pct": 5.797398546334296,
+      "win_rate_pct": 59.09090909090909,
+      "profit_factor": 2.585495109530176,
+      "period_mean_95ci_pct": [
+        0.4813143745495796,
+        10.49848317663435
+      ]
+    },
+    "ridge/2021": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": 1.6465512466986687,
+      "mean_gross_pct": 2.336551246698668,
+      "win_rate_pct": 55.00000000000001,
+      "profit_factor": 1.8097960136790663,
+      "period_mean_95ci_pct": [
+        -0.6248371844693633,
+        3.806352417470968
+      ]
+    },
+    "ridge/2022": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": -2.9434481281599654,
+      "mean_gross_pct": -2.253448128159965,
+      "win_rate_pct": 36.666666666666664,
+      "profit_factor": 0.5233706687247238,
+      "period_mean_95ci_pct": [
+        -7.154260131600212,
+        1.2869501835034776
+      ]
+    },
+    "ridge/2023": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": 0.19643190489979206,
+      "mean_gross_pct": 0.886431904899792,
+      "win_rate_pct": 50.83333333333333,
+      "profit_factor": 1.062550252097044,
+      "period_mean_95ci_pct": [
+        -1.972828497656785,
+        2.311236253301358
+      ]
+    },
+    "ridge/2024": {
+      "trades": 120,
+      "periods": 12,
+      "mean_net_pct": -1.475427810824064,
+      "mean_gross_pct": -0.785427810824064,
+      "win_rate_pct": 37.5,
+      "profit_factor": 0.6702093547231783,
+      "period_mean_95ci_pct": [
+        -4.542574370473258,
+        1.7515570422923363
+      ]
+    },
+    "ridge/2025": {
+      "trades": 110,
+      "periods": 11,
+      "mean_net_pct": 0.35257840996741524,
+      "mean_gross_pct": 1.0425784099674154,
+      "win_rate_pct": 51.81818181818182,
+      "profit_factor": 1.07946400401744,
+      "period_mean_95ci_pct": [
+        -4.26387574462502,
+        5.178360195512585
+      ]
+    }
+  },
+  "folds": [
+    {
+      "year": 2021,
+      "training_rows": 2611,
+      "last_training_exit": "2020-12-29",
+      "first_test_signal": "2021-01-28",
+      "test_rows": 1014
+    },
+    {
+      "year": 2022,
+      "training_rows": 3616,
+      "last_training_exit": "2021-12-22",
+      "first_test_signal": "2022-01-21",
+      "test_rows": 943
+    },
+    {
+      "year": 2023,
+      "training_rows": 4570,
+      "last_training_exit": "2022-12-16",
+      "first_test_signal": "2023-01-16",
+      "test_rows": 992
+    },
+    {
+      "year": 2024,
+      "training_rows": 5554,
+      "last_training_exit": "2023-12-12",
+      "first_test_signal": "2024-01-12",
+      "test_rows": 1073
+    },
+    {
+      "year": 2025,
+      "training_rows": 6623,
+      "last_training_exit": "2024-12-09",
+      "first_test_signal": "2025-01-13",
+      "test_rows": 1050
+    }
+  ],
+  "created_utc": "2026-11-01T02:53:19.504390+00:00",
+  "requested_tickers": 128,
+  "usable_tickers": 121,
+  "sample_rows": 7763,
+  "cost_per_trade_pct": 0.6900000000000001,
+  "cutoff_exclusive": "2026-01-01",
+  "status": "exploratory_not_validated",
+  "limitations": [
+    "Current supplied universe, missing delisted companies: survivorship bias.",
+    "Adjusted open returns are a total-return proxy, not audited cash executions.",
+    "Missing endpoint prices excluded; suspended/delisted losses can be understated.",
+    "Fixed 1000 EUR notional per position, fractional units; not a 1000 EUR portfolio.",
+    "Equal-universe baseline has more positions/capital than top-ten methods.",
+    "No fundamentals, no news, no Websim inputs.",
+    "Models refit annually; no tuning, no random split. 2026 reserved.",
+    "Confidence interval resamples holding periods; does not remove survivorship or model-selection bias.",
+    "This is a 21-session ranking study, not the app stop/target backtest."
+  ],
+  "paired_comparisons": {
+    "ridge_vs_equal_universe": {
+      "mean_excess_per_period_pct": -1.0924585562952238,
+      "paired_period_95ci_pct": [
+        -1.9505430593416873,
+        -0.29508280279825155
+      ]
+    },
+    "boosting_vs_equal_universe": {
+      "mean_excess_per_period_pct": -0.27564229736034934,
+      "paired_period_95ci_pct": [
+        -1.0118449475936293,
+        0.4869153351556376
+      ]
+    },
+    "momentum60_vs_equal_universe": {
+      "mean_excess_per_period_pct": -0.05866654123653917,
+      "paired_period_95ci_pct": [
+        -0.9618331176377497,
+        0.872469344695512
+      ]
+    },
+    "reversal5_vs_equal_universe": {
+      "mean_excess_per_period_pct": 0.5492547216693541,
+      "paired_period_95ci_pct": [
+        -0.2442126635603511,
+        1.4436300733756882
+      ]
+    },
+    "ridge_vs_momentum60": {
+      "mean_excess_per_period_pct": -1.033792015058685,
+      "paired_period_95ci_pct": [
+        -2.2529676855031733,
+        0.1608536477525184
+      ]
+    },
+    "boosting_vs_momentum60": {
+      "mean_excess_per_period_pct": -0.21697575612381012,
+      "paired_period_95ci_pct": [
+        -1.331155897786041,
+        0.9110584528263164
+      ]
+    },
+    "momentum60_vs_momentum60": {
+      "mean_excess_per_period_pct": 0.0,
+      "paired_period_95ci_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "reversal5_vs_momentum60": {
+      "mean_excess_per_period_pct": 0.6079212629058934,
+      "paired_period_95ci_pct": [
+        -0.4688499130828034,
+        1.7822406909155093
+      ]
+    }
+  },
+  "focal_tickers": {
+    "boosting/MAIRE": {
+      "trades": 9,
+      "periods": 9,
+      "mean_net_pct": -0.21736674064533087,
+      "mean_gross_pct": 0.47263325935466804,
+      "win_rate_pct": 33.33333333333333,
+      "profit_factor": 0.9293805930636183,
+      "period_mean_95ci_pct": [
+        -5.811116965718497,
+        4.131398321833495
+      ]
+    },
+    "boosting/REY": {
+      "trades": 6,
+      "periods": 6,
+      "mean_net_pct": -3.4337661081377298,
+      "mean_gross_pct": -2.7437661081377285,
+      "win_rate_pct": 50.0,
+      "profit_factor": 0.252691292978824,
+      "period_mean_95ci_pct": [
+        -8.358234711892987,
+        1.0146158070715667
+      ]
+    },
+    "boosting/STLAM": {
+      "trades": 10,
+      "periods": 10,
+      "mean_net_pct": -0.48664069461610604,
+      "mean_gross_pct": 0.20335930538389418,
+      "win_rate_pct": 40.0,
+      "profit_factor": 0.8550016622746761,
+      "period_mean_95ci_pct": [
+        -4.885979740080432,
+        4.109857412470831
+      ]
+    },
+    "boosting/TGYM": {
+      "trades": 5,
+      "periods": 5,
+      "mean_net_pct": -0.8346999733961459,
+      "mean_gross_pct": -0.14469997339614613,
+      "win_rate_pct": 40.0,
+      "profit_factor": 0.712297008555661,
+      "period_mean_95ci_pct": [
+        -4.999754976776176,
+        4.008495345836376
+      ]
+    },
+    "equal_universe/MAIRE": {
+      "trades": 59,
+      "periods": 59,
+      "mean_net_pct": 3.5266313683002,
+      "mean_gross_pct": 4.216631368300199,
+      "win_rate_pct": 61.016949152542374,
+      "profit_factor": 2.6414612514977818,
+      "period_mean_95ci_pct": [
+        1.0383696762520611,
+        6.426568118900105
+      ]
+    },
+    "equal_universe/REY": {
+      "trades": 59,
+      "periods": 59,
+      "mean_net_pct": -0.060282600897898164,
+      "mean_gross_pct": 0.6297173991021023,
+      "win_rate_pct": 52.54237288135594,
+      "profit_factor": 0.981563770158503,
+      "period_mean_95ci_pct": [
+        -2.0415693101481547,
+        1.9822676236770274
+      ]
+    },
+    "equal_universe/STLAM": {
+      "trades": 59,
+      "periods": 59,
+      "mean_net_pct": 0.20677465681936774,
+      "mean_gross_pct": 0.896774656819368,
+      "win_rate_pct": 47.45762711864407,
+      "profit_factor": 1.0512372341136627,
+      "period_mean_95ci_pct": [
+        -2.405717648903315,
+        2.8080981973441324
+      ]
+    },
+    "equal_universe/TGYM": {
+      "trades": 59,
+      "periods": 59,
+      "mean_net_pct": 0.9849423326498735,
+      "mean_gross_pct": 1.6749423326498734,
+      "win_rate_pct": 59.32203389830508,
+      "profit_factor": 1.41561108407286,
+      "period_mean_95ci_pct": [
+        -0.9102391008896611,
+        2.733386742415536
+      ]
+    },
+    "momentum60/MAIRE": {
+      "trades": 17,
+      "periods": 17,
+      "mean_net_pct": 2.8923271397672403,
+      "mean_gross_pct": 3.5823271397672385,
+      "win_rate_pct": 64.70588235294117,
+      "profit_factor": 2.3658058632144976,
+      "period_mean_95ci_pct": [
+        -1.3148884302864852,
+        6.840908659888664
+      ]
+    },
+    "momentum60/REY": {
+      "trades": 8,
+      "periods": 8,
+      "mean_net_pct": 5.034729829156831,
+      "mean_gross_pct": 5.724729829156831,
+      "win_rate_pct": 75.0,
+      "profit_factor": 4.747110463159591,
+      "period_mean_95ci_pct": [
+        -0.5279147343382247,
+        9.892341282868228
+      ]
+    },
+    "momentum60/STLAM": {
+      "trades": 4,
+      "periods": 4,
+      "mean_net_pct": -2.2360435342415927,
+      "mean_gross_pct": -1.5460435342415926,
+      "win_rate_pct": 25.0,
+      "profit_factor": 0.378046708122353,
+      "period_mean_95ci_pct": [
+        -5.09539184973119,
+        2.9282992251884874
+      ]
+    },
+    "momentum60/TGYM": {
+      "trades": 2,
+      "periods": 2,
+      "mean_net_pct": -1.4720345045817553,
+      "mean_gross_pct": -0.782034504581755,
+      "win_rate_pct": 50.0,
+      "profit_factor": 0.6660552753947259,
+      "period_mean_95ci_pct": [
+        -8.81603688347953,
+        5.87196787431602
+      ]
+    },
+    "reversal5/MAIRE": {
+      "trades": 5,
+      "periods": 5,
+      "mean_net_pct": -2.9648200160746363,
+      "mean_gross_pct": -2.2748200160746364,
+      "win_rate_pct": 20.0,
+      "profit_factor": 0.449368174218003,
+      "period_mean_95ci_pct": [
+        -11.36359724894653,
+        5.859223761207475
+      ]
+    },
+    "reversal5/REY": {
+      "trades": 10,
+      "periods": 10,
+      "mean_net_pct": -0.6157684880898119,
+      "mean_gross_pct": 0.07423151191018787,
+      "win_rate_pct": 50.0,
+      "profit_factor": 0.8329980166742753,
+      "period_mean_95ci_pct": [
+        -5.669394936914361,
+        4.212286795950149
+      ]
+    },
+    "reversal5/STLAM": {
+      "trades": 8,
+      "periods": 8,
+      "mean_net_pct": 11.533981098578064,
+      "mean_gross_pct": 12.223981098578065,
+      "win_rate_pct": 100.0,
+      "profit_factor": null,
+      "period_mean_95ci_pct": [
+        4.710745902893335,
+        18.803438776167898
+      ]
+    },
+    "reversal5/TGYM": {
+      "trades": 4,
+      "periods": 4,
+      "mean_net_pct": -0.7289459637255424,
+      "mean_gross_pct": -0.03894596372554259,
+      "win_rate_pct": 50.0,
+      "profit_factor": 0.7858149118232353,
+      "period_mean_95ci_pct": [
+        -8.166367803838973,
+        5.34880007833366
+      ]
+    },
+    "ridge/MAIRE": {
+      "trades": 11,
+      "periods": 11,
+      "mean_net_pct": -0.9191654650810508,
+      "mean_gross_pct": -0.22916546508105068,
+      "win_rate_pct": 45.45454545454545,
+      "profit_factor": 0.7793915546124445,
+      "period_mean_95ci_pct": [
+        -6.883614528635111,
+        4.292508471476247
+      ]
+    },
+    "ridge/REY": {
+      "trades": 6,
+      "periods": 6,
+      "mean_net_pct": 2.431079355805899,
+      "mean_gross_pct": 3.1210793558058985,
+      "win_rate_pct": 83.33333333333334,
+      "profit_factor": 2.188694360831992,
+      "period_mean_95ci_pct": [
+        -5.0983802558521925,
+        10.403460520452168
+      ]
+    },
+    "ridge/STLAM": {
+      "trades": 10,
+      "periods": 10,
+      "mean_net_pct": 0.8547082946255179,
+      "mean_gross_pct": 1.5447082946255182,
+      "win_rate_pct": 40.0,
+      "profit_factor": 1.2510624594990583,
+      "period_mean_95ci_pct": [
+        -4.010811578446793,
+        6.375329191021824
+      ]
+    },
+    "ridge/TGYM": {
+      "trades": 3,
+      "periods": 3,
+      "mean_net_pct": -7.6756891638244396,
+      "mean_gross_pct": -6.985689163824439,
+      "win_rate_pct": 33.33333333333333,
+      "profit_factor": 0.06538918988681502,
+      "period_mean_95ci_pct": [
+        -14.38930221578282,
+        1.61106770052671
+      ]
+    }
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "sklearn": "1.8.0"
+  },
+  "samples_sha256": "cf72ce11bc09a46337ef47a5a84094743d05c5410b3e944e29bf86642b20dbb0"
+}
