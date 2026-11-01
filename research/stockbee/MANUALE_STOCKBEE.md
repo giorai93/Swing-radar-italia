@@ -1,10 +1,10 @@
 # Manuale documentale Stockbee — quattro metodi
 
-Versione 0.1 · verifica delle fonti al 1 novembre 2026 · mercato di origine: USA.
+Versione 0.2 · verifica delle fonti al 1 novembre 2026 · mercato di origine: USA.
 
 Questo documento separa quanto pubblicato da Pradeep Bonde dalle scelte ancora necessarie per una replica. Non è un manuale ufficiale, una raccomandazione di trading o una strategia già validata. Una pubblicazione recente non aggiorna automaticamente tutte le regole precedenti. Nessun accesso all'area membri e nessuna lettura completa dei video è stato effettuato.
 
-**Esito:** possiamo preparare scanner e schede di valutazione. Nessuno dei quattro metodi ha ancora una specifica completa e verificata per un backtest dichiarato fedele. Le parti mancanti non sono sostituite con parametri arbitrari.
+**Esito:** possiamo preparare scanner e schede di valutazione. Nessuno dei quattro metodi ha ancora una specifica completa e verificata per un backtest dichiarato fedele. Le parti mancanti non sono sostituite con parametri arbitrari. La versione 0.2 aggiunge uscite storiche, versioni dello stop EP e un valutatore separato degli scanner fondamentali.
 
 ## Legenda e tracciabilità
 
@@ -13,13 +13,13 @@ Questo documento separa quanto pubblicato da Pradeep Bonde dalle scelte ancora n
 - **M — Mancante:** non accertato nelle fonti esaminate; non significa che l'autore non lo abbia mai pubblicato.
 - **P — Proposta nostra:** struttura dei dati o procedura di verifica; non è una regola Stockbee.
 
-Le fonti S01–S12 sono elencate in fondo. Ogni operazione futura deve conservare versione delle regole e fonti utilizzate. Le date delle pubblicazioni vanno distinte dalle date degli esempi e dalla data della nostra consultazione.
+Le fonti S01–S16 sono elencate in fondo. Ogni operazione futura deve conservare versione delle regole e fonti utilizzate. Le date delle pubblicazioni vanno distinte dalle date degli esempi e dalla data della nostra consultazione.
 
 ## Quadro dei quattro metodi
 
 | Metodo | Selezione accertata | Entrata accertata | Uscita completa | Prontezza |
 |---|---|---|---|---|
-| Momentum Burst | Pattern qualitativo di espansione dopo consolidazione [S01] | Ricerca del movimento iniziale; trigger esatto da versionare | No: indicazione storica di parziale e trailing [S03] | Scanner assistito; replica automatica incompleta |
+| Momentum Burst | Pattern qualitativo di espansione dopo consolidazione [S01] | Ricerca del movimento iniziale; trigger esatto da versionare | Parziali storici specificati; ambiguità esecutive residue [S13,S14] | Scanner assistito; replica automatica incompleta |
 | Anticipation | Due scanner storici e revisione grafica [S02] | Esempio di livelli preparati e ingresso all'avvio della rottura [S04] | No | Watchlist assistita; replay intraday da definire |
 | EP classico | Cambiamento sostanziale, sorpresa, precedente scarso interesse [S06,S08] | Modalità dipendente dal caso; regola univoca non accertata | No | Ricerca dei catalizzatori; backtest fedele bloccato |
 | EP 9 milioni | Volume >8,9 milioni e classificazione dei candidati [S08] | Trigger esecutivo completo non accertato | No | Scanner della soglia; nessuna equivalenza con un ordine |
@@ -30,7 +30,7 @@ Le fonti S01–S12 sono elencate in fondo. Ogni operazione futura deve conservar
 
 **Q.** “Ordinato”, “stretto”, “vicino ai massimi” e “linearità” non sono una formula completamente specificata. Il nostro precedente limite del 75% della candela e la mediana a dieci giorni erano traduzioni nostre. Non diventano regole ufficiali.
 
-**D storico, gestione — S03.** In un commento del 26 aprile 2020 a un articolo del 2014, Bonde indica tre giorni di mantenimento, poi realizzo parziale e stop sulla parte restante. La quota, il calcolo dello stop e le eccezioni non sono definiti. Non equivale a uscire interamente alla quinta seduta, né a un target 3R.
+**D storico, gestione — S13,S14.** La ricerca successiva ha trovato articoli dedicati alle uscite nel 2018 e 2019. Specificano parziali di almeno metà posizione e condizioni aggiuntive. Si veda la sezione di aggiornamento: la precedente lacuna non significava assenza di documentazione pubblica. Restano decisioni esecutive e attualità da verificare.
 
 **Fondamentali.** Le fonti qui usate non impongono uno stesso filtro fondamentale a ogni Momentum Burst. Un catalizzatore può essere rilevante, ma non si può imporre il filtro EP dei ricavi a tutti i burst.
 
@@ -52,7 +52,7 @@ Le fonti S01–S12 sono elencate in fondo. Ogni operazione futura deve conservar
 
 **D, selezione — S06 (10 luglio 2023), S08 (slide 2024).** Occorre un evento che cambi le aspettative; nei casi legati ai risultati, sorpresa su utili o vendite e aspettative precedenti contenute sono elementi centrali. Le slide distinguono il classico da altre varianti e descrivono contesto di scarso interesse per il titolo e caratteristiche societarie. Non basta un gap.
 
-**D, variante di selezione growth — S07, 1 settembre 2025.** Uno scanner cerca società costituite o quotate negli ultimi dieci anni, capitalizzazione inferiore a 11 miliardi di dollari e due trimestri con crescita dei ricavi almeno del 39%. Il testo introduttivo cita invece meno di 10 miliardi. La differenza resta aperta. “Costituita oppure quotata” non va ridotto silenziosamente a “IPO”. La definizione esatta dei campi MarketSurge, compresa la base temporale della crescita, deve essere confermata prima di tradurli in codice.
+**D, variante di selezione growth — S07, 1 settembre 2025 (con precisazione dalle immagini S10 sotto).** Uno scanner cerca società costituite o quotate negli ultimi dieci anni, capitalizzazione inferiore a 11 miliardi di dollari e due trimestri con crescita dei ricavi almeno del 39%. Il testo introduttivo cita invece meno di 10 miliardi. La differenza resta aperta. “Costituita oppure quotata” non va ridotto silenziosamente a “IPO”. La definizione esatta dei campi MarketSurge, compresa la base temporale della crescita, deve essere confermata prima di tradurli in codice.
 
 **Q.** Rilevanza dell'evento, precedente scarso interesse, novità della crescita, sostenibilità e aspettative del mercato richiedono evidenza e giudizio. Il solo bilancio annuale non consente di ricostruire tutte queste condizioni.
 
@@ -141,8 +141,59 @@ In questa revisione non sono stati eseguiti nuovi backtest, nuovi test di profit
 | S07 | [Find the young Episodic Pivots](https://stockbee.blogspot.com/2025/09/find-young-episodic-pivots.html) | 01/09/2025; testo e risposta dell'autore esaminati |
 | S08 | [Trade Factory, PDF](https://impact.traders4acause.org/wp-content/uploads/2024/11/02-Pradeep-Trade-Factory-2.pdf) | Cartella evento 2024; testo del PDF esaminato; data esatta non accertata |
 | S09 | [How to Find and Research Pre-Market Winners](https://stockbee.blogspot.com/2026/07/how-to-find-and-research-pre-market.html) | 31/07/2026; testo esaminato; formule nelle immagini da verificare |
-| S10 | [Scans Irun in Marketsurge to find Delayed Reactions EP](https://stockbee.blogspot.com/2025/09/scans-irun-in-marketsurge-to-find.html) | 01/09/2025; testo esaminato; immagini individuate, criteri completi non trascritti/validati |
+| S10 | [Scans Irun in Marketsurge to find Delayed Reactions EP](https://stockbee.blogspot.com/2025/09/scans-irun-in-marketsurge-to-find.html) | 01/09/2025; testo e prime cinque immagini esaminati; campi trascritti sotto, intervalli data troncati e definizioni vendor ancora da confermare |
 | S11 | [Archivio settembre 2024](https://stockbee.blogspot.com/2024/09/) | Testi indicizzati su problemi di trading e anticipation del 26/09; regole numeriche di uscita incomplete |
 | S12 | [My swing trading Process Flow](https://stockbee.blogspot.com/2014/07/my-swing-trading-process-flow.html) | 30/07/2014; avviso autore 18/09/2021 letto nella ricerca precedente |
 
 Questo elenco è la base di evidenza del manuale, non la dichiarazione di avere letto tutto il materiale esistente.
+
+## Aggiornamento 0.2: lacune risolte e differenze da conservare
+
+### Uscite swing documentate, versione 2018/2019
+
+**S13, 27 luglio 2018:** stop al minimo della giornata d'ingresso oppure basato su metà range, secondo il punto d'entrata; preferenza per distanza inferiore al 4%, idealmente al 2%. Realizzo di almeno metà posizione alla chiusura del terzo/quinto giorno; metà anche su un rialzo dell'8% nel giorno d'ingresso o successivo. Protezione intraday a 25–50 centesimi dal massimo. Vendita su gap del 20% nei giorni indicati; eventuale resto gestito sui minimi giornalieri dopo il terzo giorno.
+
+**S14, 12 luglio 2019:** ribadisce stop, parziale di almeno metà al terzo/quinto giorno, metà su rialzo rapido dell'8% e uscita su gap del 20%. Descrive un trailing senza fissare nuovamente l'offset. Prevede uscita se il titolo non progredisce entro tre/cinque giorni, con riferimento al dollar breakout per cinque giorni.
+
+**Ambiguità ancora operative (nostra analisi):** quale minimo era già osservabile al momento dell'ordine; base di calcolo del gap e dell'8%; conteggio del giorno d'ingresso; priorità fra stop e parziale; quota esatta quando la fonte dice almeno metà; definizione di mancata progressione; scelta fra 25 e 50 centesimi. Non usare il minimo finale della giornata per una decisione mattutina. Queste sono versioni storiche, non l'attestazione delle regole attuali. Non estenderle automaticamente all'EP.
+
+### Stop EP: due indicazioni storiche diverse
+
+**S15, risposta autore del 5 gennaio 2022:** a una domanda sullo stop immediatamente dopo l'ingresso EP, indica 2,5% sotto l'entrata. È una risposta concreta, con ambito limitato; non certifica tutte le varianti successive.
+
+**S16, risposta autore del 30 settembre 2010:** descrive ingressi pre-market/apertura, stop sul minimo dei due giorni precedenti e uscite in quattro parti con obiettivo del 20% o più. Non precisa tutti i livelli o la gestione delle quattro parti. Le due versioni non vengono fuse.
+
+### Scanner fondamentali: immagini esaminate del 1 settembre 2025 [S10]
+
+Trascrizione dei riepiloghi, non di un criterio soltanto selezionato nell'editor:
+
+| Profilo | Filtri letti |
+|---|---|
+| Bucket 1, primo | Ricavi ultimo trimestre: crescita >=39%; media crescita ricavi 2Q >=39%; vendite annue >=25 milioni USD; volume medio 50 giorni >=100.000 azioni; prezzo >=1 USD |
+| Bucket 1, secondo | Crescita ricavi ultimo trimestre >=99%; vendite annue >=25 milioni USD; volume medio 50 giorni >=100.000; prezzo >=1 USD |
+| Bucket 2 | Crescita EPS ultimo trimestre e trimestre precedente ciascuna >=39%; crescita ricavi ultimo trimestre e media 2Q ciascuna >=20%; vendite annue >=25 milioni USD; volume medio 50 giorni >=200.000; prezzo >=3 USD |
+| Bucket 0, due varianti | Filtri growth più capitalizzazione <=11 miliardi USD; date di costituzione/IPO: intervallo troncato nell'immagine, non ricostruito |
+
+La media 2Q non richiede che entrambi i trimestri superino la soglia. Il periodo esatto di confronto dei campi va confermato nella definizione MarketSurge. L'etichetta di un filtro earnings surprise mostrata a sinistra non prova che sia un criterio attivo.
+
+### Primo componente eseguibile: valutatore fondamentale
+
+`fundamental_screen.py` valuta soltanto i tre profili Bucket 1/2 sopra; Bucket 0 resta sospeso per le date incomplete. Non seleziona un profilo in base ai rendimenti. Non usa i valori annuali ESEF al posto dei campi trimestrali richiesti.
+
+Input: JSON con `issuer` e `facts`. Ogni campo contiene `value`, `period`, `source_url`, `published_at`, `available_at` e `definition_verified`. I timestamp richiedono fuso. Un valore futuro, privo di provenienza, non finito o con definizione non verificata resta sconosciuto. Un fallimento certo esclude dal profilo; se non ci sono fallimenti ma manca un campo il risultato è sconosciuto, non positivo. Una verifica positiva significa soltanto che i filtri del profilo passano.
+
+```
+python research/stockbee/fundamental_screen.py facts.json --as-of 2025-09-01T12:00:00Z
+python -m unittest discover -s research/stockbee -p 'test_fundamental_screen.py' -v
+```
+
+Sono stati eseguiti e superati nove test sintetici: soglie, dati futuri/mancanti, provenienza, definizioni, numeri non validi e distinzione media/due trimestri. Nessuna azienda reale è stata dichiarata conforme e nessun nuovo backtest è stato eseguito. Il controllo dei timestamp non certifica da solo la correttezza delle fonti o la freschezza dei prezzi: resta un requisito dell'acquisizione dati.
+
+### Nuove fonti
+
+| ID | Fonte | Lettura |
+|---|---|---|
+| S13 | [My exit guidelines for momentum burst swing trades](https://stockbee.blogspot.com/2018/07/my-exit-guidelines-for-momentum-burst.html) | 27/07/2018; testo indicizzato esaminato; apertura web intermittentemente bloccata |
+| S14 | [Exit guidelines for swing trades](https://stockbee.blogspot.com/2019/07/exit-guidelines-for-swing-trades.html) | 12/07/2019; testo indicizzato esaminato |
+| S15 | [Always Use Stops](https://stockbee.blogspot.com/2022/01/always-use-stops.html) | Post 04/01/2022; risposta autore 05/01/2022 letta; video non visionato |
+| S16 | [What are Episodic Pivots and how to find them](https://stockbee.blogspot.com/2010/02/what-are-episodic-pivots-and-how-to.html?m=0) | Post 12/02/2010; testo letto e risposta autore 30/09/2010 recuperata nell'indice |
