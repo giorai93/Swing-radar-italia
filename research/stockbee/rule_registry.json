@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-01",
+  "purpose": "Evidence registry; not an execution configuration",
+  "manual": "MANUALE_STOCKBEE.md",
+  "legacy_study": "exploratory_custom_variants_not_official_replication",
+  "methods": [
+    {
+      "method": "momentum_burst",
+      "sources": [
+        "S01",
+        "S03",
+        "S05",
+        "S11"
+      ],
+      "faithful_backtest_enabled": false,
+      "entry_rule": null,
+      "initial_stop_rule": null,
+      "exit_rule": null,
+      "position_sizing_rule": null,
+      "market_context_rule": null,
+      "blocking_gaps": [
+        "Scanner version and trigger",
+        "Initial stop",
+        "Partial size and trailing rule",
+        "Failure exit",
+        "Account risk and context filter"
+      ],
+      "market_adaptation": "Italy requires separately named specification"
+    },
+    {
+      "method": "anticipation",
+      "sources": [
+        "S02",
+        "S04",
+        "S05",
+        "S11"
+      ],
+      "faithful_backtest_enabled": false,
+      "entry_rule": null,
+      "initial_stop_rule": null,
+      "exit_rule": null,
+      "position_sizing_rule": null,
+      "market_context_rule": null,
+      "blocking_gaps": [
+        "Pivot construction",
+        "Anticipatory versus confirmed entry",
+        "Order validity and gap handling",
+        "Stop updates and exit",
+        "Account risk and context filter"
+      ],
+      "market_adaptation": "Italy requires separately named specification"
+    },
+    {
+      "method": "ep_classic",
+      "sources": [
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10"
+      ],
+      "faithful_backtest_enabled": false,
+      "entry_rule": null,
+      "initial_stop_rule": null,
+      "exit_rule": null,
+      "position_sizing_rule": null,
+      "market_context_rule": null,
+      "blocking_gaps": [
+        "Variant-specific fundamental criteria",
+        "Timestamped catalyst and prior consensus",
+        "Neglect definition",
+        "Entry mode and initial stop",
+        "Partial exits trailing and account risk"
+      ],
+      "market_adaptation": "Italy requires separately named specification"
+    },
+    {
+      "method": "ep9",
+      "sources": [
+        "S08",
+        "S09"
+      ],
+      "faithful_backtest_enabled": false,
+      "entry_rule": null,
+      "initial_stop_rule": null,
+      "exit_rule": null,
+      "position_sizing_rule": null,
+      "market_context_rule": null,
+      "blocking_gaps": [
+        "Volume units session and observation time",
+        "Candidate classification",
+        "Entry trigger and exclusions",
+        "Stop partial exits and trailing",
+        "Account risk and context filter"
+      ],
+      "market_adaptation": "Italy requires separately named specification"
+    }
+  ]
+}
