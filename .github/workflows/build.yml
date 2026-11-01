@@ -42,12 +42,20 @@ jobs:
         with:
           name: esef-verification
           path: project/assets/fundamentals.json
+      - name: Mobile UI verification
+        run: |
+          npm install --no-save --package-lock=false playwright@1.56.1
+          npx playwright install --with-deps chromium
+          python project/tools/bundle_fundamentals.py
+          node project/tests/mobile_ui.cjs
       - name: Install Android build tools
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"
       - name: Build APK
         run: bash project/build_apk.sh
+      - name: Verify packaged offline data and UI
+        run: python project/tests/verify_apk.py
       - uses: actions/upload-artifact@v4
         with:
           name: Swing-Radar-Italia-3.0

@@ -66,10 +66,10 @@ vm.createContext(ui);
 vm.runInContext(source.split('<script>')[1].split('</script>')[0],ui);
 vm.runInContext(js,ui);
 vm.runInContext("nav('stats')",ui);
-assert(nodes.get('view').innerHTML.includes('Statistiche setup'),'stats view renders');
+assert(nodes.get('view').innerHTML.includes('Risultati delle simulazioni'),'stats view renders');
 assert(nodes.get('view').innerHTML.includes('value="2.95"'),'stored fee displayed');
 vm.runInContext("statsSetParam('fee',0)",ui);
-assert(nodes.get('view').innerHTML.includes('Win rate netto'),'stats view recalculates after parameter change');
+assert(nodes.get('view').innerHTML.includes('Win rate'),'stats view recalculates after parameter change');
 console.log('OK: next-open fill, costs, stop-first, target1 vs T2 alternative, expiry, pending, no-fill, dedupe, segment/kind split, UI link');
 
 {
@@ -94,3 +94,8 @@ assert.equal(prefix.all.closed,0,'later bars cannot resolve a truncated experime
 console.log('PASS: all four strategies, equal execution costs, duplicate exclusion, pending and missing-level cases');
 
 }
+
+vm.runInContext("nav('history')",ui);
+assert(nodes.get('view').innerHTML.includes('Archivio simulazioni'));
+assert(nodes.get('view').innerHTML.includes('Momentum'));
+assert(nodes.get('view').innerHTML.includes('Diario'));

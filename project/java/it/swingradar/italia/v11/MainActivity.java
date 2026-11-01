@@ -32,14 +32,14 @@ public final class MainActivity extends Activity{
         super.onCreate(state);
         getWindow().setStatusBarColor(0xff071e34);getWindow().setNavigationBarColor(0xfff2f5fa);
         getWindow().getDecorView().setSystemUiVisibility(android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-        web=new WebView(this);web.setBackgroundColor(0xfff2f5fa);
+        web=new WebView(this);web.clearCache(true);web.setBackgroundColor(0xfff2f5fa);
         WebSettings s=web.getSettings();s.setJavaScriptEnabled(true);s.setDomStorageEnabled(false);
         s.setAllowFileAccess(true);s.setAllowContentAccess(false);s.setJavaScriptCanOpenWindowsAutomatically(false);
         web.setWebViewClient(new WebViewClient(){
             @Override public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest request){
-                Uri uri=request.getUrl();return !HOME.equals(uri.toString());
+                return externalLink(request.getUrl());
             }
-            @Override public boolean shouldOverrideUrlLoading(WebView view,String url){return !HOME.equals(url);}
+            @Override public boolean shouldOverrideUrlLoading(WebView view,String url){return externalLink(Uri.parse(url));}
         });
         web.setWebChromeClient(new WebChromeClient());
         web.addJavascriptInterface(new Bridge(),"Android");setContentView(web);web.loadUrl(HOME);
@@ -47,14 +47,21 @@ public final class MainActivity extends Activity{
         if(Build.VERSION.SDK_INT>=33&&checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)!=PackageManager.PERMISSION_GRANTED)
             requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS},102);
         // Trigger a fresh uncached scan on an engine update without losing local data.
-        if(getPreferences(0).getInt("installed_engine_version",0)<21){
-            getPreferences(0).edit().putInt("installed_engine_version",21)
+        if(getPreferences(0).getInt("installed_engine_version",0)<32){
+            getPreferences(0).edit().putInt("installed_engine_version",32)
                 .putBoolean("first_run",false).apply();RadarScanner.start(this,null,true);
         }
     }
     @Override protected void onResume(){
         super.onResume();
         RadarScanner.refreshIfDue(this);
+    }
+    private boolean externalLink(Uri uri){
+        if(HOME.equals(uri.toString()))return false;
+        if("https".equals(uri.getScheme()))try{
+            startActivity(new android.content.Intent(android.content.Intent.ACTION_VIEW,uri));
+        }catch(Exception ignored){}
+        return true;
     }
     private void schedule(){
         JobScheduler jobs=(JobScheduler)getSystemService(JOB_SCHEDULER_SERVICE);

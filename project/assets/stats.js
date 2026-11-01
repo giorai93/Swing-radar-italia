@@ -66,6 +66,7 @@ function statsSimulateOne(signal,bars,opts){
   if(entry<=stop||entry>=t1){out.reason='Slippage d’ingresso oltre stop o target';return out;}
   const risk=(entry-stop)*quantity;
   if(risk<=0){out.reason='Rischio unitario non valido';return out;}
+  out.mature=start+opts.horizon<=bars.length;
   out.entryDay=first.day;out.entry=entry;out.quantity=quantity;out.risk=risk;
   const last=Math.min(start+opts.horizon,bars.length);
   // T2 is a separate hypothetical path: the main trade exits entirely at T1.
@@ -151,7 +152,8 @@ function statsSummarize(rows){
     equity*=Math.max(.001,1+.01*x.netR);peak=Math.max(peak,equity);
     worstDD=Math.max(worstDD,(peak-equity)/peak);
   }
-  return {signals:rows.length,closed:resolved.length,pending:pending.length,
+  const matured=resolved.filter(x=>x.mature);
+  return {matureClosed:matured.length,matureAvgR:matured.length?matured.reduce((a,x)=>a+x.netR,0)/matured.length:null,signals:rows.length,closed:resolved.length,pending:pending.length,
     excluded:rows.length-resolved.length-pending.length,
     winRate:resolved.length?gains.length/resolved.length*100:null,
     avgR:resolved.length?resolved.reduce((a,x)=>a+x.netR,0)/resolved.length:null,
@@ -193,55 +195,36 @@ function statsSummaryTable(name,a){
     '<div><span>R medio netto</span><strong>'+(a.avgR===null?'N/D':statsFmt(a.avgR,2)+'R')+'</strong></div>'+
     '<div><span>Profit Factor</span><strong>'+(a.pf===null?'N/D':statsFmt(a.pf,2))+'</strong></div></div>';
 }
+let statsStrategy='all';
+function statsSelectStrategy(value){statsStrategy=value;render();}
+function statsNav(){return '<div class="chips"><button class="chip '+(tab==='stats'?'sel':'')+'" onclick="nav(\'stats\')">Confronto strategie</button><button class="chip '+(tab==='history'?'sel':'')+'" onclick="nav(\'history\')">Archivio simulazioni</button></div>';}
 function statsRender(){
   const r=statsCurrentReport(),a=r.all,s=statsSettings;
-  let out='<div class="topline"><h2>📊 Statistiche setup</h2><small>Simulazione locale</small></div>'+
-    '<div class="section"><p><strong>Esperimento, non rendimento reale.</strong> Entra alla <strong>prima apertura successiva</strong> al setup; esce a target 1, stop oppure dopo '+s.horizon+' sedute. Stop prima del target se entrambi sono toccati nella stessa barra. Dati EOD: sequenza intraday sconosciuta. Include quattro strategie; solo le zone che rispettano tutte e quattro le condizioni entrano nella simulazione Recupero. Momentum usa prezzi e volumi, non notizie storiche verificate.</p></div>'+
-    '<div class="section"><h3>Parametri simulazione</h3><div class="stats-form">'+
-      '<label>Importo per acquisto (€)<input inputmode="numeric" type="number" min="100" max="1000000" step="100" value="'+s.capital+'" onchange="statsSetParam(\'capital\',this.value)"></label>'+
-      '<label>Commissione per lato (€)<input inputmode="decimal" type="number" min="0" max="100" step="0.01" value="'+s.fee+'" onchange="statsSetParam(\'fee\',this.value)"></label>'+
-      '<label>Slippage per lato (bps)<input inputmode="numeric" type="number" min="0" max="300" step="1" value="'+s.slippageBps+'" onchange="statsSetParam(\'slippageBps\',this.value)"></label>'+
-      '<label>Uscita massima (sedute)<select onchange="statsSetParam(\'horizon\',this.value)">'+[5,10,20].map(n=>'<option value="'+n+'" '+(n===s.horizon?'selected':'')+'>'+n+'</option>').join('')+'</select></label></div>'+
-      '<button class="action" onclick="statsRefresh()">↻ Ricalcola dallo storico locale</button></div>';
-  if(a.signals===0)out+='<div class="alert"><strong>Nessun setup confermato nel database</strong>Apri Radar e avvia una scansione. Le statistiche compariranno quando ci saranno segnali e prezzi successivi sufficienti; non verranno creati risultati fittizi.</div>';
-  out+='<div class="stats-grid">'+statsDetailBox('Idee indipendenti',String(a.signals),'Quattro strategie indipendenti')+
-    statsDetailBox('Rilevamenti ripetuti',String(r.repeated),'Esclusi come trade doppi')+
-    statsDetailBox('Esiti chiusi',String(a.closed),'Stop, target 1 o tempo')+
-    statsDetailBox('In osservazione',String(a.pending),'Dati futuri insufficienti')+
-    statsDetailBox('Non simulabili',String(a.excluded),'Dettaglio sotto')+
-    statsDetailBox('Win rate netto',statsPct(a.winRate),'Esiti chiusi')+
-    statsDetailBox('R medio netto',a.avgR===null?'N/D':statsFmt(a.avgR,2)+' R','Commissioni e slippage inclusi')+
-    statsDetailBox('Profit Factor',a.pf===null?'N/D':statsFmt(a.pf,2),'N/D se non esistono perdite')+
-    statsDetailBox('DD sequenziale proxy',statsPct(a.drawdownProxy),'Non drawdown di portafoglio')+'</div>';
-  out+='<div class="section"><h3>Regole delle nuove simulazioni</h3><p>Recupero: titolo sotto SMA200, calo 60 sedute almeno 12%, entro +12% dal supporto delle precedenti 120 sedute, RSI2 ≤70, chiusura nella parte alta almeno 45%. Stop sotto supporto e minimo della barra; target 1 massimo tra SMA20 e 1,5R; target 2 massimo tra SMA50 e 2,5R. Rischio al segnale massimo 18%.</p><p>Momentum: rialzo ≥3,5% in una seduta oppure ≥1,5% con rialzo su due sedute ≥6%; volume relativo ≥1,15 e chiusura almeno al 60% della barra. Stop sotto minimo della barra di 0,25 ATR14; target 1 a 2R e target 2 a 3R; rischio massimo 12%. Livelli fissati alla chiusura del segnale.</p><p>Entrata alla prima apertura successiva, stessi costi e durata per tutti. Nessuna replica certificata Websim. Ipotesi definite dopo gli esempi osservati, non test fuori campione. Le nuove simulazioni compaiono dopo una nuova scansione.</p></div>';
-  out+='<div class="section"><h3>Confronto strategie</h3>'+statsSummaryTable('↗ Forza',r.force)+statsSummaryTable('↘ Debolezza',r.weak)+statsSummaryTable('⌁ Recupero su supporto',r.recovery)+statsSummaryTable('⚡ Momentum prezzo-volume',r.momentum)+
-    '<p class="stats-foot">Le medie includono solo esiti definitivi. Se un gruppo ha pochi casi, i valori non sono conclusivi.</p></div>';
-  out+='<div class="section"><h3>Target e stop · esiti della simulazione</h3>'+
-    '<div class="detail-line"><span>Target 1 raggiunto per primo</span><strong>'+a.t1Count+' / '+a.closed+' ('+statsPct(a.t1Rate)+')</strong></div>'+
-    '<div class="detail-line"><span>Stop raggiunto per primo</span><strong>'+a.stopCount+' / '+a.closed+'</strong></div>'+
-    '<div class="detail-line"><span>Uscite per tempo</span><strong>'+a.timeCount+' / '+a.closed+'</strong></div>'+
-    '<div class="detail-line"><span>Target 2 teorico prima dello stop</span><strong>'+a.t2Count+' / '+a.t2Known+' ('+statsPct(a.t2Rate)+')</strong></div>'+
-    '<p class="stats-foot">Target 2 è un percorso <strong>alternativo</strong> ipotetico: non un guadagno realizzato dopo l’uscita a target 1.</p></div>';
-  out+='<div class="section"><h3>Rendimento a 5, 10 e 20 sedute</h3><p>Simula mantenimento fino a quella chiusura, senza stop/target: % media netta sull’importo effettivamente investito.</p>'+
-    [5,10,20].map(h=>'<div class="detail-line"><span>'+h+' sedute ('+a.forward[h].n+' osservazioni complete)</span><strong>'+statsPct(a.forward[h].avg)+'</strong></div>').join('')+
-    '<p class="stats-foot">Le osservazioni non ancora mature non entrano nella media: ogni orizzonte ha un proprio denominatore.</p></div>';
-  out+='<div class="section"><h3>Large, Mid e Small Cap</h3>'+['LARGE','MID','SMALL','BASE'].map(seg=>statsSummaryTable(segmentLabel(seg),r.segments[seg])).join('')+
-    '<p class="stats-foot">Le fasce sono indicative e rispecchiano l’etichetta disponibile al momento del segnale.</p></div>';
-  out+='<div class="section"><h3>Audit dei segnali</h3><div class="chips">'+
-    [['all','Tutti'],['resolved','Chiusi'],['pending','In corso'],['excluded','Non simulabili']].map(([value,name])=>
-      '<button class="chip '+(statsMode===value?'sel':'')+'" onclick="statsSetMode(\''+value+'\')">'+name+'</button>').join('')+'</div>';
-  const selected=r.rows.filter(x=>statsMode==='all'||x.state===statsMode);
-  out+='<p>'+selected.length+' segnali in questa vista. Gli esiti sono ipotetici; il diario registra separatamente gli acquisti reali.</p>';
-  if(!selected.length)out+='<div class="empty">Nessun segnale per questo filtro. Aggiorna la scansione per accumulare uno storico più ampio.</div>';
-  else for(const x of selected.slice(0,120)){
-    const name=x.state==='resolved'?(x.exitReason+' · '+statsFmt(x.netR,2)+'R'):x.state==='pending'?'IN CORSO':'NON SIMULABILE';
-    const tone=x.state==='pending'?'#bc7212':x.state==='excluded'?'#667f93':x.netR>=0?'#0d996e':'#c83c52';
-    out+='<div class="stats-result"><div><strong>'+esc(x.ticker)+' · '+esc(x.kind)+'</strong><small>'+esc(x.asof)+' · '+esc(segmentLabel(x.segment))+'</small></div>'+
-      '<div><strong style="color:'+tone+'">'+esc(name)+'</strong><small>'+esc(x.state==='resolved'?('P&L '+statsFmt(x.pnl,2)+' € · uscita '+x.exitDay):x.reason)+'</small></div>'+ 
-      '<button class="action" onclick="openChart(\''+esc(x.ticker)+'\',\''+esc(x.asof)+'\',\''+esc(x.kind)+'\')">📈</button></div>';
-  }
-  out+='</div><div class="section"><h3>Quanto sono affidabili queste cifre?</h3><p>'+(
-    a.closed<30?'<strong>Campione insufficiente ('+a.closed+' casi chiusi).</strong> Evita conclusioni sulla redditività delle strategie. ':'')+
-    'Storico limitato ai segnali salvati dall’app (recupero retrospettivo recente), ai soli titoli oggi coperti e ai prezzi ancora in cache. Rilevamenti sullo stesso titolo/strategia sono esclusi finché il primo trade teorico è aperto. Questo non è un backtest completo né fuori campione: possono esistere <strong>survivorship bias, selezione del campione e trade sovrapposti fra titoli diversi</strong>. Le quotazioni Yahoo non ufficiali non simulano spread o esecuzioni reali. Il DD visualizzato concatena singoli trade a rischio fisso 1%, ignorando sovrapposizioni e vincoli di capitale: <strong>non è il MaxDD di un portafoglio</strong>.</p></div>';
+  const groups=[['Forza / Breakout',r.force],['Debolezza / Pullback',r.weak],['Recupero su supporto',r.recovery],['Momentum prezzo-volume',r.momentum]];
+  const measured=groups.filter(x=>x[1].closed>0),negative=measured.filter(x=>x[1].avgR<0);
+  let out='<div class="topline"><h2>Risultati delle simulazioni</h2><small>Non operazioni reali</small></div>'+statsNav();
+  out+='<div class="result-verdict"><h3>'+(measured.length===0?'Risultati non ancora disponibili':negative.length===measured.length?'Tutte le strategie misurate sono negative':negative.length+' strategie su '+measured.length+' con R medio negativo')+'</h3><p>'+a.closed+' operazioni concluse; '+a.pending+' ancora aperte; '+a.excluded+' non simulabili. '+(a.closed?'Un Profit Factor sotto 1 indica perdite superiori ai guadagni nel campione. ':'Avvia una scansione per raccogliere i dati. ')+'Non è una prova fuori campione: la finestra recente può favorire gli esiti che si chiudono prima.</p></div>';
+  out+='<div class="section"><h3>Quale strategia ha funzionato nel campione?</h3>'+groups.map(([name,v])=>statsSummaryTable(name,v)).join('')+'<p>Per ciascuna strategia: operazioni chiuse, percentuale in profitto, R medio netto e Profit Factor. Un R è il rischio iniziale dell’operazione. N/D significa che il dato non è calcolabile.</p></div>';
+  const mature=a.matureClosed||0;
+  out+='<div class="section"><h3>Quanto è completo il campione?</h3><p>'+a.pending+' posizioni teoriche non hanno ancora un esito. Solo '+mature+' operazioni chiuse hanno anche '+s.horizon+' sedute successive disponibili. R medio di queste ultime: '+(a.matureAvgR===null?'N/D':statsFmt(a.matureAvgR,2)+'R')+'.</p><p>Non è un rendimento di portafoglio: posizioni e strategie possono sovrapporsi e non condividono un limite di capitale.</p></div>';
+  out+='<details><summary>Costi e regole di esecuzione</summary><div class="stats-form">'+
+    '<label>Euro per acquisto<input type="number" min="100" max="1000000" value="'+s.capital+'" onchange="statsSetParam(\'capital\',this.value)"></label>'+
+    '<label>Commissione per lato<input type="number" min="0" step="0.01" value="'+s.fee+'" onchange="statsSetParam(\'fee\',this.value)"></label>'+
+    '<label>Slippage (bps per lato)<input type="number" min="0" value="'+s.slippageBps+'" onchange="statsSetParam(\'slippageBps\',this.value)"></label>'+
+    '<label>Durata massima<select onchange="statsSetParam(\'horizon\',this.value)">'+[5,10,20].map(n=>'<option '+(n===s.horizon?'selected':'')+'>'+n+'</option>').join('')+'</select></label></div><p>Ingresso all’apertura successiva; uscita intera a target 1, stop o scadenza. Stop prima del target se toccati nella stessa barra. Le soglie delle strategie non sono state ottimizzate per migliorare questi risultati.</p><button class="action" onclick="statsRefresh()">Ricalcola</button></details>';
+  out+='<details><summary>Esiti e limiti del backtest</summary><p>Target 1: '+a.t1Count+' · Stop: '+a.stopCount+' · Scadenza: '+a.timeCount+'. Rilevamenti ripetuti esclusi: '+r.repeated+'.</p><p>Solo titoli oggi coperti e segnali salvati; replay recente di 35 sedute, non storico pluriennale. Possibili distorsioni da selezione dei titoli e prezzi mancanti. Momentum analizza prezzi e volumi, non eventi storici verificati. Le regole non replicano una strategia proprietaria Websim.</p></details>';
   return out;
+}
+function statsArchiveRender(){
+  const r=statsCurrentReport();
+  const names={all:'Tutte',FORZA:'Forza',DEBOLEZZA:'Debolezza',RECUPERO:'Recupero',EVENT_MOMENTUM:'Momentum'};
+  const rows=r.rows.filter(x=>(statsStrategy==='all'||x.kind===statsStrategy)&&(statsMode==='all'||x.state===statsMode));
+  let out='<div class="topline"><h2>Archivio simulazioni</h2><small>'+rows.length+' operazioni teoriche</small></div>'+statsNav();
+  out+='<div class="section"><p>Ogni riga è un’operazione simulata. I tuoi acquisti reali sono esclusivamente nel Diario.</p></div>';
+  out+='<div class="chips">'+Object.entries(names).map(([k,v])=>'<button class="chip '+(statsStrategy===k?'sel':'')+'" onclick="statsSelectStrategy(\''+k+'\')">'+v+'</button>').join('')+'</div>';
+  out+='<div class="chips">'+[['all','Tutte'],['resolved','Concluse'],['pending','Aperte'],['excluded','Non simulabili']].map(([k,v])=>'<button class="chip '+(statsMode===k?'sel':'')+'" onclick="statsSetMode(\''+k+'\')">'+v+'</button>').join('')+'</div><div class="section">';
+  for(const x of rows.slice(0,300))out+='<div class="archive-row"><strong>'+esc(x.ticker)+' · '+esc(names[x.kind]||x.kind)+'</strong><small>Segnale '+esc(x.asof)+' · Ingresso '+esc(x.entryDay||'—')+' · Uscita '+esc(x.exitDay||'—')+'</small><p>'+(x.state==='resolved'?esc(x.exitReason)+' · '+statsFmt(x.pnl,2)+' € · '+statsFmt(x.netR,2)+'R':esc(x.reason))+'</p></div>';
+  if(!rows.length)out+='<p>Nessuna operazione per questi filtri.</p>';
+  if(rows.length>300)out+='<p>Mostrate le 300 più recenti; il confronto include tutte le righe.</p>';
+  return out+'</div>';
 }

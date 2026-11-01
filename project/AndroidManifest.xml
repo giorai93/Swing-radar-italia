@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <application android:allowBackup="false" android:label="Swing Radar Italia 3.0"
+    <application android:allowBackup="false" android:label="Swing Radar Italia 3.2"
                  android:usesCleartextTraffic="false" android:theme="@android:style/Theme.Material.Light.NoActionBar"
                  android:icon="@drawable/ic_logo">
         <activity android:name=".MainActivity" android:exported="true">

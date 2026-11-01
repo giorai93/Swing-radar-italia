@@ -54,7 +54,9 @@ final class RadarScanner {
              .put("universeInfo",ItalianUniverse.status(context))
              .put("earnings",EarningsCalendar.status(context))
              .put("fundamentals",Fundamentals.status(context));
-        }catch(Exception ignored){}return a;
+        }catch(Exception ignored){}
+        try{a.put("fundamentals",Fundamentals.status(context));}catch(Exception ignored){}
+        return a;
     }
     static boolean start(Context context,Complete completion){
         return start(context,completion,false);

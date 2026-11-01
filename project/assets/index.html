@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light">
-  <title>Swing Radar Italia 3.0</title>
+  <title>Swing Radar Italia 3.2</title>
   <style>
     :root{--ink:#10263d;--muted:#708398;--blue:#0d6efd;--navy:#071e34;--green:#0d996e;--amber:#d08412;--red:#c83c52;--bg:#f2f5fa;--line:#e7edf4;--white:#fff;--shadow:0 10px 35px #0f36500b}
     *{box-sizing:border-box}html,body{margin:0;color:var(--ink);background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{min-height:100vh;padding-bottom:100px}
@@ -23,15 +23,16 @@
     .chart-scroll{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.chart-scroll .action{font-size:10px;padding:7px 9px;white-space:nowrap}.chart-scroll span{font-size:9px;color:#7b8ca0;text-align:center}
     .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.stats-metric{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;min-height:94px}.stats-metric span{display:block;font-size:10px;color:#718398}.stats-metric strong{display:block;font-size:20px;font-weight:850;color:#133550;margin:7px 0}.stats-metric small{display:block;font-size:10px;color:#8d9baa;line-height:1.4}.stats-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.stats-form label{font-size:11px;color:#61768b;font-weight:700}.stats-form input,.stats-form select{margin-top:5px;width:100%;border:1px solid #d3e1ed;border-radius:10px;padding:10px;color:#18354f;background:#f9fcff;font-size:13px}.stats-summary{display:grid;grid-template-columns:1.25fr .85fr 1fr 1fr;align-items:center;gap:6px;padding:14px 0;border-bottom:1px solid var(--line)}.stats-summary>div{min-width:0}.stats-summary span,.stats-summary small{display:block;font-size:9px;color:#8092a4;margin-top:4px}.stats-summary strong{display:block;font-size:11px;word-break:break-word}.stats-result{display:flex;align-items:center;gap:8px;justify-content:space-between;border-bottom:1px solid #e8edf3;padding:11px 0}.stats-result>div{min-width:0;flex:1}.stats-result strong{display:block;font-size:10px}.stats-result small{display:block;font-size:9px;color:#8091a2;margin-top:5px;line-height:1.3}.stats-result .action{padding:8px;min-width:36px}.stats-foot{font-size:10px!important;color:#667d91!important;margin-top:12px!important;line-height:1.6!important}
     .badge.recovery-watch{background:#e9f1fc;color:#2f6798}.badge.recovery-rebound{background:#fff2dd;color:#98621c}.badge.recovery-confirm{background:#e2f8ed;color:#0a8354}.badge.recovery-invalid{background:#fff0f1;color:#ad354d}.phase-note{border-left:3px solid #dba95b;background:#fff9ef;color:#855c25;border-radius:7px;padding:9px 11px;font-size:11px;line-height:1.5;margin:12px 0 0}.phase-note.recovery-confirm{background:#eafaf2;color:#166648;border-color:#36b887}.phase-note.recovery-invalid{background:#fff2f2;color:#8b3746;border-color:#ce5469}
-  </style>
+  .hero{padding:18px 18px 22px;border-radius:0 0 20px 20px}.hero h1{font-size:23px;margin:14px 0 6px}.hero-bottom{margin-top:14px}.stats{margin-top:0}.content>.stats{display:none}.section p+p{margin-top:10px}details{margin:12px 0;padding:12px;background:#f5f8fc;border-radius:12px}summary{font-size:12px;font-weight:750;cursor:pointer}.modal{overflow-wrap:anywhere}.fund-row{margin:14px 0}.stats-summary{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important}.stats-summary>div:first-child{grid-column:1/-1}.result-verdict{padding:16px;background:#fff0f1;border:1px solid #ffd5da;border-radius:16px;margin:14px 0}.result-verdict h3{margin:0 0 8px;font-size:16px}.result-verdict p{font-size:12px;line-height:1.6;margin:0}.archive-row{padding:14px 0;border-bottom:1px solid #e7edf4}.archive-row small{display:block;color:#708398;margin-top:6px}.section .action{margin-top:12px}
+</style>
 </head>
 <body>
 <div class="app">
   <header class="hero">
     <div class="brand"><div class="brand-name">◆ SWING RADAR <span style="color:#62b8ff">ITALIA</span></div><div class="livepill" id="connection">◌ Solo Borsa Italiana</div></div>
-    <h1>Scopri i setup.<br><span style="color:#61c4ff">Decidi tu quando entrare.</span></h1>
-    <p>Analisi quotidiana direttamente sul telefono. Nessun server, nessun conto broker collegato.</p>
-    <div class="hero-bottom"><button class="white-btn" id="scanBtn" onclick="startScan()">↻ &nbsp; Scansiona Milano</button><button class="secondary-btn" onclick="nav('stats')">📊 Statistiche</button><button class="secondary-btn" onclick="nav('data')">Fonte e qualità dati</button></div>
+    <h1>Il tuo radar di ricerca</h1>
+    <p>Build 3.2 · Bilanci offline SOL · Dati a fine seduta</p>
+    <div class="hero-bottom"><button class="white-btn" id="scanBtn" onclick="startScan()">↻ &nbsp; Scansiona Milano</button><button class="secondary-btn" onclick="nav('stats')">📊 Risultati</button><button class="secondary-btn" onclick="nav('data')">Stato dati</button></div>
   </header>
   <main class="content">
     <div class="stats">
@@ -45,18 +46,18 @@
     <section id="watchlist"></section>
   </main>
   <nav class="nav">
-    <button data-tab="radar" class="on" onclick="nav('radar')"><span>◈</span>Radar</button>
-    <button data-tab="strategies" onclick="nav('strategies')"><span>◫</span>Strategie</button>
-    <button data-tab="titles" onclick="nav('titles')"><span>◇</span>Titoli</button>
-    <button data-tab="history" onclick="nav('history')"><span>◷</span>Storico</button>
+    <button data-tab="radar" class="on" onclick="nav('radar')"><span>◈</span>Oggi</button>
+    <button data-tab="strategies" onclick="nav('strategies')"><span>◫</span>Osserva</button>
+    <button data-tab="fund" onclick="nav('fund')"><span>◇</span>Bilanci</button>
+    <button data-tab="stats" onclick="nav('stats')"><span>◷</span>Risultati</button>
     <button data-tab="journal" onclick="nav('journal')"><span>▤</span>Diario</button>
-    
   </nav>
   <div id="overlay"></div>
 </div>
+<script src="fundamentals-bundle.js"></script>
 <script>
   'use strict';
-  let tab='radar',snapshot={signals:[],trades:[],status:{}},filter='all',period='45d',zoneMode='recent',zonePhase='all',modalSignal=null,fundMode='all',lastSnapshotText='';
+  let tab='radar',snapshot={signals:[],trades:[],status:{}},filter='all',period='session',zoneMode='recent',zonePhase='all',modalSignal=null,fundMode='all',lastSnapshotText='';
   let lifecycleMode='active',journalMode='open',diagTicker='MAIRE',strategyMode='force';
   const esc=v=>String(v===null||v===undefined?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const euro=(n,d=2)=>Number(n||0).toLocaleString('it-IT',{minimumFractionDigits:d,maximumFractionDigits:d})+' €';
@@ -65,9 +66,16 @@
   const known=n=>typeof n==='number'&&Number.isFinite(n);
   const metric=(n,d=1,suffix='')=>known(n)?fnum(n,d)+suffix:'N/D';
   const lastUpdateIt=value=>{const d=Date.parse(value||'');return Number.isFinite(d)?new Date(d).toLocaleString('it-IT',{timeZone:'Europe/Rome',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'mai';};
-  const fundamentals=()=>snapshot.status?.fundamentals||{values:{}};
+  function fundamentals(){
+    const bundled=window.SWING_FUNDAMENTALS||{values:{}},native=snapshot.status?.fundamentals||{};
+    const values={...(bundled.values||{})};
+    for(const [ticker,m] of Object.entries(native.values||{})){
+      if(m&&m.sourceUrl&&m.facts&&(!values[ticker]||(m.retrievedAt||'')>=(values[ticker].retrievedAt||'')))values[ticker]=m;
+    }
+    return {...bundled,...native,values,count:Object.keys(values).length};
+  }
   const earnings=()=>snapshot.status?.earnings||{values:{},upcoming:[],recent:[]};
-  const metricsFor=ticker=>(fundamentals().values||{})[ticker]||null;
+  const metricsFor=ticker=>(fundamentals().values||{})[String(ticker||'').trim().toUpperCase().replace(/^MIL:/,'').replace(/\.MI$/,'')]||null;
   function medianOf(items){const n=items.length;if(!n)return null;items.sort((a,b)=>a-b);return n%2?items[(n-1)/2]:(items[n/2-1]+items[n/2])/2;}
   function peersFor(ticker,col){const m=metricsFor(ticker);if(!m||!m.sector)return null;const peers=Object.entries(fundamentals().values||{}).filter(([t,x])=>t!==ticker&&x.sector===m.sector&&known(x[col])&&x[col]>0).map(([t,x])=>x[col]);return peers.length>=3?medianOf(peers):null;}
 
@@ -163,13 +171,13 @@
   }
   function opportunityAssessment(s){
     const m=metricsFor(s.ticker);
-    if(!m||!m.retrievedAt||!s.asof||s.asof<m.retrievedAt.slice(0,10))return {score:null,reason:'Nessun bilancio verificato disponibile alla data del setup'};
+    if(!m||m.dataStatus!=='verified')return {score:null,reason:'Bilancio non verificato'}; // Current assessment only, never consumed by historical backtest.
     const q=qualityAssessment(s.ticker),g=growthAssessment(s.ticker),v=valueAssessment(s.ticker),t=tradeAssessment(s);
     if([q.score,g.score,v.score,t.score].some(x=>x===null))return {score:null,reason:'Dati incompleti'};
     let score=Math.round(.25*q.score+.20*g.score+.20*v.score+.35*t.score);
     if(t.score<50)score=Math.min(score,49);
     if(lifecycleGroup(s)!=='active')score=Math.min(score,35);
-    return {score,reason:'25% qualità · 20% crescita · 20% valore · 35% trade'};
+    return {score,reason:'Valutazione attuale: 25% qualità · 20% crescita · 20% valore · 35% trade; non storica'};
   }
   function sortValue(s){
     if(sortMode==='trade')return tradeAssessment(s).score;
@@ -206,7 +214,7 @@
     for(const r of ranked){
       const m=metricsFor(r.ticker);
       const tag=active.has(r.ticker)?'Setup attivo':watch.has(r.ticker)?'In osservazione':'Solo fondamentali';
-      out+='<article class="signal"><div class="signalhead"><div class="ticker">'+esc(r.ticker)+'</div><div class="company"><strong>'+esc(m.sector||'Settore N/D')+'</strong><span>'+tag+'</span></div><div class="score">'+(r.priority.score===null?'N/D':r.priority.score+'/100')+'<small>Priorità fondamentale</small></div></div>'+scoreStrip(r.ticker,null)+fundBadges(r.ticker)+'<div class="signalactions"><span class="risk">Non è un segnale di acquisto</span><button class="action" onclick="openFund(\''+esc(r.ticker)+'\')">Fair Value e bilanci →</button></div></article>';
+      out+='<article class="signal"><div class="signalhead"><div class="ticker">'+esc(r.ticker)+'</div><div class="company"><strong>'+esc(m.sector||'Settore N/D')+'</strong><span>'+tag+'</span></div><div class="score">'+(r.priority.score===null?'N/D':r.priority.score+'/100')+'<small>Priorità fondamentale</small></div></div>'+scoreStrip(r.ticker,null)+fundBadges(r.ticker)+'<div class="signalactions"><span class="risk">Non è un segnale di acquisto</span><button class="action" onclick="openFund(\''+esc(r.ticker)+'\')">Bilanci →</button></div></article>';
     }
     if(!ranked.length)out+='<div class="empty">Dati fondamentali non disponibili. Controlla la fonte nel menu Dati.</div>';
     return out;
@@ -214,19 +222,19 @@
   function fundBadges(ticker){const q=qualityAssessment(ticker),g=growthAssessment(ticker),v=valueAssessment(ticker);return '<div class="fund-row">'+[['Quality',q.score],['Growth',g.score],['Valuation',v.score]].map(([k,n])=>'<span class="fund-tag">'+k+' '+(n===null?'N/D':n+'/100')+'</span>').join('')+'</div>';}
   function fairValuePanel(){return '<p class="reason">Fair value N/D: il Valuation Score misura solo earnings yield, non un prezzo obiettivo né una probabilità.</p>';}
   function fundPanel(ticker){
-    const m=metricsFor(ticker);if(!m)return '<p>Bilancio ESEF non disponibile per questo titolo.</p>';
+    const m=metricsFor(ticker);if(!m)return '<div class="alert"><strong>Titolo non ancora coperto</strong>Il registro attuale copre SOL e GVS. Non è un errore della scansione: manca ancora un bilancio verificato per '+esc(ticker)+'.</div>';
     const rows=[['Società',m.name],['Chiusura esercizio',m.periodEnd],['Base','Consolidato annuale IFRS, non TTM'],['Pubblicazione',m.publishedAt||'Non verificata'],['Recuperato il',m.retrievedAt],['Crescita ricavi a/a',metric(m.revenue_growth_pct,2,'%')],['ROE su patrimonio medio del gruppo',metric(m.roe_pct,2,'%')],['Margine netto consolidato',metric(m.net_margin_pct,2,'%')],['Patrimonio / attivo',metric(m.equity_ratio_pct,2,'%')],['Cassa operativa / utile',metric(m.cash_conversion,2,'×')],['EPS base annuale',metric(m.eps,3,' €')],['Prezzo',metric(m.price,3,' €')],['Data prezzo',m.priceDate||'N/D']];
-    const link=(u,label)=>typeof u==='string'&&u.startsWith('https://')?'<p><a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(label)+'</a></p>':'';
-    return '<p class="reason">'+esc(m.dataStatus==='needs_review'?'DATI DA VERIFICARE: '+(m.warnings||[]).join(' · '):'Controlli di estrazione superati')+'</p>'+fundBadges(ticker)+fairValuePanel()+rows.map(([k,v])=>'<div class="detail-line"><span>'+esc(k)+'</span><strong>'+esc(v||'N/D')+'</strong></div>').join('')+link(m.sourceUrl,'Bilancio ESEF originale')+link(m.sourcePage,'Pagina Investor Relations')+link(m.priceSource,'Fonte prezzo Yahoo (non ufficiale)')+'<p class="reason">SHA-256: '+esc(m.sha256)+'</p><details><summary>Dati XBRL verificabili e contesti</summary>'+Object.entries(m.facts||{}).map(([k,f])=>'<p><b>'+esc(k)+'</b>: '+esc(f.value)+' '+esc(f.unit)+'<br>'+esc(f.concept)+' · '+esc(f.context)+' · '+esc(f.start||'istantaneo')+' → '+esc(f.end)+' · ID '+esc(f.id)+'</p>').join('')+'</details><p class="reason">Quality: media delle metriche disponibili (minimo 2/4). Growth: clamp(50 + 2 × crescita %, 0, 100). Valuation: clamp(10 × earnings yield %, 0, 100). Euristiche non validate. Copertura: solo emittenti nel registro ESEF.</p>';
+    const link=(u,label)=>typeof u==='string'&&u.startsWith('https://')?'<p><a href="'+esc(u)+'" rel="noopener">'+esc(label)+'</a></p>':'';
+    return fundNarrative(m)+'<p class="reason">'+esc(m.dataStatus==='needs_review'?'DATI DA VERIFICARE: '+(m.warnings||[]).join(' · '):'Controlli di estrazione superati')+'</p>'+fundBadges(ticker)+fairValuePanel()+rows.map(([k,v])=>'<div class="detail-line"><span>'+esc(k)+'</span><strong>'+esc(v||'N/D')+'</strong></div>').join('')+link(m.sourceUrl,'Bilancio ESEF originale')+link(m.sourcePage,'Pagina Investor Relations')+link(m.priceSource,'Fonte prezzo Yahoo (non ufficiale)')+'<p class="reason">SHA-256: '+esc(m.sha256)+'</p><details><summary>Dati XBRL verificabili e contesti</summary>'+Object.entries(m.facts||{}).map(([k,f])=>'<p><b>'+esc(k)+'</b>: '+esc(f.value)+' '+esc(f.unit)+'<br>'+esc(f.concept)+' · '+esc(f.context)+' · '+esc(f.start||'istantaneo')+' → '+esc(f.end)+' · ID '+esc(f.id)+'</p>').join('')+'</details><p class="reason">Quality: media delle metriche disponibili (minimo 2/4). Growth: clamp(50 + 2 × crescita %, 0, 100). Valuation: clamp(10 × earnings yield %, 0, 100). Euristiche non validate. Copertura: solo emittenti nel registro ESEF.</p>';
   }
-  function nav(to){tab=to;filter='all';document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===to));render();}
+  function nav(to){tab=to;filter='all';if(to==='radar')period='session';document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===(to==='history'?'stats':to)));render();}
   function chooseStrategy(v){strategyMode=v;render();}
   function strategySelector(){
     const opts=[['force','↗ Forza / Breakout'],['weak','↘ Debolezza / Pullback'],['zones','⌁ Zone / Recupero'],['events','⚡ Momentum / Eventi']];
     return '<div class="strategy-grid">'+opts.map(([id,name])=>'<button class="strategy-tile '+(strategyMode===id?'selected':'')+'" onclick="chooseStrategy(\''+id+'\')">'+name+'</button>').join('')+'</div>';
   }
   function renderStrategies(){
-    let out='<div class="topline"><h2>Quattro movimenti · strategie distinte</h2></div>'+strategySelector();
+    let out='<div class="topline"><h2>Liste di osservazione</h2></div><div class="section"><p>Quattro tipi di movimento. I candidati non sono acquisti; i setup sono segnali teorici. Gli esiti passati sono in Risultati.</p></div>'+strategySelector();
     if(strategyMode==='zones')return out+renderZones();
     if(strategyMode==='events')return out+renderEventMomentum()+renderEarnings();
     const kind=strategyMode==='force'?'FORZA':'DEBOLEZZA';
@@ -236,7 +244,7 @@
     out+='<div class="section"><h3>Setup attivi</h3><p>'+active.length+' setup ancora attivi. I livelli sono teorici e derivano da prezzi EOD.</p></div>';
     out+=sortControls();out+=active.length?active.filter(passesResearchFilters).sort(researchSort).map(signalCard).join(''):'<div class="empty">Nessun setup attivo per questa strategia.</div>';
     out+='<div class="topline"><h2>In osservazione</h2><small>'+watch.length+' titoli</small></div>';
-    out+=watch.length?watch.map(w=>'<article class="signal"><div class="signalhead"><div class="ticker">'+esc(w.ticker)+'</div><div class="company"><strong>'+esc(w.name)+'</strong><span>'+esc(w.asof)+'</span></div></div><div class="badges"><span class="badge weak">DA CONFERMARE</span><span class="badge">'+esc(w.matched)+'/'+esc(w.required)+' condizioni</span></div><p class="reason">'+esc(w.missing||'Conferma tecnica mancante')+'</p>'+fundBadges(w.ticker)+'<div class="signalactions"><span class="risk">Non è un segnale di ingresso</span><button class="action" onclick="openFund(\''+esc(w.ticker)+'\')">Fair Value →</button></div></article>').join(''):'<div class="empty">Nessun candidato in formazione.</div>';
+    out+=watch.length?watch.map(w=>'<article class="signal"><div class="signalhead"><div class="ticker">'+esc(w.ticker)+'</div><div class="company"><strong>'+esc(w.name)+'</strong><span>'+esc(w.asof)+'</span></div></div><div class="badges"><span class="badge weak">DA CONFERMARE</span><span class="badge">'+esc(w.matched)+'/'+esc(w.required)+' condizioni</span></div><p class="reason">'+esc(w.missing||'Conferma tecnica mancante')+'</p>'+fundBadges(w.ticker)+'<div class="signalactions"><span class="risk">Non è un segnale di ingresso</span><button class="action" onclick="openFund(\''+esc(w.ticker)+'\')">Bilancio →</button></div></article>').join(''):'<div class="empty">Nessun candidato in formazione.</div>';
     return out;
   }
   function renderHistory(){
@@ -384,14 +392,14 @@
     document.getElementById('status').innerHTML=html;
     filter=tab==='force'?'FORZA':tab==='weak'?'DEBOLEZZA':filter;
     renderExtra();
-    document.getElementById('events').innerHTML=(tab==='radar'||tab==='zones')?renderEarnings():'';
+    document.getElementById('events').innerHTML=tab==='zones'?renderEarnings():'';
     const view=document.getElementById('view');
     if(tab==='strategies'){view.innerHTML=renderStrategies();decorateSegments();return;}
-    if(tab==='history'){view.innerHTML=renderHistory();decorateSegments();return;}
+    if(tab==='history'){view.innerHTML=statsArchiveRender();return;}
     if(tab==='journal'){view.innerHTML=renderJournal();return;}
     if(tab==='stats'){view.innerHTML=statsRender();return;}
     if(tab==='data'){view.innerHTML=renderData();return;}
-    if(tab==='titles'){view.innerHTML=titlesView();return;}
+    if(tab==='titles'){view.innerHTML=renderFunds();return;}
     if(tab==='fund'){view.innerHTML=renderFunds();return;}
     if(tab==='zones'){view.innerHTML=renderZones()+renderEventMomentum();decorateSegments();return;}
     const selected=activeSignals().filter(s=>lifecycleGroup(s)==='active');
@@ -442,18 +450,23 @@
   }
   function setFilter(value){filter=value;render();}
   function signalCard(s){const ts=tradeAssessment(s),os=opportunityAssessment(s);const old=Number(s.dataAge)>4;const sym=s.kind==='FORZA'?'↗ FORZA':'↘ DEBOLEZZA';return '<article class="signal"><div class="signalhead"><div class="ticker">'+esc(s.ticker)+'</div><div class="company"><strong>'+esc(s.name)+'</strong><span>Milano · '+esc(s.asof)+'</span></div><div class="score">'+esc(s.score)+'/100<small>Ranking tecnico</small></div></div><div class="badges"><span class="badge '+(s.kind==='FORZA'?'force':'weak')+'">'+sym+'</span><span class="badge '+(lifecycleGroup(s)==='invalid'?'old':lifecycleGroup(s)==='target'?'force':'weak')+'">'+esc(lifecycleLabel(s))+'</span><span class="badge">Vol. '+esc(s.rvol)+'×</span>'+(s.episodeCount>1?'<span class="badge">↻ '+esc(s.episodeCount)+' rilevamenti · dal '+esc(s.episodeStart)+'</span>':'')+(old?'<span class="badge old">Storico · '+esc(s.dataAge)+' gg</span>':'')+'</div><div class="three-scores"><div class="score-pillar"><small>Trade Score</small><strong>'+(ts.score===null?'N/D':ts.score+'/100')+'</strong><span>'+esc(ts.label)+'</span></div><div class="score-pillar"><small>Opportunity</small><strong>'+(os.score===null?'N/D':os.score+'/100')+'</strong><span>Fondamentali + trade</span></div><div class="score-pillar"><small>Rischio/Rendimento</small><strong>'+(ts.rr===null||ts.rr===undefined?'N/D':ts.rr.toFixed(2)+'R')+'</strong><span>Target 1 / stop</span></div></div><div class="signalgrid"><div><small>Entrata teorica</small><strong class="mono">'+euro(s.entry,3)+'</strong></div><div><small>Stop indicativo</small><strong class="mono">'+euro(s.stop,3)+'</strong></div><div><small>Target 1</small><strong class="mono">'+euro(s.target1,3)+'</strong></div></div><div class="reason">'+esc(s.reason)+(s.stateAt?' Stato osservato al '+esc(s.stateAt)+'.':'')+'</div>'+scoreStrip(s.ticker,s.score)+'<div class="signalactions"><span class="risk">Rischio prezzo: '+esc(s.riskPct)+'% · RSI2 '+esc(s.rsi2)+'</span><button class="action" onclick="showSignal(\''+esc(s.ticker)+'\',\''+esc(s.asof)+'\',\''+esc(s.kind)+'\')">Dettagli e diario →</button></div></article>';}
-  function showSignal(ticker,asof,kind){modalSignal=(snapshot.signals||[]).find(s=>s.ticker===ticker&&s.asof===asof&&s.kind===kind);if(!modalSignal)return;const s=modalSignal,episode=consolidateSignals(snapshot.signals||[]).find(x=>x.ticker===ticker&&x.kind===kind&&x.asof===asof);const rows=[['Stato simulato',lifecycleLabel(s)],['Stato aggiornato',s.stateAt||'N/D'],['Ultima chiusura osservata',known(s.lastPrice)?euro(s.lastPrice,3):'N/D'],['Prezzo di riferimento',euro(s.price,3)],['Stop indicativo',euro(s.stop,3)],['Target 1',euro(s.target1,3)],['Target 2',euro(s.target2,3)],['Massimo 20 sedute',euro(s.resistance,3)],['SMA20',euro(s.sma20,3)],['SMA50',euro(s.sma50,3)],['SMA200',euro(s.sma200,3)],['RSI(2)',fnum(s.rsi2)],['Volume relativo',fnum(s.rvol,2)+'×'],['Fonte',s.source],['Trade Score',tradeAssessment(s).score===null?'N/D':tradeAssessment(s).score+'/100'],['Opportunity Score',opportunityAssessment(s).score===null?'N/D':opportunityAssessment(s).score+'/100'],['R/R target 1',tradeAssessment(s).rr===null?'N/D':fnum(tradeAssessment(s).rr,2)+'R'],['Backtest validato?','No, ricerca sperimentale']];if(episode&&episode.episodeCount>1)rows.unshift(['Rilevamenti dello stesso setup',episode.episodeDates.join(', ')+' · livelli più recenti']);document.getElementById('overlay').innerHTML='<div class="modal-backdrop" onclick="closeModal(event)"><div class="modal"><div class="modal-header"><h2>'+esc(s.ticker)+' · '+esc(s.kind)+'</h2><button class="xbtn" onclick="closeModal()">×</button></div><p style="color:#718396;font-size:12px">'+esc(s.reason)+'</p>'+rows.map(([k,v])=>'<div class="detail-line"><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>').join('')+'<div class="section" style="margin-top:14px"><h3>Analisi fondamentale</h3>'+fundPanel(s.ticker)+'</div><button class="primary" style="margin-top:16px" onclick="tradeFromSignal()">+ Registra un acquisto reale</button></div></div>';}
+  function showSignal(ticker,asof,kind){modalSignal=(snapshot.signals||[]).find(s=>s.ticker===ticker&&s.asof===asof&&s.kind===kind);if(!modalSignal)return;const s=modalSignal,episode=consolidateSignals(snapshot.signals||[]).find(x=>x.ticker===ticker&&x.kind===kind&&x.asof===asof);const rows=[['Stato simulato',lifecycleLabel(s)],['Stato aggiornato',s.stateAt||'N/D'],['Ultima chiusura osservata',known(s.lastPrice)?euro(s.lastPrice,3):'N/D'],['Prezzo di riferimento',euro(s.price,3)],['Stop indicativo',euro(s.stop,3)],['Target 1',euro(s.target1,3)],['Target 2',euro(s.target2,3)],['Massimo 20 sedute',euro(s.resistance,3)],['SMA20',euro(s.sma20,3)],['SMA50',euro(s.sma50,3)],['SMA200',euro(s.sma200,3)],['RSI(2)',fnum(s.rsi2)],['Volume relativo',fnum(s.rvol,2)+'×'],['Fonte',s.source],['Trade Score',tradeAssessment(s).score===null?'N/D':tradeAssessment(s).score+'/100'],['Opportunity attuale (non storico)',opportunityAssessment(s).score===null?'N/D':opportunityAssessment(s).score+'/100'],['R/R target 1',tradeAssessment(s).rr===null?'N/D':fnum(tradeAssessment(s).rr,2)+'R'],['Backtest validato?','No, ricerca sperimentale']];if(episode&&episode.episodeCount>1)rows.unshift(['Rilevamenti dello stesso setup',episode.episodeDates.join(', ')+' · livelli più recenti']);document.getElementById('overlay').innerHTML='<div class="modal-backdrop" onclick="closeModal(event)"><div class="modal"><div class="modal-header"><h2>'+esc(s.ticker)+' · '+esc(s.kind)+'</h2><button class="xbtn" onclick="closeModal()">×</button></div><p style="color:#718396;font-size:12px">'+esc(s.reason)+'</p>'+rows.map(([k,v])=>'<div class="detail-line"><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>').join('')+'<div class="section" style="margin-top:14px"><h3>Analisi fondamentale</h3>'+fundPanel(s.ticker)+'</div><button class="primary" style="margin-top:16px" onclick="tradeFromSignal()">+ Registra un acquisto reale</button></div></div>';}
   function openFund(ticker){modalSignal=null;document.getElementById('overlay').innerHTML='<div class="modal-backdrop" onclick="closeModal(event)"><div class="modal"><div class="modal-header"><h2>'+esc(ticker)+' · Fondamentali</h2><button class="xbtn" onclick="closeModal()">×</button></div>'+fundPanel(ticker)+'<div class="section" style="margin-top:14px"><p>Questi dati non costituiscono un segnale operativo. Le metriche possono essere ritardate o mancanti; verificare sempre il bilancio pubblicato dall’emittente.</p></div></div></div>';}
   function setFundMode(v){fundMode=v;render();}
-  function renderFunds(){const f=fundamentals(),values=f.values||{},all=Object.keys(values).sort();
-    const watching=new Set((snapshot.status?.candidates||[]).map(x=>x.ticker));const signalled=new Set((snapshot.signals||[]).filter(isRecent).map(x=>x.ticker));
-    const tickers=all.filter(t=>fundMode==='all'||(fundMode==='watch'&&watching.has(t))||(fundMode==='signal'&&signalled.has(t)));
-    let out='<div class="topline"><h2>Fair Value e fondamentali</h2><small>'+all.length+' con dati</small></div>';
-    out+='<div class="section"><h3>Fonte: bilanci pubblici ESEF/XBRL</h3><p>Ultimo aggiornamento: '+(f.updatedAt?esc(new Date(f.updatedAt).toLocaleString('it-IT',{timeZone:'Europe/Rome'})):'mai')+'. Registro iniziale: GVS e SOL; sono mostrati solo i depositi recuperati e validati. Bilanci annuali 2025; non includono le semestrali 2026. Altri titoli restano N/D finché il relativo deposito non viene integrato.'+(f.lastError?'<br>Ultimo errore: '+esc(f.lastError):'')+Object.entries(f.errors||{}).map(([t,e])=>'<br>'+esc(t)+': '+esc(e)).join('')+'</p></div>';
-    out+='<div class="chips"><button class="chip '+(fundMode==='all'?'sel':'')+'" onclick="setFundMode(\'all\')">Tutti con dati</button><button class="chip '+(fundMode==='watch'?'sel':'')+'" onclick="setFundMode(\'watch\')">In formazione</button><button class="chip '+(fundMode==='signal'?'sel':'')+'" onclick="setFundMode(\'signal\')">Setup confermati</button></div>';
-    if(!tickers.length)out+='<div class="empty">Nessuna metrica disponibile per questa selezione. Le quote tecniche non sono valutazioni fondamentali.</div>';
-    for(const ticker of tickers){const m=values[ticker];out+='<article class="signal"><div class="signalhead"><div class="ticker">'+esc(ticker)+'</div><div class="company"><strong>'+esc(m.sector||'Settore non disponibile')+'</strong><span>'+(watching.has(ticker)?'In formazione · ':'')+(signalled.has(ticker)?'Setup tecnico · ':'')+'Borsa Milano</span></div></div>'+fundBadges(ticker)+'<p>Bilancio '+esc(m.periodEnd||'N/D')+'</p><div class="signalactions"><span class="risk">Valutazione · qualità · crescita</span><button class="action" onclick="openFund(\''+esc(ticker)+'\')">Fair Value e qualità →</button></div></article>';}
-    return out+'<div class="section"><p>Multipli e margini sono descrittivi; non usiamo una valutazione sintetica senza confronto e copertura settoriale sufficienti. Il filtro tecnico rimane indipendente.</p></div>';
+  function fundNarrative(m){
+    if(m.dataStatus!=='verified')return '<div class="alert"><strong>Analisi sospesa</strong>Il documento contiene incoerenze. I punteggi restano N/D.</div>';
+    const parts=[];
+    if(known(m.revenue_growth_pct))parts.push('Ricavi '+(m.revenue_growth_pct>=0?'in crescita':'in contrazione')+' del '+metric(Math.abs(m.revenue_growth_pct),1,'%')+' rispetto all’anno precedente.');
+    if(known(m.roe_pct))parts.push('ROE '+metric(m.roe_pct,1,'%')+' sul patrimonio medio del gruppo.');
+    if(known(m.cash_conversion))parts.push('La cassa operativa è '+metric(m.cash_conversion,2,' volte')+' l’utile consolidato.');
+    return '<div class="section"><h3>Lettura del bilancio '+esc(m.periodEnd)+'</h3><p>'+esc(parts.join(' '))+'</p><p>Questi dati descrivono l’esercizio annuale, non gli ultimi risultati trimestrali. Non bastano da soli a stabilire se il titolo sia conveniente.</p></div>';
+  }
+  function renderFunds(){
+    const f=fundamentals(),all=Object.keys(f.values||{}),ok=all.filter(t=>f.values[t].dataStatus==='verified');
+    let out='<div class="topline"><h2>Bilanci e qualità aziendale</h2><small>'+ok.length+' verificati / '+all.length+' nel registro</small></div>';
+    out+='<div class="section"><h3>Copertura effettiva</h3><p>SOL: analisi annuale disponibile anche offline. GVS: documento da verificare. Gli altri titoli non sono ancora coperti. Prezzi e segnali possono essere disponibili anche senza bilanci.</p><p>Dataset: '+esc(lastUpdateIt(f.updatedAt))+'. '+esc(f.lastError?'Aggiornamento remoto fallito: '+f.lastError:'')+'</p></div>';
+    for(const ticker of all){const m=f.values[ticker];out+='<article class="signal"><div class="signalhead"><div class="ticker">'+esc(ticker)+'</div><div class="company"><strong>'+esc(m.name)+'</strong><span>Bilancio '+esc(m.periodEnd)+'</span></div></div>'+fundNarrative(m)+fundBadges(ticker)+'<button class="action" onclick="openFund(\''+esc(ticker)+'\')">Apri analisi, numeri e fonti →</button></article>';}
+    return out;
   }
   function closeModal(event){if(!event||event.target.classList.contains('modal-backdrop'))document.getElementById('overlay').innerHTML='';}
   function setJournalMode(value){journalMode=value;render();}

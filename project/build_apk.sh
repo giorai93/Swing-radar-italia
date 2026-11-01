@@ -3,13 +3,14 @@ set -euo pipefail
 APP_ROOT="$(cd "$(dirname "$0")" && pwd)"
 BUILDTOOLS="${ANDROID_HOME:?ANDROID_HOME missing}/build-tools/35.0.0"
 PLATFORM="$ANDROID_HOME/platforms/android-35/android.jar"
+python3 "$APP_ROOT/tools/bundle_fundamentals.py"
 OUT="$APP_ROOT/build"
 mkdir -p "$OUT/classes" "$OUT/generated" "$OUT/dex"
 "$BUILDTOOLS/aapt2" compile --dir "$APP_ROOT/res" -o "$OUT/resources.zip"
 "$BUILDTOOLS/aapt2" link -o "$OUT/unsigned.apk" -I "$PLATFORM" \
   --manifest "$APP_ROOT/AndroidManifest.xml" -A "$APP_ROOT/assets" \
-  --min-sdk-version 26 --target-sdk-version 34 --version-code 31 \
-  --version-name 3.1 --java "$OUT/generated" -R "$OUT/resources.zip"
+  --min-sdk-version 26 --target-sdk-version 34 --version-code 32 \
+  --version-name 3.2 --java "$OUT/generated" -R "$OUT/resources.zip"
 java com.sun.tools.javac.Main -source 8 -target 8 -Xlint:-options -encoding UTF-8 -bootclasspath "$PLATFORM" \
   -d "$OUT/classes" "$OUT/generated/it/swingradar/italia/v11/R.java" \
   "$APP_ROOT/java/it/swingradar/italia/v11/MainActivity.java" \
