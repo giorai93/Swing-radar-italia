@@ -1,0 +1,49 @@
+{
+  "issuer": "NVIDIA / NVDA",
+  "facts": {
+    "sales_growth_last_q_pct": {
+      "value": 55.60252996005326,
+      "period": "Q2 FY26",
+      "source_url": "https://investor.nvidia.com/news/press-release-details/2025/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2026/default.aspx",
+      "published_date": "2025-08-27",
+      "published_at": null,
+      "available_at": null,
+      "definition_verified": false,
+      "basis": "GAAP; arithmetic diagnostic only",
+      "warning": "Vendor definition and exact release time unverified; never manufacture historical timestamps"
+    },
+    "avg_sales_growth_2q_pct": {
+      "value": 62.392725585156406,
+      "period": "Q2 FY26",
+      "source_url": "https://investor.nvidia.com/news/press-release-details/2025/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2026/default.aspx",
+      "published_date": "2025-08-27",
+      "published_at": null,
+      "available_at": null,
+      "definition_verified": false,
+      "basis": "GAAP; arithmetic diagnostic only",
+      "warning": "Vendor definition and exact release time unverified; never manufacture historical timestamps"
+    },
+    "eps_growth_last_q_pct": {
+      "value": 61.19402985074627,
+      "period": "Q2 FY26",
+      "source_url": "https://investor.nvidia.com/news/press-release-details/2025/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2026/default.aspx",
+      "published_date": "2025-08-27",
+      "published_at": null,
+      "available_at": null,
+      "definition_verified": false,
+      "basis": "GAAP; arithmetic diagnostic only",
+      "warning": "Vendor definition and exact release time unverified; never manufacture historical timestamps"
+    },
+    "eps_growth_prior_q_pct": {
+      "value": 26.666666666666682,
+      "period": "Q1 FY26",
+      "source_url": "https://investor.nvidia.com/news/press-release-details/2025/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2026/default.aspx",
+      "published_date": "2025-05-28",
+      "published_at": null,
+      "available_at": null,
+      "definition_verified": false,
+      "basis": "GAAP; arithmetic diagnostic only",
+      "warning": "Vendor definition and exact release time unverified; never manufacture historical timestamps"
+    }
+  }
+}
