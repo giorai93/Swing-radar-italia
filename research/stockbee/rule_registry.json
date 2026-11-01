@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "as_of": "2026-11-01",
   "purpose": "Evidence registry; not an execution configuration",
   "manual": "MANUALE_STOCKBEE.md",
@@ -11,7 +11,9 @@
         "S01",
         "S03",
         "S05",
-        "S11"
+        "S11",
+        "S13",
+        "S14"
       ],
       "faithful_backtest_enabled": false,
       "entry_rule": null,
@@ -20,13 +22,17 @@
       "position_sizing_rule": null,
       "market_context_rule": null,
       "blocking_gaps": [
-        "Scanner version and trigger",
-        "Initial stop",
-        "Partial size and trailing rule",
-        "Failure exit",
-        "Account risk and context filter"
+        "Current applicability of historical guidelines",
+        "Intraday entry and observable initial stop",
+        "Partial exact size and trigger priority",
+        "Definition of no progress and gap reference",
+        "Account risk and market context"
       ],
-      "market_adaptation": "Italy requires separately named specification"
+      "market_adaptation": "Italy requires separately named specification",
+      "documented_exit_versions": [
+        "2018-07-27",
+        "2019-07-12"
+      ]
     },
     {
       "method": "anticipation",
@@ -58,7 +64,9 @@
         "S07",
         "S08",
         "S09",
-        "S10"
+        "S10",
+        "S15",
+        "S16"
       ],
       "faithful_backtest_enabled": false,
       "entry_rule": null,
@@ -73,7 +81,17 @@
         "Entry mode and initial stop",
         "Partial exits trailing and account risk"
       ],
-      "market_adaptation": "Italy requires separately named specification"
+      "market_adaptation": "Italy requires separately named specification",
+      "documented_stop_versions": [
+        {
+          "date": "2010-09-30",
+          "rule": "low of two days before entry"
+        },
+        {
+          "date": "2022-01-05",
+          "rule": "2.5 percent below entry"
+        }
+      ]
     },
     {
       "method": "ep9",
@@ -96,5 +114,17 @@
       ],
       "market_adaptation": "Italy requires separately named specification"
     }
-  ]
+  ],
+  "fundamental_screen": {
+    "file": "fundamental_screen.py",
+    "source": "S10",
+    "source_date": "2025-09-01",
+    "profiles": [
+      "bucket1_growth",
+      "bucket1_fast_growth",
+      "bucket2_eps_sales"
+    ],
+    "live_issuer_validation": false,
+    "synthetic_tests_passed": 9
+  }
 }
