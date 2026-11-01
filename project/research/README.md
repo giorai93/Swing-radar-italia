@@ -1,5 +1,6 @@
 # Ricerca ML sul mercato italiano — protocollo v1
 
+> Verifica successiva: il v1 è superato come evidenza di performance. La selezione richiedeva prezzi futuri disponibili e il filtro nominale di 1 euro usava prezzi retrorettificati. Vedere `validation/RESULTS.md` per correzioni, portafoglio vincolato e limiti ancora aperti. I dati v1 restano archiviati per tracciabilità.
 Esperimento esplorativo separato dai segnali Android. Non replica Websim e non ottimizza le quattro strategie dell'app. Studia una domanda più semplice: si possono selezionare dieci titoli con rendimento successivo migliore delle alternative elementari?
 
 ## Protocollo fissato prima dei risultati

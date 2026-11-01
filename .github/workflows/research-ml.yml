@@ -32,7 +32,23 @@ jobs:
                   assert math.isclose(metrics[key],b['overall'][method][key],rel_tol=1e-7,abs_tol=1e-9),(method,key)
           print('Saved-sample results reproduced')
           PY
+      - name: Replay capital-constrained portfolio validation
+        run: python project/research/portfolio_validation.py --out /tmp/portfolio-replay
+      - name: Verify portfolio results and reserved-period gate
+        run: |
+          python - <<'PYCODE'
+          import json, math
+          a=json.load(open('project/research/validation/report.json'))
+          b=json.load(open('/tmp/portfolio-replay/report.json'))
+          for scenario,metrics in a['reports'].items():
+              for key in ['final_equity_eur','return_pct','max_daily_drawdown_pct','fees_eur','trades']:
+                  assert math.isclose(metrics[key],b['reports'][scenario][key],rel_tol=1e-9,abs_tol=1e-7),(scenario,key)
+          assert b['gate']['final_2026_test_executed'] is False
+          print('All capital-constrained scenarios reproduced; 2026 remains reserved')
+          PYCODE
       - uses: actions/upload-artifact@v4
         with:
           name: italian-ml-replay
-          path: /tmp/ml-replay/
+          path: |
+            /tmp/ml-replay/
+            /tmp/portfolio-replay/

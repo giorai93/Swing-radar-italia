@@ -1,5 +1,6 @@
 # Primo esperimento eseguito — 1 novembre 2026
 
+> Verifica successiva: il v1 è superato come evidenza di performance. La selezione richiedeva prezzi futuri disponibili e il filtro nominale di 1 euro usava prezzi retrorettificati. Vedere `validation/RESULTS.md` per correzioni, portafoglio vincolato e limiti ancora aperti. I dati v1 restano archiviati per tracciabilità.
 121 ticker con storico sufficiente su 128 richiesti. Valutazione cronologica 2021–2025: 59 periodi, 590 selezioni per metodo top-ten. Parametri fissati prima di vedere i risultati. Nessuna ottimizzazione successiva. Il 2026 non è stato valutato.
 
 | Metodo | Media netta per operazione (21 sedute) | Profit factor | Operazioni positive |

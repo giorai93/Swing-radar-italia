@@ -1,0 +1,90 @@
+[
+  {
+    "company": "ATLANTIA",
+    "delisting_date": "2022-12-09",
+    "source": "https://www.borsaitaliana.it/borsaitaliana/statistiche/statistiche-storiche/revoche.en.pdf",
+    "provider_symbol_candidate": "ATL.MI",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/ATL.MI?range=10y&interval=1d&events=div%2Csplits",
+    "retrieved_utc": "2026-11-01T03:00:15.605613+00:00",
+    "included_in_backtest": false,
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "company": "AUTOGRILL",
+    "delisting_date": "2023-07-24",
+    "source": "https://www.borsaitaliana.it/borsaitaliana/statistiche/statistiche-storiche/revoche.en.pdf",
+    "provider_symbol_candidate": "AUT.MI",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/AUT.MI?range=10y&interval=1d&events=div%2Csplits",
+    "retrieved_utc": "2026-11-01T03:00:15.606473+00:00",
+    "included_in_backtest": false,
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "company": "CERVED GROUP",
+    "delisting_date": "2022-02-09",
+    "source": "https://www.borsaitaliana.it/borsaitaliana/statistiche/statistiche-storiche/revoche.en.pdf",
+    "provider_symbol_candidate": "CERV.MI",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/CERV.MI?range=10y&interval=1d&events=div%2Csplits",
+    "retrieved_utc": "2026-11-01T03:00:15.607421+00:00",
+    "included_in_backtest": false,
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "company": "TOD'S",
+    "delisting_date": "2024-06-07",
+    "source": "https://www.borsaitaliana.it/borsaitaliana/statistiche/statistiche-storiche/revoche.en.pdf",
+    "provider_symbol_candidate": "TOD.MI",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/TOD.MI?range=10y&interval=1d&events=div%2Csplits",
+    "retrieved_utc": "2026-11-01T03:00:15.608004+00:00",
+    "included_in_backtest": false,
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "company": "SARAS",
+    "delisting_date": "2024-09-11",
+    "source": "https://www.borsaitaliana.it/borsaitaliana/statistiche/statistiche-storiche/revoche.en.pdf",
+    "provider_symbol_candidate": "SRS.MI",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/SRS.MI?range=10y&interval=1d&events=div%2Csplits",
+    "retrieved_utc": "2026-11-01T03:00:20.125260+00:00",
+    "included_in_backtest": false,
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "company": "UNIPOLSAI",
+    "delisting_date": "2024-07-03",
+    "source": "https://www.borsaitaliana.it/borsaitaliana/statistiche/statistiche-storiche/revoche.en.pdf",
+    "provider_symbol_candidate": "US.MI",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/US.MI?range=10y&interval=1d&events=div%2Csplits",
+    "retrieved_utc": "2026-11-01T03:00:20.127778+00:00",
+    "included_in_backtest": false,
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "company": "SALCEF GROUP",
+    "delisting_date": "2024-11-19",
+    "source": "https://www.borsaitaliana.it/borsaitaliana/statistiche/statistiche-storiche/revoche.en.pdf",
+    "provider_symbol_candidate": "SAL.MI",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/SAL.MI?range=10y&interval=1d&events=div%2Csplits",
+    "retrieved_utc": "2026-11-01T03:00:20.128388+00:00",
+    "included_in_backtest": false,
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "company": "IMA",
+    "delisting_date": "2021-01-28",
+    "source": "https://www.borsaitaliana.it/borsaitaliana/statistiche/statistiche-storiche/revoche.en.pdf",
+    "provider_symbol_candidate": "IMA.MI",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/IMA.MI?range=10y&interval=1d&events=div%2Csplits",
+    "retrieved_utc": "2026-11-01T03:00:20.154376+00:00",
+    "included_in_backtest": false,
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  }
+]

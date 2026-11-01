@@ -1,0 +1,12 @@
+{
+  "ticker": "TIT",
+  "date": "2024-01-02",
+  "provider_split_adjusted_close": 2.993000030517578,
+  "reconstructed_nominal_close": 0.2993000030517578,
+  "old_passes_price_1eur": true,
+  "corrected_passes_price_1eur": false,
+  "interpretation": "Reconstruction from provider split metadata; not independent validation of complete corporate actions.",
+  "independent_split_source": "https://www.gruppotim.it/content/dam/gt/investitori/doc---avvisi/anno-2026/CS-10-giugno-2026-raggruppamento-azionario.pdf",
+  "independent_split_ratio": "1 new ordinary share for 10 existing shares",
+  "note": "2026 corporate-action metadata used only to undo retrospective price scaling; 2026 price performance not evaluated."
+}
