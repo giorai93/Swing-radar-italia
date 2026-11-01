@@ -1,0 +1,263 @@
+{
+  "issuer": "NVIDIA",
+  "source_validation": "six metric pairs checked against issuer tables",
+  "reference_checks_passed": [
+    "q1/Revenue",
+    "q1/Diluted earnings per share",
+    "q2/Revenue",
+    "q2/Diluted earnings per share",
+    "q1/Non-GAAP EPS",
+    "q2/Non-GAAP EPS"
+  ],
+  "releases": {
+    "q1": {
+      "source_url": "https://investor.nvidia.com/news/press-release-details/2025/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2026/default.aspx",
+      "source_sha256": "6f2694a10cca8e16bb14848b9fc3cce55a1a377494be9da2aaf43e918ccde131",
+      "period": "Q1 FY26",
+      "published_date": "2025-05-28",
+      "publication_time": null,
+      "publication_time_precision": "date_only",
+      "metrics": {
+        "GAAP": {
+          "Revenue": {
+            "current": 44062.0,
+            "previous_year": 26044.0,
+            "calculated_yoy_pct": 69.18292121025955,
+            "reported_rounded_yoy_pct": 69.0,
+            "unit": "USD millions",
+            "row_label": "Revenue"
+          },
+          "Diluted earnings per share": {
+            "current": 0.76,
+            "previous_year": 0.6,
+            "calculated_yoy_pct": 26.666666666666682,
+            "reported_rounded_yoy_pct": 27.0,
+            "unit": "USD/share",
+            "row_label": "Diluted earnings per share*"
+          }
+        },
+        "Non-GAAP": {
+          "Revenue": {
+            "current": 44062.0,
+            "previous_year": 26044.0,
+            "calculated_yoy_pct": 69.18292121025955,
+            "reported_rounded_yoy_pct": 69.0,
+            "unit": "USD millions",
+            "row_label": "Revenue"
+          },
+          "Diluted earnings per share": {
+            "current": 0.81,
+            "previous_year": 0.61,
+            "calculated_yoy_pct": 32.78688524590165,
+            "reported_rounded_yoy_pct": 33.0,
+            "unit": "USD/share",
+            "row_label": "Diluted earnings per share*"
+          }
+        }
+      }
+    },
+    "q2": {
+      "source_url": "https://investor.nvidia.com/news/press-release-details/2025/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2026/default.aspx",
+      "source_sha256": "bbb243fbd773d349e680832bcbdad9907e5b5f81017219fa833c9fc96b290a45",
+      "period": "Q2 FY26",
+      "published_date": "2025-08-27",
+      "publication_time": null,
+      "publication_time_precision": "date_only",
+      "metrics": {
+        "GAAP": {
+          "Revenue": {
+            "current": 46743.0,
+            "previous_year": 30040.0,
+            "calculated_yoy_pct": 55.60252996005326,
+            "reported_rounded_yoy_pct": 56.0,
+            "unit": "USD millions",
+            "row_label": "Revenue"
+          },
+          "Diluted earnings per share": {
+            "current": 1.08,
+            "previous_year": 0.67,
+            "calculated_yoy_pct": 61.19402985074627,
+            "reported_rounded_yoy_pct": 61.0,
+            "unit": "USD/share",
+            "row_label": "Diluted earnings per share"
+          }
+        },
+        "Non-GAAP": {
+          "Revenue": {
+            "current": 46743.0,
+            "previous_year": 30040.0,
+            "calculated_yoy_pct": 55.60252996005326,
+            "reported_rounded_yoy_pct": 56.0,
+            "unit": "USD millions",
+            "row_label": "Revenue"
+          },
+          "Diluted earnings per share": {
+            "current": 1.05,
+            "previous_year": 0.68,
+            "calculated_yoy_pct": 54.41176470588236,
+            "reported_rounded_yoy_pct": 54.0,
+            "unit": "USD/share",
+            "row_label": "Diluted earnings per share"
+          }
+        }
+      }
+    }
+  },
+  "derived_diagnostics": {
+    "latest_revenue_yoy_pct": 55.60252996005326,
+    "mean_two_revenue_yoy_pct": 62.392725585156406,
+    "vendor_equivalence_verified": false
+  },
+  "screen": {
+    "issuer": "NVIDIA / NVDA",
+    "as_of": "2025-09-02T12:00:00Z",
+    "profiles": {
+      "bucket1_growth": {
+        "status": "unknown",
+        "checks": [
+          {
+            "field": "annual_sales_usd_m",
+            "minimum": 25,
+            "value": null,
+            "status": "unknown",
+            "reason": "missing_fact"
+          },
+          {
+            "field": "avg_volume_50d_shares",
+            "minimum": 100000,
+            "value": null,
+            "status": "unknown",
+            "reason": "missing_fact"
+          },
+          {
+            "field": "price_usd",
+            "minimum": 1,
+            "value": null,
+            "status": "unknown",
+            "reason": "missing_fact"
+          },
+          {
+            "field": "sales_growth_last_q_pct",
+            "minimum": 39,
+            "value": 55.60252996005326,
+            "status": "unknown",
+            "reason": "vendor_field_definition_not_verified"
+          },
+          {
+            "field": "avg_sales_growth_2q_pct",
+            "minimum": 39,
+            "value": 62.392725585156406,
+            "status": "unknown",
+            "reason": "vendor_field_definition_not_verified"
+          }
+        ],
+        "source": "https://stockbee.blogspot.com/2025/09/scans-irun-in-marketsurge-to-find.html",
+        "source_date": "2025-09-01",
+        "trade_signal": false
+      },
+      "bucket1_fast_growth": {
+        "status": "unknown",
+        "checks": [
+          {
+            "field": "annual_sales_usd_m",
+            "minimum": 25,
+            "value": null,
+            "status": "unknown",
+            "reason": "missing_fact"
+          },
+          {
+            "field": "avg_volume_50d_shares",
+            "minimum": 100000,
+            "value": null,
+            "status": "unknown",
+            "reason": "missing_fact"
+          },
+          {
+            "field": "price_usd",
+            "minimum": 1,
+            "value": null,
+            "status": "unknown",
+            "reason": "missing_fact"
+          },
+          {
+            "field": "sales_growth_last_q_pct",
+            "minimum": 99,
+            "value": 55.60252996005326,
+            "status": "unknown",
+            "reason": "vendor_field_definition_not_verified"
+          }
+        ],
+        "source": "https://stockbee.blogspot.com/2025/09/scans-irun-in-marketsurge-to-find.html",
+        "source_date": "2025-09-01",
+        "trade_signal": false
+      },
+      "bucket2_eps_sales": {
+        "status": "unknown",
+        "checks": [
+          {
+            "field": "annual_sales_usd_m",
+            "minimum": 25,
+            "value": null,
+            "status": "unknown",
+            "reason": "missing_fact"
+          },
+          {
+            "field": "avg_volume_50d_shares",
+            "minimum": 200000,
+            "value": null,
+            "status": "unknown",
+            "reason": "missing_fact"
+          },
+          {
+            "field": "price_usd",
+            "minimum": 3,
+            "value": null,
+            "status": "unknown",
+            "reason": "missing_fact"
+          },
+          {
+            "field": "eps_growth_last_q_pct",
+            "minimum": 39,
+            "value": 61.19402985074627,
+            "status": "unknown",
+            "reason": "vendor_field_definition_not_verified"
+          },
+          {
+            "field": "eps_growth_prior_q_pct",
+            "minimum": 39,
+            "value": 26.666666666666682,
+            "status": "unknown",
+            "reason": "vendor_field_definition_not_verified"
+          },
+          {
+            "field": "sales_growth_last_q_pct",
+            "minimum": 20,
+            "value": 55.60252996005326,
+            "status": "unknown",
+            "reason": "vendor_field_definition_not_verified"
+          },
+          {
+            "field": "avg_sales_growth_2q_pct",
+            "minimum": 20,
+            "value": 62.392725585156406,
+            "status": "unknown",
+            "reason": "vendor_field_definition_not_verified"
+          }
+        ],
+        "source": "https://stockbee.blogspot.com/2025/09/scans-irun-in-marketsurge-to-find.html",
+        "source_date": "2025-09-01",
+        "trade_signal": false
+      }
+    },
+    "scope": "Historical USA fundamental screen only; no entry, exit, ranking or profitability claim",
+    "bucket0_status": "blocked: date range truncated in published images; do not infer endpoint"
+  },
+  "not_a_signal": true,
+  "gaps": [
+    "MarketSurge field definitions/adjustments not certified",
+    "Exact historical publication times absent",
+    "Historical annual-sales definition, price and volume fields not supplied",
+    "No historical consensus comparison",
+    "No trade or return calculated"
+  ]
+}
