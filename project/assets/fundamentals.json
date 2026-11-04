@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-02T20:11:09.628936+00:00",
+  "updatedAt": "2026-11-04T00:02:49.453969+00:00",
   "values": {
     "GVS": {
       "dataStatus": "needs_review",
@@ -17,7 +17,7 @@
       "basis": "Annual consolidated IFRS; not TTM",
       "lei": "81560013EACB40B52D17",
       "sha256": "a12256a2c4bcd09ead90ae70f5cd974887b143abb7eff15bb9e6894ba15a3ed5",
-      "retrievedAt": "2026-11-02T20:11:07.449326+00:00",
+      "retrievedAt": "2026-11-04T00:02:47.719188+00:00",
       "facts": {
         "revenue_2025": {
           "concept": "ifrs-full:Revenue",
@@ -158,8 +158,8 @@
       "equity_ratio_pct": null,
       "cash_conversion": null,
       "eps": null,
-      "price": 5.730000019073486,
-      "priceDate": "2026-10-30",
+      "price": 5.869999885559082,
+      "priceDate": "2026-11-02",
       "priceSource": "https://query1.finance.yahoo.com/v8/finance/chart/GVS.MI?range=10d&interval=1d"
     },
     "SOL": {
@@ -173,7 +173,7 @@
       "basis": "Annual consolidated IFRS; not TTM",
       "lei": "81560096A9AEBBBD4B25",
       "sha256": "a289b099e4ba03def2b8abaee74e8f58782ae56e3615d34298ccffd71f994736",
-      "retrievedAt": "2026-11-02T20:11:09.471886+00:00",
+      "retrievedAt": "2026-11-04T00:02:49.308531+00:00",
       "facts": {
         "revenue_2025": {
           "concept": "ifrs-full:Revenue",
@@ -358,8 +358,8 @@
       "equity_ratio_pct": 49.06972453510991,
       "cash_conversion": 1.6853524780412323,
       "eps": 1.841,
-      "price": 59.79999923706055,
-      "priceDate": "2026-10-30",
+      "price": 60.400001525878906,
+      "priceDate": "2026-11-02",
       "priceSource": "https://query1.finance.yahoo.com/v8/finance/chart/SOL.MI?range=10d&interval=1d"
     }
   },
